@@ -1,0 +1,1 @@
+Elementos da interface do usuário, como HUD, botões, menus e telas de game over ou pause.

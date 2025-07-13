@@ -1,0 +1,1 @@
+Controladores e arquivos de animações relacionados à apresentação (ex: transições de tela, efeitos em UI).

@@ -1,0 +1,1 @@
+Imagens usadas na interface ou em elementos visuais diretamente exibidos ao jogador (ícones, botões etc.).

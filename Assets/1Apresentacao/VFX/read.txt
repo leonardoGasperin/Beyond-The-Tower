@@ -1,0 +1,1 @@
+Efeitos visuais relacionados à apresentação, como partículas na tela de vitória ou brilho em botões.
