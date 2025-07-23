@@ -3,7 +3,6 @@ using btt.Aplicacao.Servico;
 using btt.Core.Contrato;
 using btt.Core.Negocio;
 using Reflex.Core;
-using Reflex.Injectors;
 using UnityEngine;
 
 public class EntidadeEscopadaExemplo : MonoBehaviour, IInstaller

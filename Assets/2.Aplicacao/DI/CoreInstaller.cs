@@ -18,13 +18,11 @@ namespace btt.Aplicacao.DI
         private void ServicosInternosDependencias(ContainerBuilder builder)
         {
             builder.AddSingleton(new SingletonExemploServico(), typeof(ISingletonExemploServico));
-            //builder.AddScoped(typeof(ScopedExemploServico), typeof(IScopedExemploServico));
         }
 
         private void NegocioDependencias(ContainerBuilder builder)
         {
             builder.AddSingleton(new SingletonExemploNegocio(), typeof(ISingletonExemploNegocio));
-            //builder.AddScoped(typeof(ScopedExemploNegocio), typeof(IScopedExemploNegocio));
         }
     }
 }

@@ -1,5 +1,4 @@
 using btt.Aplicacao.Contrato;
-using System;
 using UnityEngine;
 
 namespace btt.Aplicacao.Servico
