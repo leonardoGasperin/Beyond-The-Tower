@@ -5,6 +5,7 @@ using btt.Core.Negocio;
 using Reflex.Core;
 using UnityEngine;
 
+//Exemplo de commit e PR
 public class EntidadeEscopadaExemplo : MonoBehaviour, IInstaller
 {
     public void InstallBindings(ContainerBuilder containerBuilder)
