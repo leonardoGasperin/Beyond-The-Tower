@@ -1,4 +1,5 @@
 using btt.Core.Contrato;
+using System;
 using UnityEngine;
 
 namespace btt.Core.Negocio
@@ -8,9 +9,10 @@ namespace btt.Core.Negocio
     /// </summary>
     public class ScopedExemploNegocio : IScopedExemploNegocio
     {
+        public Guid Id { get; } = Guid.NewGuid();
         /// <summary>
         /// Método de exemplo que pode ser implementado pelo negócio.
         /// </summary>
-        public void ExemploMetodo() => Debug.Log("[Personagem] Negócio scoped injetado com sucesso!");
+        public void ExemploMetodo() => Debug.Log("[Personagem] " + Id + " Negócio scoped injetado com sucesso!");
     }
 }
