@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movimentacao : MonoBehaviour {
+public class Controller : MonoBehaviour {
 
     [SerializeField] private float forcaDoPulo = 200f;
     [SerializeField] private float velocidade = 10f;
@@ -19,7 +19,7 @@ public class Movimentacao : MonoBehaviour {
         
         //Se apertou espaço, pula
         if(Keyboard.current.spaceKey.wasPressedThisFrame){
-            if(estaNoChao) {
+            if(estaNoChao){
                 Pulo();
             }
             else return;
@@ -53,3 +53,4 @@ public class Movimentacao : MonoBehaviour {
 
     void Pulo(){
     }
+}
