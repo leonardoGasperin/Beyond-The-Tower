@@ -1,4 +1,5 @@
 using UnityEngine;
+using static PersonagemFachadaServico;
 
 namespace btt.Core.Entidade
 {
@@ -11,6 +12,11 @@ namespace btt.Core.Entidade
     /// </remarks>
     public class Personagem : MonoBehaviour
     {
+        /// <summary>
+        /// Propriedade que fornece acesso aos serviços resolvidos para este escopo.
+        /// </summary>
+        public ServiceLocator Services { get; private set; }
+
         #region Atributos
         public string nome;
         public int pontosVida;
@@ -21,7 +27,8 @@ namespace btt.Core.Entidade
         public int experiencia;
         Transform posicao;
         //Animator animacao;
-        public float velocidade;
+        public int velocidade;
+        public int forcaPulo;
         public bool estaVivo;
         public bool estaAtacando;
         public bool estaDefendendo;
@@ -30,6 +37,15 @@ namespace btt.Core.Entidade
         #endregion
 
         #region Unity Methods
+
+        /// <summary>
+        /// Inicializa o Service Locator ao acordar a entidade, obtendo-o do componente associado.
+        /// </summary>
+        public virtual void Awake()
+        {
+            Services = GetComponent<PersonagemFachadaServico>().Services;
+        }
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -38,12 +54,6 @@ namespace btt.Core.Entidade
             estaVivo = true;
             estaAtacando = false;
             estaDefendendo = false;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
         #endregion
 
