@@ -11,7 +11,7 @@ public class Movimentacao : MonoBehaviour {
     }
 
     void Update(){
-        rb.velocity = new Vector2(movimentoX * velocidade, 0f);
+        rb.linearVelocity = new Vector2(movimentoX * velocidade, 0f);
     }
 
     void Pulo(){
