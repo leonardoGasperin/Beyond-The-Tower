@@ -4,16 +4,16 @@ using static PersonagemFachadaServico;
 namespace btt.Core.Entidade
 {
     /// <summary>
-    /// Classe base para personagens no jogo, contendo atributos e métodos comuns.
+    /// Classe base para personagens no jogo, contendo atributos e mï¿½todos comuns.
     /// </summary>
     /// <remarks>
-    /// Esta classe define os atributos básicos de um personagem, como pontos de vida, ataque, defesa, etc.
-    /// Também implementa a lógica de dano e morte do personagem.
+    /// Esta classe define os atributos bï¿½sicos de um personagem, como pontos de vida, ataque, defesa, etc.
+    /// Tambï¿½m implementa a lï¿½gica de dano e morte do personagem.
     /// </remarks>
     public class Personagem : MonoBehaviour
     {
         /// <summary>
-        /// Propriedade que fornece acesso aos serviços resolvidos para este escopo.
+        /// Propriedade que fornece acesso aos serviï¿½os resolvidos para este escopo.
         /// </summary>
         public ServiceLocator Services { get; private set; }
 
@@ -54,6 +54,7 @@ namespace btt.Core.Entidade
             estaVivo = true;
             estaAtacando = false;
             estaDefendendo = false;
+            Services.movimentacaoServico.Pulo();
         }
         #endregion
 
@@ -78,7 +79,7 @@ namespace btt.Core.Entidade
             estaVivo = false;
             ativo = false;
             //animacao.SetTrigger("Morreu");
-            // Desativar o personagem ou iniciar a lógica de reinício
+            // Desativar o personagem ou iniciar a lï¿½gica de reinï¿½cio
         }
 
         public void Atacar(Personagem alvo)
