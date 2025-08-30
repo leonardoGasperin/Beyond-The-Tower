@@ -1,0 +1,12 @@
+using btt.Aplicacao.Contrato;
+using UnityEngine;
+
+namespace btt.Aplicacao.Servico {
+
+    public class ComportamentoInimigoServico {
+
+        public float distanciaRaycast = 5f;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, distanciaRaycast);
+    }
+}

@@ -3,15 +3,16 @@ using UnityEngine;
 namespace btt.Core.Entidade
 {
     /// <summary>
-    /// Classe base para personagens no jogo, contendo atributos e métodos comuns.
+    /// Classe base para personagens no jogo, contendo atributos e mï¿½todos comuns.
     /// </summary>
     /// <remarks>
-    /// Esta classe define os atributos básicos de um personagem, como pontos de vida, ataque, defesa, etc.
-    /// Também implementa a lógica de dano e morte do personagem.
+    /// Esta classe define os atributos bï¿½sicos de um personagem, como pontos de vida, ataque, defesa, etc.
+    /// Tambï¿½m implementa a lï¿½gica de dano e morte do personagem.
     /// </remarks>
     public class Personagem : MonoBehaviour
     {
         #region Atributos
+        Rigidbody2D rb;
         public string nome;
         public int pontosVida;
         public int pontosEnergia;
@@ -31,8 +32,9 @@ namespace btt.Core.Entidade
 
         #region Unity Methods
         // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        public virtual void Start()
         {
+            rb = GetComponent<Rigidbody2D>();
             posicao = GetComponent<Transform>();
             //animacao = GetComponent<Animator>();
             estaVivo = true;
@@ -41,10 +43,25 @@ namespace btt.Core.Entidade
         }
 
         // Update is called once per frame
-        void Update()
+        public virtual void Update()
         {
 
         }
+
+    //Checar se o jogador estÃ¡ tocando o chÃ£o
+        void OnCollisionEnter2D(Collision2D col){
+            if(col.gameObject.CompareTag("Plataforma")) {
+                estaChao = true;
+            }
+    }
+
+    //Checar se o jogador nÃ£o estÃ¡ tocando o chÃ£o
+        void OnCollisionExit2D(Collision2D col){
+            if(col.gameObject.CompareTag("Plataforma")){
+                estaChao = false;
+            }
+    }
+
         #endregion
 
         #region Methods
@@ -68,7 +85,7 @@ namespace btt.Core.Entidade
             estaVivo = false;
             ativo = false;
             //animacao.SetTrigger("Morreu");
-            // Desativar o personagem ou iniciar a lógica de reinício
+            // Desativar o personagem ou iniciar a lï¿½gica de reinï¿½cio
         }
 
         public void Atacar(Personagem alvo)
