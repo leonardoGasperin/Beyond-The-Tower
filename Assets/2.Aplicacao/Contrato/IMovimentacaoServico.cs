@@ -1,6 +1,8 @@
-namespace BTT.aplicacao.contratos {
+using UnityEngine;
+
+namespace btt.Aplicacao.Contratos {
     public interface IMovimentacaoServico{
         public void Movimentacao(Rigidbody2D rb, float velocidade, float movimentoX);
-        public void Pulo(Rigidbody2D rb, transform transform, float forcaDoPulo);
+        public void Pulo(Rigidbody2D rb, Transform transform, float forcaDoPulo);
     }
 }

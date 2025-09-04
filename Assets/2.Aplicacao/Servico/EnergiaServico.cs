@@ -1,8 +1,11 @@
 using UnityEngine;
+using System.Collections;
+using System.Threading.Tasks;
+using btt.Aplicacao.Contrato;
 
-namespace btt.aplicacao.servico {
+namespace btt.Aplicacao.Servico {
 
-    public class EnergiaManagerServico:IEnergyManager {
+    public class EnergiaServico:IEnergiaServico {
 
         public void ReduzirEnergia(int energiaPulo){
             energiaPulo --;
@@ -14,9 +17,9 @@ namespace btt.aplicacao.servico {
             if (energiaPulo > energiaMaximaPulo) energiaPulo = energiaMaximaPulo;
         }
 
-        public void RecuperarEnergiaAutomaticamente(int energiaPulo){
+        public async Task RecuperarEnergiaAutomaticamente(int energiaPulo){
             energiaPulo ++;
-            yield return new WaitForSeconds(2);
+            await Task.Delay(2000);
         }
     }
 }

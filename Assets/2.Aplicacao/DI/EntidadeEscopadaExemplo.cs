@@ -5,55 +5,57 @@ using btt.Core.Negocio;
 using Reflex.Core;
 using UnityEngine;
 
-/// <summary>
-/// Exemplo de entidade que demonstra a configuração e utilização de serviços com escopo (scoped) via injeção de dependência.
-/// Cria um contêiner de dependências para o ciclo de vida desta entidade e expõe os serviços resolvidos através de um Service Locator.
-/// </summary>
-public class EntidadeEscopadaExemplo : MonoBehaviour
-{
+    namespace btt.Aplicacao.DI.Exemplo{
     /// <summary>
-    /// Propriedade que fornece acesso aos serviços resolvidos para este escopo.
+    /// Exemplo de entidade que demonstra a configuraï¿½ï¿½o e utilizaï¿½ï¿½o de serviï¿½os com escopo (scoped) via injeï¿½ï¿½o de dependï¿½ncia.
+    /// Cria um contï¿½iner de dependï¿½ncias para o ciclo de vida desta entidade e expï¿½e os serviï¿½os resolvidos atravï¿½s de um Service Locator.
     /// </summary>
-    public ServiceLocator Services { get; private set; }
-
-    /// <summary>
-    /// Inicializa o contêiner de dependências scoped e resolve os serviços necessários ao acordar a entidade.
-    /// </summary>
-    void Awake()
-    {
-        var builder = new ContainerBuilder();
-        builder.AddScoped(typeof(ScopedExemploServico), typeof(IScopedExemploServico));
-        builder.AddScoped(typeof(ScopedExemploNegocio), typeof(IScopedExemploNegocio));
-        var container = builder.Build();
-
-        Services = new ServiceLocator(container);
-    }
-
-    /// <summary>
-    /// Service Locator que expõe as instâncias dos serviços scoped resolvidos para este escopo.
-    /// </summary>
-    public class ServiceLocator
+    public class EntidadeEscopadaExemplo : MonoBehaviour
     {
         /// <summary>
-        /// Serviço de exemplo com escopo, implementando <see cref="IScopedExemploServico"/>.
+        /// Propriedade que fornece acesso aos serviï¿½os resolvidos para este escopo.
         /// </summary>
-        public IScopedExemploServico scopedExemploServico;
+        public ServiceLocator Services { get; private set; }
 
         /// <summary>
-        /// Negócio de exemplo com escopo, implementando <see cref="IScopedExemploNegocio"/>.
+        /// Inicializa o contï¿½iner de dependï¿½ncias scoped e resolve os serviï¿½os necessï¿½rios ao acordar a entidade.
         /// </summary>
-        public IScopedExemploNegocio scopedExemploNegocio;
-        // Adicione todos os outros serviços como campos
-
-        /// <summary>
-        /// Resolve e armazena as instâncias dos serviços scoped a partir do contêiner fornecido.
-        /// </summary>
-        /// <param name="container">Contêiner de dependências scoped.</param>
-        public ServiceLocator(Container container)
+        void Awake()
         {
-            scopedExemploServico = (IScopedExemploServico)container.Resolve(typeof(IScopedExemploServico));
-            scopedExemploNegocio = (IScopedExemploNegocio)container.Resolve(typeof(IScopedExemploNegocio));
-            // Resolva todos os outros serviços aqui...
+            var builder = new ContainerBuilder();
+            builder.AddScoped(typeof(ScopedExemploServico), typeof(IScopedExemploServico));
+            builder.AddScoped(typeof(ScopedExemploNegocio), typeof(IScopedExemploNegocio));
+            var container = builder.Build();
+
+            Services = new ServiceLocator(container);
+        }
+
+        /// <summary>
+        /// Service Locator que expï¿½e as instï¿½ncias dos serviï¿½os scoped resolvidos para este escopo.
+        /// </summary>
+        public class ServiceLocator
+        {
+            /// <summary>
+            /// Serviï¿½o de exemplo com escopo, implementando <see cref="IScopedExemploServico"/>.
+            /// </summary>
+            public IScopedExemploServico scopedExemploServico;
+
+            /// <summary>
+            /// Negï¿½cio de exemplo com escopo, implementando <see cref="IScopedExemploNegocio"/>.
+            /// </summary>
+            public IScopedExemploNegocio scopedExemploNegocio;
+            // Adicione todos os outros serviï¿½os como campos
+
+            /// <summary>
+            /// Resolve e armazena as instï¿½ncias dos serviï¿½os scoped a partir do contï¿½iner fornecido.
+            /// </summary>
+            /// <param name="container">Contï¿½iner de dependï¿½ncias scoped.</param>
+            public ServiceLocator(Container container)
+            {
+                scopedExemploServico = (IScopedExemploServico)container.Resolve(typeof(IScopedExemploServico));
+                scopedExemploNegocio = (IScopedExemploNegocio)container.Resolve(typeof(IScopedExemploNegocio));
+                // Resolva todos os outros serviï¿½os aqui...
+            }
         }
     }
 }

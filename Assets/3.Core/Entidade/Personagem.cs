@@ -1,4 +1,5 @@
 using UnityEngine;
+using btt.Aplicacao.DI.Personagem;
 
 namespace btt.Core.Entidade
 {
@@ -12,7 +13,8 @@ namespace btt.Core.Entidade
     public class Personagem : MonoBehaviour
     {
         #region Atributos
-        Rigidbody2D rb;
+        public PersonagemConfiguracaoDI.ServiceLocator fachada;
+        public Rigidbody2D rb;
         public string nome;
         public int pontosVida;
         public int pontosEnergia;
@@ -20,7 +22,8 @@ namespace btt.Core.Entidade
         public int defesa;
         public int nivel;
         public int experiencia;
-        Transform posicao;
+        public float forcaDoPulo;
+        public Transform posicao;
         //Animator animacao;
         public float velocidade;
         public bool estaVivo;
@@ -32,7 +35,7 @@ namespace btt.Core.Entidade
 
         #region Unity Methods
         // Start is called once before the first execution of Update after the MonoBehaviour is created
-        public virtual void Start()
+        protected virtual void Start()
         {
             rb = GetComponent<Rigidbody2D>();
             posicao = GetComponent<Transform>();
@@ -43,7 +46,7 @@ namespace btt.Core.Entidade
         }
 
         // Update is called once per frame
-        public virtual void Update()
+        protected virtual void Update()
         {
 
         }

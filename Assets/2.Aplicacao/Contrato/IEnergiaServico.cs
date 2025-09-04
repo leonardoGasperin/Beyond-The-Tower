@@ -1,12 +1,13 @@
 using UnityEngine;
+using System.Collections;
+using System.Threading.Tasks;
 
 namespace btt.Aplicacao.Contrato {
 
-    public interface IEnergiaManager {
+    public interface IEnergiaServico {
 
         public void ReduzirEnergia(int energiaPulo);
         public void RecuperarEnergia(int energiaPulo, int energiaMaximaPulo);
-        public void RecuperarEnergiaAutomaticamente(int energiaPulo);
-
+        public Task RecuperarEnergiaAutomaticamente(int energiaPulo);
     }
 }

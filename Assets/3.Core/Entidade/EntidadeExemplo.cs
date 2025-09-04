@@ -1,16 +1,17 @@
+using btt.Aplicacao.DI.Exemplo;
 using UnityEngine;
 
 namespace btt.Core.Entidade
 {
     /// <summary>
-    /// Exemplo de personagem que utiliza serviços com escopo (scoped) resolvidos via Service Locator.
-    /// Esta classe demonstra como acessar e utilizar serviços e negócios scoped, 
-    /// que são criados e gerenciados para o ciclo de vida da entidade associada.
+    /// Exemplo de personagem que utiliza serviï¿½os com escopo (scoped) resolvidos via Service Locator.
+    /// Esta classe demonstra como acessar e utilizar serviï¿½os e negï¿½cios scoped, 
+    /// que sï¿½o criados e gerenciados para o ciclo de vida da entidade associada.
     /// </summary>
     public class PersonagemExemplo : MonoBehaviour
     {
         /// <summary>
-        /// Service Locator que fornece acesso aos serviços scoped desta entidade.
+        /// Service Locator que fornece acesso aos serviï¿½os scoped desta entidade.
         /// </summary>
         protected EntidadeEscopadaExemplo.ServiceLocator services;
 
@@ -23,7 +24,7 @@ namespace btt.Core.Entidade
         }
 
         /// <summary>
-        /// Executa métodos de exemplo dos serviços scoped ao iniciar a entidade.
+        /// Executa mï¿½todos de exemplo dos serviï¿½os scoped ao iniciar a entidade.
         /// </summary>
         public virtual void Start()
         {
