@@ -1,4 +1,5 @@
 using UnityEngine.InputSystem;
+using btt.Aplicacao.DI.Personagem;
 
 namespace btt.Core.Entidade {
 

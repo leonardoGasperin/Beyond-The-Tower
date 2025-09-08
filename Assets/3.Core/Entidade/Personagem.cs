@@ -34,6 +34,11 @@ namespace btt.Core.Entidade
         #endregion
 
         #region Unity Methods
+
+        protected virtual void Awake(){
+            fachada = GetComponent<PersonagemConfiguracaoDI>().Services;
+        }
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Start()
         {
