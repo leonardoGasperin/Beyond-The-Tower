@@ -1,16 +1,11 @@
-using btt.Aplicacao.Contrato;
 using btt.Aplicacao.Servico;
+using btt.Aplicacao.Contratos;
 using btt.Core.Contrato;
-using btt.Core.Negocio;
 using Reflex.Core;
 using UnityEngine;
 
-    namespace btt.Aplicacao.DI.Exemplo{
-    /// <summary>
-    /// Exemplo de entidade que demonstra a configura��o e utiliza��o de servi�os com escopo (scoped) via inje��o de depend�ncia.
-    /// Cria um cont�iner de depend�ncias para o ciclo de vida desta entidade e exp�e os servi�os resolvidos atrav�s de um Service Locator.
-    /// </summary>
-    public class EntidadeEscopadaExemplo : MonoBehaviour
+namespace btt.Aplicacao.DI.Personagem {
+    public class PersonagemConfiguracaoDI : MonoBehaviour
     {
         /// <summary>
         /// Propriedade que fornece acesso aos servi�os resolvidos para este escopo.
@@ -23,8 +18,7 @@ using UnityEngine;
         void Awake()
         {
             var builder = new ContainerBuilder();
-            builder.AddScoped(typeof(ScopedExemploServico), typeof(IScopedExemploServico));
-            builder.AddScoped(typeof(ScopedExemploNegocio), typeof(IScopedExemploNegocio));
+            builder.AddScoped(typeof(MovimentacaoServico), typeof(IMovimentacaoServico));
             var container = builder.Build();
 
             Services = new ServiceLocator(container);
@@ -36,14 +30,9 @@ using UnityEngine;
         public class ServiceLocator
         {
             /// <summary>
-            /// Servi�o de exemplo com escopo, implementando <see cref="IScopedExemploServico"/>.
+            /// Servi�o de exemplo com escopo, implementando <see cref="ImovimentacaoServico"/>.
             /// </summary>
-            public IScopedExemploServico scopedExemploServico;
-
-            /// <summary>
-            /// Neg�cio de exemplo com escopo, implementando <see cref="IScopedExemploNegocio"/>.
-            /// </summary>
-            public IScopedExemploNegocio scopedExemploNegocio;
+            public IMovimentacaoServico movimentacaoServico;
             // Adicione todos os outros servi�os como campos
 
             /// <summary>
@@ -52,8 +41,7 @@ using UnityEngine;
             /// <param name="container">Cont�iner de depend�ncias scoped.</param>
             public ServiceLocator(Container container)
             {
-                scopedExemploServico = (IScopedExemploServico)container.Resolve(typeof(IScopedExemploServico));
-                scopedExemploNegocio = (IScopedExemploNegocio)container.Resolve(typeof(IScopedExemploNegocio));
+                movimentacaoServico = (IMovimentacaoServico)container.Resolve(typeof(IMovimentacaoServico));
                 // Resolva todos os outros servi�os aqui...
             }
         }

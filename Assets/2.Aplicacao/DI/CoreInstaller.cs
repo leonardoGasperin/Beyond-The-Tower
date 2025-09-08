@@ -5,17 +5,17 @@ using btt.Core.Negocio;
 using Reflex.Core;
 using UnityEngine;
 
-namespace btt.Aplicacao.DI
+namespace btt.Aplicacao.DI.Core
 {
     /// <summary>
-    /// Responsável por registrar as dependências da aplicação no contêiner de injeção de dependência.
+    /// Responsï¿½vel por registrar as dependï¿½ncias da aplicaï¿½ï¿½o no contï¿½iner de injeï¿½ï¿½o de dependï¿½ncia.
     /// </summary>
     public class Installer : MonoBehaviour, IInstaller
     {
         /// <summary>
-        /// Registra todas as dependências necessárias utilizando o <see cref="ContainerBuilder"/>.
+        /// Registra todas as dependï¿½ncias necessï¿½rias utilizando o <see cref="ContainerBuilder"/>.
         /// </summary>
-        /// <param name="containerBuilder">Instância do construtor de contêiner para registrar os serviços.</param>
+        /// <param name="containerBuilder">Instï¿½ncia do construtor de contï¿½iner para registrar os serviï¿½os.</param>
         public void InstallBindings(ContainerBuilder containerBuilder)
         {
             ServicosInternosDependencias(containerBuilder);
@@ -23,18 +23,18 @@ namespace btt.Aplicacao.DI
         }
 
         /// <summary>
-        /// Registra os serviços internos como singletons no contêiner.
+        /// Registra os serviï¿½os internos como singletons no contï¿½iner.
         /// </summary>
-        /// <param name="builder">Construtor de contêiner para registro dos serviços.</param>
+        /// <param name="builder">Construtor de contï¿½iner para registro dos serviï¿½os.</param>
         private void ServicosInternosDependencias(ContainerBuilder builder)
         {
             builder.AddSingleton(new SingletonExemploServico(), typeof(ISingletonExemploServico));
         }
 
         /// <summary>
-        /// Registra as dependências de negócio como singletons no contêiner.
+        /// Registra as dependï¿½ncias de negï¿½cio como singletons no contï¿½iner.
         /// </summary>
-        /// <param name="builder">Construtor de contêiner para registro das dependências de negócio.</param>
+        /// <param name="builder">Construtor de contï¿½iner para registro das dependï¿½ncias de negï¿½cio.</param>
         private void NegocioDependencias(ContainerBuilder builder)
         {
             builder.AddSingleton(new SingletonExemploNegocio(), typeof(ISingletonExemploNegocio));
