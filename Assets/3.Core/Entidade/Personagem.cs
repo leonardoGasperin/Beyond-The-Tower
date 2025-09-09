@@ -36,12 +36,12 @@ namespace btt.Core.Entidade
         #region Unity Methods
 
         protected virtual void Awake(){
-            fachada = GetComponent<PersonagemConfiguracaoDI>().Services;
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Start()
         {
+            fachada = GetComponent<PersonagemConfiguracaoDI>().Services;
             rb = GetComponent<Rigidbody2D>();
             posicao = GetComponent<Transform>();
             //animacao = GetComponent<Animator>();
