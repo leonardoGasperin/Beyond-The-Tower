@@ -19,4 +19,8 @@ public class JogadorController {
         }
         return 0;
     }
+
+    public bool BotaoAtaque(){
+        return Keyboard.current.zKey.isPressed;
+    }
 }

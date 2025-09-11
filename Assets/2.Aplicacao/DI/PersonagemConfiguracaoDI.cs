@@ -1,5 +1,6 @@
 using btt.Aplicacao.Servico;
 using btt.Aplicacao.Contratos;
+using btt.Aplicacao.Contrato;
 using btt.Core.Contrato;
 using Reflex.Core;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace btt.Aplicacao.DI.Personagem {
         {
             var builder = new ContainerBuilder();
             builder.AddScoped(typeof(MovimentacaoServico), typeof(IMovimentacaoServico));
+            builder.AddScoped(typeof(EnergiaServico), typeof(IEnergiaServico));
+            builder.AddScoped(typeof(CombateServico), typeof(ICombateServico));
             var container = builder.Build();
 
             Services = new ServiceLocator(container);
@@ -33,6 +36,8 @@ namespace btt.Aplicacao.DI.Personagem {
             /// Servi�o de exemplo com escopo, implementando <see cref="ImovimentacaoServico"/>.
             /// </summary>
             public IMovimentacaoServico movimentacaoServico;
+            public IEnergiaServico energiaServico;
+            public ICombateServico combateServico;
             // Adicione todos os outros servi�os como campos
 
             /// <summary>
@@ -42,6 +47,9 @@ namespace btt.Aplicacao.DI.Personagem {
             public ServiceLocator(Container container)
             {
                 movimentacaoServico = (IMovimentacaoServico)container.Resolve(typeof(IMovimentacaoServico));
+                energiaServico = (IEnergiaServico)container.Resolve(typeof(IEnergiaServico));
+                combateServico = (ICombateServico)container.Resolve(typeof(ICombateServico));
+
                 // Resolva todos os outros servi�os aqui...
             }
         }
