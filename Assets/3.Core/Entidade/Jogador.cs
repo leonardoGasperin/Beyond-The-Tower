@@ -14,6 +14,7 @@ namespace btt.Core.Entidade {
             pontosEnergia = 3;
             pontosVida = 10;
             ataque = 2;
+            forcaDoPulo = 5;
         }
 
         protected override void Update(){
@@ -23,17 +24,19 @@ namespace btt.Core.Entidade {
             int direcional = jogadorController.BotoesDirecao();
 
             if (jogadorController.BotaoPulo(estaChao)){
-                fachada.movimentacaoServico.Pulo(rb, posicao, forcaDoPulo);
-                fachada.energiaServico.ReduzirEnergia(pontosEnergia);
-                Debug.Log(pontosEnergia);
+                fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
+                pontosEnergia = fachada.energiaServico.ReduzirEnergia(pontosEnergia);
             }
 
             if (direcional != 0)
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
-
-            void OnCollisionEnter2D(Collision2D col) {
-                if(jogadorController.BotaoAtaque()) fachada.combateServico.Atacando(ataque, col, pontosEnergia);
-           }
+            
+        }
+        
+        void OnCollisionStay2D(Collision2D col){
+            if(jogadorController.BotaoAtaque() && col.gameObject.CompareTag("Inimigo")){
+                fachada.combateServico.Atacando(ataque, col, pontosEnergia);
+            }
         }
     }
 }

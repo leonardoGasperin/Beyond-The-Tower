@@ -7,9 +7,11 @@ namespace btt.Aplicacao.Servico {
 
     public class EnergiaServico:IEnergiaServico {
 
-        public void ReduzirEnergia(int pontosEnergia){
+        public int ReduzirEnergia(int pontosEnergia){
             pontosEnergia --;
             if(pontosEnergia < 0) pontosEnergia = 0;
+            Debug.Log("Pontos de energia: " + pontosEnergia);
+            return pontosEnergia;
         }
 
         public void RecuperarEnergia(int pontosEnergia, int energiaMaximaPulo){

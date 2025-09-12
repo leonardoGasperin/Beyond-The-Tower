@@ -5,7 +5,10 @@ namespace btt.Core.Entidade {
 
     public class Inimigo : Personagem {
     
-    
+        protected override void Start(){
+            base.Start();
+            pontosVida = 10;
+        }
     
     }
 

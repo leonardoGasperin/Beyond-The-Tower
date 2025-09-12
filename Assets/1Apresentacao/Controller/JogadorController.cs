@@ -21,6 +21,6 @@ public class JogadorController {
     }
 
     public bool BotaoAtaque(){
-        return Keyboard.current.zKey.isPressed;
+        return Keyboard.current.zKey.wasPressedThisFrame;
     }
 }
