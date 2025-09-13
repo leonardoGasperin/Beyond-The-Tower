@@ -7,6 +7,7 @@ namespace btt.Core.Entidade {
     public class Jogador : Personagem {
 
         private JogadorController jogadorController;
+        public Inimigo alvo;
 
         protected override void Start(){
             base.Start();
@@ -15,6 +16,7 @@ namespace btt.Core.Entidade {
             pontosVida = 10;
             ataque = 2;
             forcaDoPulo = 5;
+            podeAtacar = false;
         }
 
         protected override void Update(){
@@ -31,11 +33,26 @@ namespace btt.Core.Entidade {
             if (direcional != 0)
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
             
+            if(podeAtacar && jogadorController.BotaoAtaque()) {
+                var estadoInimigo = fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+                if (!estadoInimigo) pontosEnergia++;
+                Debug.Log("Jogador Pontos de energia: " + pontosEnergia);
+            }
         }
         
-        void OnCollisionStay2D(Collision2D col){
-            if(jogadorController.BotaoAtaque() && col.gameObject.CompareTag("Inimigo")){
-                fachada.combateServico.Atacando(ataque, col, pontosEnergia);
+        protected override void OnCollisionEnter2D(Collision2D col){
+            base.OnCollisionEnter2D(col);
+            if(col.gameObject.CompareTag("Inimigo")){
+                podeAtacar = true;
+                alvo = col.gameObject.GetComponent<Inimigo>();
+            }
+        }
+
+        protected override void OnCollisionExit2D(Collision2D col){
+            base.OnCollisionExit2D(col);
+            if(col.gameObject.CompareTag("Inimigo")){
+                podeAtacar = false;
+                alvo = null;
             }
         }
     }

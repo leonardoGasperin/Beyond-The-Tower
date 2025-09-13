@@ -28,6 +28,7 @@ namespace btt.Core.Entidade
         public float velocidade;
         public bool estaVivo;
         public bool estaAtacando;
+        public bool podeAtacar;
         public bool estaDefendendo;
         public bool estaChao;
         public bool ativo = true;
@@ -57,14 +58,14 @@ namespace btt.Core.Entidade
         }
 
     //Checar se o jogador está tocando o chão
-        void OnCollisionEnter2D(Collision2D col){
+        protected virtual void OnCollisionEnter2D(Collision2D col){
             if(col.gameObject.CompareTag("Plataforma")) {
                 estaChao = true;
             }
     }
 
     //Checar se o jogador não está tocando o chão
-        void OnCollisionExit2D(Collision2D col){
+        protected virtual void OnCollisionExit2D(Collision2D col){
             if(col.gameObject.CompareTag("Plataforma")){
                 estaChao = false;
             }
@@ -73,7 +74,7 @@ namespace btt.Core.Entidade
         #endregion
 
         #region Methods
-        protected virtual void Dano(int danoRecebido)
+        public virtual void Dano(int danoRecebido)
         {
             int danoFinal = danoRecebido - defesa;
             if (danoFinal < 0)
@@ -95,18 +96,17 @@ namespace btt.Core.Entidade
             //animacao.SetTrigger("Morreu");
             // Desativar o personagem ou iniciar a l�gica de rein�cio
         }
-
+        /*
         public void Atacar(Personagem alvo)
         {
-            if (estaVivo && !estaAtacando)
+            if (alvo.estaVivo && estaAtacando)
             {
-                estaAtacando = true;
                 //animacao.SetTrigger("Ataca");
                 alvo.Dano(ataque);
                 estaAtacando = false;
             }
         }
-
+        */
         #endregion
     }
 }
