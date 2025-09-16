@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 344689259}
   m_Layer: 0
   m_Name: Jogador
-  m_TagString: Untagged
+  m_TagString: Jogador
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,6 +257,7 @@ MonoBehaviour:
   velocidade: 5
   estaVivo: 0
   estaAtacando: 0
+  podeAtacar: 0
   estaDefendendo: 0
   estaChao: 0
   ativo: 1
@@ -594,6 +595,7 @@ MonoBehaviour:
   velocidade: 0
   estaVivo: 0
   estaAtacando: 0
+  podeAtacar: 0
   estaDefendendo: 0
   estaChao: 0
   ativo: 1

@@ -5,13 +5,12 @@ using btt.Core.Entidade;
 namespace btt.Aplicacao.Servico {
 
     public class CombateServico : ICombateServico {
-        public bool Atacando (int ataque, Inimigo inimigo, int pontosEnergia){
-            if (inimigo == null) {
+        public bool Atacando (int ataque, Personagem personagem, int pontosEnergia){
+            if (personagem == null) {
                 return true;
             }
-            inimigo.Dano(ataque);
-            Debug.Log("Vida do inimigo: " + inimigo.pontosVida);
-            return inimigo.estaVivo;
+            personagem.Dano(ataque);
+            return personagem.estaVivo;
         }
     }
 }

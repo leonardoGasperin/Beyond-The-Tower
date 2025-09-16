@@ -7,7 +7,7 @@ namespace btt.Core.Entidade {
     public class Jogador : Personagem {
 
         private JogadorController jogadorController;
-        public Inimigo alvo;
+        private Inimigo alvo;
 
         protected override void Start(){
             base.Start();
@@ -25,18 +25,19 @@ namespace btt.Core.Entidade {
 
             int direcional = jogadorController.BotoesDirecao();
 
-            if (jogadorController.BotaoPulo(estaChao)){
-                fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
-                pontosEnergia = fachada.energiaServico.ReduzirEnergia(pontosEnergia);
-            }
-
             if (direcional != 0)
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
             
             if(podeAtacar && jogadorController.BotaoAtaque()) {
                 var estadoInimigo = fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+                Debug.Log("Inimigo pontos de vida: " + alvo.pontosVida);
                 if (!estadoInimigo) pontosEnergia++;
-                Debug.Log("Jogador Pontos de energia: " + pontosEnergia);
+                Debug.Log("Jogador pontos de energia: " + pontosEnergia);
+            }
+
+            if (jogadorController.BotaoPulo(estaChao) && pontosEnergia > 0){
+                fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
+                pontosEnergia = fachada.energiaServico.ReduzirEnergia(pontosEnergia);
             }
         }
         
