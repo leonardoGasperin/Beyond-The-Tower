@@ -21,6 +21,12 @@ namespace btt.Core.Entidade {
             base.Update();
 
             if(podeAtacar && alvo != null){
+
+                if(alvo.pontosVida <= 0 || pontosVida == 0){
+                    podeAtacar = false;
+                    return;
+                }
+
                 timerCooldown -= Time.deltaTime;
                 if (timerCooldown <= 0) {
                     timerCooldown = ataqueCooldown;

@@ -29,6 +29,7 @@ namespace btt.Core.Entidade
         public bool estaVivo;
         public bool estaAtacando;
         public bool podeAtacar;
+        public bool podeAndar;
         public bool estaDefendendo;
         public bool estaChao;
         public bool ativo = true;
