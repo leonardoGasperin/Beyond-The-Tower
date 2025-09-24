@@ -33,6 +33,7 @@ namespace btt.Core.Entidade
         public bool estaDefendendo;
         public bool estaChao;
         public bool ativo = true;
+        public int maxHP;
         #endregion
 
         #region Unity Methods
@@ -94,6 +95,7 @@ namespace btt.Core.Entidade
         {
             estaVivo = false;
             ativo = false;
+            podeAtacar = false;
             //animacao.SetTrigger("Morreu");
             // Desativar o personagem ou iniciar a l�gica de rein�cio
         }

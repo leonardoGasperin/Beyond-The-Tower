@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Threading.Tasks;
 using btt.Aplicacao.DI.Personagem;
+using UnityEngine.UI;
 
 namespace btt.Core.Entidade {
 
@@ -9,12 +10,16 @@ namespace btt.Core.Entidade {
         private Jogador alvo;
         private float ataqueCooldown = 2f;
         private float timerCooldown = 0f;
+        [SerializeField] private GameObject barraHP;
+        public Image hpVerde;
     
         protected override void Start(){
             base.Start();
+            maxHP = 10;
             pontosVida = 10;
             ataque = 2;
             podeAtacar = false;
+            hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
         }
 
         protected override void Update(){
@@ -22,7 +27,7 @@ namespace btt.Core.Entidade {
 
             if(podeAtacar && alvo != null){
 
-                if(alvo.pontosVida <= 0 || pontosVida == 0){
+                if(alvo.pontosVida <= 0 || pontosVida <= 0){
                     podeAtacar = false;
                     return;
                 }
@@ -34,6 +39,10 @@ namespace btt.Core.Entidade {
                     Debug.Log("Jogador pontos de vida: " + alvo.pontosVida);
                 }
             }
+
+            hpVerde.fillAmount = (float)pontosVida/maxHP;
+
+            if(pontosVida <= 0) GetComponent<BoxCollider2D>().enabled = false;
         }
 
         protected override void OnCollisionEnter2D(Collision2D col){

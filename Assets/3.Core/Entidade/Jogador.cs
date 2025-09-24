@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using btt.Aplicacao.DI.Personagem;
+using UnityEngine.UI;
 
 namespace btt.Core.Entidade {
 
@@ -8,15 +9,21 @@ namespace btt.Core.Entidade {
 
         private JogadorController jogadorController;
         private Inimigo alvo;
+        private GerenciadorUI ui;
+        [SerializeField] private GameObject barraHP;
+        public Image hpVerde;
 
         protected override void Start(){
             base.Start();
             jogadorController = new JogadorController();
             pontosEnergia = 3;
             pontosVida = 10;
+            maxHP = 10;
             ataque = 2;
-            forcaDoPulo = 5;
+            forcaDoPulo = 10;
             podeAtacar = false;
+            ui = GameObject.Find("GerenciadorUI").GetComponent<GerenciadorUI>();
+            hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
         }
 
         protected override void Update(){
@@ -35,17 +42,23 @@ namespace btt.Core.Entidade {
                     alvo = null;
                 }
                 else if(podeAtacar && jogadorController.BotaoAtaque()) {
+                    
                     var estadoInimigo = fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
-                    Debug.Log("Inimigo pontos de vida: " + alvo.pontosVida);
-                    if (!estadoInimigo) pontosEnergia++;
-                    Debug.Log("Jogador pontos de energia: " + pontosEnergia);
+                    if (!estadoInimigo) {
+                        pontosEnergia = pontosEnergia + 2;
+                        pontosVida ++;
+                    }
                 }
             }
 
-            if (jogadorController.BotaoPulo(estaChao) && pontosEnergia > 0 && pontosVida > 0){
+            if (jogadorController.BotaoPulo() && pontosEnergia > 0 && pontosVida > 0){
                 fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
                 pontosEnergia = fachada.energiaServico.ReduzirEnergia(pontosEnergia);
             }
+
+            if (pontosVida <= 0) ui.GameOver();
+
+            hpVerde.fillAmount = (float)pontosVida/maxHP;
         }
         
         protected override void OnCollisionEnter2D(Collision2D col){

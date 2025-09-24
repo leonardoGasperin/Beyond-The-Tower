@@ -10,7 +10,6 @@ namespace btt.Aplicacao.Servico {
         public int ReduzirEnergia(int pontosEnergia){
             pontosEnergia --;
             if(pontosEnergia < 0) pontosEnergia = 0;
-            Debug.Log("Pontos de energia: " + pontosEnergia);
             return pontosEnergia;
         }
 

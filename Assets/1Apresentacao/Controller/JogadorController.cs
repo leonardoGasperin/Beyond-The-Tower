@@ -3,9 +3,9 @@ using UnityEngine.InputSystem;
 
 public class JogadorController {
 
-    public bool BotaoPulo(bool estaChao){
+    public bool BotaoPulo(){
         //Se apertou espaço, pula
-        return Keyboard.current.spaceKey.wasPressedThisFrame && estaChao;
+        return Keyboard.current.spaceKey.wasPressedThisFrame;
     }
 
     public int BotoesDirecao(){
