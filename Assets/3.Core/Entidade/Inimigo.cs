@@ -24,25 +24,28 @@ namespace btt.Core.Entidade {
 
         protected override void Update(){
             base.Update();
+            InimigoPodeAtacar();
+            hpVerde.fillAmount = (float)pontosVida/maxHP;
+            if(pontosVida <= 0) GetComponent<BoxCollider2D>().enabled = false;
+        }
 
+        private void InimigoPodeAtacar(){
             if(podeAtacar && alvo != null){
 
                 if(alvo.pontosVida <= 0 || pontosVida <= 0){
                     podeAtacar = false;
                     return;
                 }
-
-                timerCooldown -= Time.deltaTime;
-                if (timerCooldown <= 0) {
-                    timerCooldown = ataqueCooldown;
-                    fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
-                    Debug.Log("Jogador pontos de vida: " + alvo.pontosVida);
-                }
+                IntervaloAtaqueInimigo();
             }
+        }
 
-            hpVerde.fillAmount = (float)pontosVida/maxHP;
-
-            if(pontosVida <= 0) GetComponent<BoxCollider2D>().enabled = false;
+        private void IntervaloAtaqueInimigo(){
+            timerCooldown -= Time.deltaTime;
+            if (timerCooldown <= 0) {
+                timerCooldown = ataqueCooldown;
+                fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+            }
         }
 
         protected override void OnCollisionEnter2D(Collision2D col){

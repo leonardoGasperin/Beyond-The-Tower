@@ -36,20 +36,7 @@ namespace btt.Core.Entidade {
             if (direcional != 0 && pontosVida > 0)
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
             
-            if (podeAtacar && alvo != null) {
-                if (alvo.pontosVida <= 0) {
-                    podeAtacar = false;
-                    alvo = null;
-                }
-                else if(podeAtacar && jogadorController.BotaoAtaque()) {
-                    
-                    var estadoInimigo = fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
-                    if (!estadoInimigo) {
-                        pontosEnergia = pontosEnergia + 2;
-                        pontosVida ++;
-                    }
-                }
-            }
+            if (podeAtacar && alvo != null) JogadorPodeAtacar();
 
             if (jogadorController.BotaoPulo() && pontosEnergia > 0 && pontosVida > 0){
                 fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
@@ -59,6 +46,24 @@ namespace btt.Core.Entidade {
             if (pontosVida <= 0) ui.GameOver();
 
             hpVerde.fillAmount = (float)pontosVida/maxHP;
+        }
+
+        private void JogadorPodeAtacar(){
+            if (alvo.pontosVida <= 0) {
+                podeAtacar = false;
+                alvo = null;
+            }
+            else if(podeAtacar && jogadorController.BotaoAtaque()) {
+                JogadorAtaca();
+            }
+        }
+
+        private void JogadorAtaca(){
+            var estadoInimigo = fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+                if (!estadoInimigo) {
+                    pontosEnergia = pontosEnergia + 2;
+                    pontosVida ++;
+                }
         }
         
         protected override void OnCollisionEnter2D(Collision2D col){
