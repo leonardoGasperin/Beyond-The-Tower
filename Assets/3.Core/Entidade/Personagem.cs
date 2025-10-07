@@ -16,6 +16,8 @@ namespace btt.Core.Entidade
         public PersonagemConfiguracaoDI.ServiceLocator fachada;
         public Rigidbody2D rb;
         public string nome;
+        public string tagAlvo;
+        public Personagem alvo;
         public int pontosVida;
         public int pontosEnergia;
         public int ataque;
@@ -61,17 +63,19 @@ namespace btt.Core.Entidade
 
     //Checar se o jogador está tocando o chão
         protected virtual void OnCollisionEnter2D(Collision2D col){
-            if(col.gameObject.CompareTag("Plataforma")) {
-                estaChao = true;
+            if(col.gameObject.CompareTag(tagAlvo)){
+                podeAtacar = true;
+                alvo = col.gameObject.GetComponent<Personagem>();
             }
-    }
+        }
 
     //Checar se o jogador não está tocando o chão
         protected virtual void OnCollisionExit2D(Collision2D col){
-            if(col.gameObject.CompareTag("Plataforma")){
-                estaChao = false;
+            if(col.gameObject.CompareTag(tagAlvo)){
+                podeAtacar = false;
+                alvo = null;
             }
-    }
+        }
 
         #endregion
 
@@ -93,7 +97,6 @@ namespace btt.Core.Entidade
 
         private void Morreu()
         {
-            estaVivo = false;
             ativo = false;
             podeAtacar = false;
             //animacao.SetTrigger("Morreu");

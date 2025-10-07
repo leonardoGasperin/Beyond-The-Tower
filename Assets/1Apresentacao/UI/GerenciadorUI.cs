@@ -27,13 +27,13 @@ namespace btt.Core.Entidade {
 
             if (!gameOver && jogador.transform.position.y < camera.transform.position.y - 10) {
                 gameOver = true;
-                camera.cameraPodeSubir = false;
                 GameOver();
             }
         }
 
         public void GameOver(){
             painelGameOver.SetActive(true);
+            camera.cameraPodeSubir = false;
         }
 
         public void Reiniciar(){

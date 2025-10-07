@@ -7,7 +7,7 @@ namespace btt.Aplicacao.Servico {
     public class CombateServico : ICombateServico {
         public bool Atacando (int ataque, Personagem personagem, int pontosEnergia){
             if (personagem == null) {
-                return true;
+                return false;
             }
             personagem.Dano(ataque);
             return personagem.estaVivo;

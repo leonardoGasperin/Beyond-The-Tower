@@ -8,13 +8,14 @@ namespace btt.Core.Entidade {
     public class Jogador : Personagem {
 
         private JogadorController jogadorController;
-        private Inimigo alvo;
         private GerenciadorUI ui;
         [SerializeField] private GameObject barraHP;
         public Image hpVerde;
+        private GerenciadorCamera camera;
 
         protected override void Start(){
             base.Start();
+            tagAlvo = "Inimigo";
             jogadorController = new JogadorController();
             pontosEnergia = 3;
             pontosVida = 10;
@@ -36,7 +37,23 @@ namespace btt.Core.Entidade {
             if (direcional != 0 && pontosVida > 0)
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
             
-            if (podeAtacar && alvo != null) JogadorPodeAtacar();
+            if(direcional == -1) {
+                transform.localScale = new Vector3(-1, 1, 1);
+                barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if(direcional == 1) {
+                transform.localScale = new Vector3(1, 1, 1);
+                barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+            
+            if (podeAtacar && alvo.pontosVida > 0 && jogadorController.BotaoAtaque()) {
+                fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+            }
+
+            if (alvo != null && alvo.pontosVida <= 0) {
+                podeAtacar = false;
+                alvo = null;
+            }
 
             if (jogadorController.BotaoPulo() && pontosEnergia > 0 && pontosVida > 0){
                 fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
@@ -46,40 +63,6 @@ namespace btt.Core.Entidade {
             if (pontosVida <= 0) ui.GameOver();
 
             hpVerde.fillAmount = (float)pontosVida/maxHP;
-        }
-
-        private void JogadorPodeAtacar(){
-            if (alvo.pontosVida <= 0) {
-                podeAtacar = false;
-                alvo = null;
-            }
-            else if(podeAtacar && jogadorController.BotaoAtaque()) {
-                JogadorAtaca();
-            }
-        }
-
-        private void JogadorAtaca(){
-            var estadoInimigo = fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
-                if (!estadoInimigo) {
-                    pontosEnergia = pontosEnergia + 2;
-                    pontosVida ++;
-                }
-        }
-        
-        protected override void OnCollisionEnter2D(Collision2D col){
-            base.OnCollisionEnter2D(col);
-            if(col.gameObject.CompareTag("Inimigo")){
-                podeAtacar = true;
-                alvo = col.gameObject.GetComponent<Inimigo>();
-            }
-        }
-
-        protected override void OnCollisionExit2D(Collision2D col){
-            base.OnCollisionExit2D(col);
-            if(col.gameObject.CompareTag("Inimigo")){
-                podeAtacar = false;
-                alvo = null;
-            }
         }
     }
 }
