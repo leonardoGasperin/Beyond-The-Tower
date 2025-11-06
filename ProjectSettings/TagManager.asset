@@ -7,11 +7,12 @@ TagManager:
   - Inimigo
   - Jogador
   - Plataforma
+  - npc
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Plataforma
   - Water
   - UI
   - 

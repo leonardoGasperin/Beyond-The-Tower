@@ -1,24 +1,23 @@
 using UnityEngine;
 using btt.Aplicacao.DI.Personagem;
+using DialogueSystem;
 
 namespace btt.Core.Entidade {
-    public class MiniBoss : Inimigo
+    public class MiniBoss : Personagem
     {
         public GameObject projetil;
+        private Jogador jogador;
         public Vector3 offset;
         private bool podeAtirar;
         public float distancia;
         private float tiroCooldown = 2f;
         private float timer = 0f;
         
-        protected override void Awake() {
-            base.Awake();
-            if (jogador == null) jogador = GameObject.FindGameObjectWithTag("Jogador").GetComponent<Jogador>();
-        }
-        
         protected override void Start(){
             base.Start();
-            podeAtirar = true;
+            jogador = GameObject.FindGameObjectWithTag("Jogador").GetComponent<Jogador>();
+            podeAtirar = false;
+            velocidade = 0;
             maxHP = 100;
             pontosVida = 100;
         }

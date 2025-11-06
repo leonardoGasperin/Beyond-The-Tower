@@ -10,14 +10,17 @@ namespace btt.Core.Entidade {
         private TMP_Text numeroEnergias;
         private Jogador jogador;
         private bool gameOver = false;
-        private GerenciadorCamera camera;
+        private GerenciadorCamera mainCamera;
+        private CanvasGroup energiasCanvasGroup;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            energiasCanvasGroup = GameObject.Find("Energias").GetComponent<CanvasGroup>();
+            energiasCanvasGroup.alpha = 0f;
             numeroEnergias = GameObject.Find("Quantidade").GetComponent<TMP_Text>();
             jogador = GameObject.Find("Jogador").GetComponent<Jogador>();
-            camera = GameObject.Find("Main Camera").GetComponent<GerenciadorCamera>();
+            mainCamera = GameObject.Find("Main Camera").GetComponent<GerenciadorCamera>();
         }
 
         // Update is called once per frame
@@ -25,7 +28,7 @@ namespace btt.Core.Entidade {
         {
             numeroEnergias.text = jogador.pontosEnergia.ToString();
 
-            if (!gameOver && jogador.transform.position.y < camera.transform.position.y - 10) {
+            if (!gameOver && jogador.transform.position.y < mainCamera.transform.position.y - 10) {
                 gameOver = true;
                 GameOver();
             }
@@ -33,7 +36,7 @@ namespace btt.Core.Entidade {
 
         public void GameOver(){
             painelGameOver.SetActive(true);
-            camera.cameraPodeSubir = false;
+            mainCamera.cameraPodeSubir = false;
         }
 
         public void Reiniciar(){

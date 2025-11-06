@@ -13,9 +13,13 @@ namespace btt.Core.Entidade {
         public Image hpVerde;
         public Jogador jogador;
         public float distanciaDoJogador;
-        public float velocidadeSaidaColisao;
+        public float velocidadeSaidaColisao = 2f;
         private float direcao;
-    
+        private float tempo = 0f;
+        private float tempoTroca = 1.5f;
+        private Vector2 direcaoOlha = Vector2.left;
+        private bool viuJogador;
+ 
         protected override void Start(){
             base.Start();
             tagAlvo = "Jogador";
@@ -26,6 +30,8 @@ namespace btt.Core.Entidade {
             barraHP = transform.Find("Barra de HP");
             hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
             jogador = GameObject.FindGameObjectWithTag("Jogador").GetComponent<Jogador>();
+            velocidade = 2f;
+            viuJogador = false;
         }
 
         protected override void Update(){
@@ -43,10 +49,40 @@ namespace btt.Core.Entidade {
 
             if(estaVivo == false) return;
 
-            distanciaDoJogador = jogador.transform.position.x - transform.position.x;
+            tempo += Time.deltaTime;
+            if(tempo >= tempoTroca) {
+                TrocaDirecao();
+                tempo = 0;
+            }
 
-            if (Mathf.Abs(distanciaDoJogador) > 0) {
-                direcao = Mathf.Sign(distanciaDoJogador);
+            distanciaDoJogador = jogador.transform.position.x - transform.position.x;
+            direcao = Mathf.Sign(distanciaDoJogador);
+
+            RaycastHit2D detectaChao = Physics2D.Raycast(transform.position  + new Vector3(0, -1f, 0), Vector2.down, 0.5f);
+            Debug.DrawRay(transform.position  + new Vector3(0, -0.3f, 0), Vector2.down, Color.yellow);
+
+            RaycastHit2D verJogador = Physics2D.Raycast(transform.position  + new Vector3(OrigemRay(), 0, 0), direcaoOlha, 10f);
+            Debug.DrawRay(transform.position + new Vector3(OrigemRay(), 0, 0), direcaoOlha * 10f, Color.yellow);
+
+            if(detectaChao.collider == null) viuJogador = false;
+
+            if(detectaChao.collider == null && direcao < 0) {
+                Vector3 posicao = transform.position;
+                posicao.x += 0.01f;
+                transform.position = posicao;
+            }
+
+            if(detectaChao.collider == null && direcao > 0) {
+                Vector3 posicao2 = transform.position;
+                posicao2.x -= 0.01f;
+                transform.position = posicao2;
+            }
+
+            if(verJogador.collider != null && verJogador.collider.CompareTag("Jogador") && detectaChao.collider != null && Mathf.Abs(distanciaDoJogador) > 0) {
+                viuJogador = true;
+            }
+
+            if(viuJogador) {
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
             }
 
@@ -61,6 +97,22 @@ namespace btt.Core.Entidade {
 
             if(podeAtacar && alvo != null && alvo.pontosVida > 0) IntervaloAtaqueInimigo();
 
+        }
+
+        private Vector2 TrocaDirecao(){
+            if(direcaoOlha == Vector2.left) direcaoOlha = Vector2.right;
+            else {
+                direcaoOlha = Vector2.left;
+            }
+            return direcaoOlha;
+        }
+
+        private int OrigemRay(){
+            if(direcaoOlha == Vector2.left) {
+                return -1;
+            } else {
+                return 1;
+            }
         }
 
         private void IntervaloAtaqueInimigo(){

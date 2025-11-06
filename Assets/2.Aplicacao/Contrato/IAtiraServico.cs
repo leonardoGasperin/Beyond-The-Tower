@@ -5,7 +5,6 @@ using btt.Core.Entidade;
 namespace btt.Aplicacao.Contratos {
 
     public interface IAtiraServico {
-        public void Atira(Vector3 direcaoTiro, float velocidadeTiro, Transform transform);
+        public void Atira(Vector2 velocidadeTiro, Transform transform);
     }
-
 }

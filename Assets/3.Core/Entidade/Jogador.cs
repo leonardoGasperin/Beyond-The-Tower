@@ -11,13 +11,14 @@ namespace btt.Core.Entidade {
         private GerenciadorUI ui;
         [SerializeField] private GameObject barraHP;
         public Image hpVerde;
-        private GerenciadorCamera camera;
+        private GerenciadorCamera mainCamera;
+        public int direcional;
 
         protected override void Start(){
             base.Start();
             tagAlvo = "Inimigo";
             jogadorController = new JogadorController();
-            pontosEnergia = 3;
+            pontosEnergia = 10000;
             pontosVida = 10;
             maxHP = 10;
             ataque = 2;
@@ -32,7 +33,7 @@ namespace btt.Core.Entidade {
 
             if(Keyboard.current == null) return;
 
-            int direcional = jogadorController.BotoesDirecao();
+            direcional = jogadorController.BotoesDirecao();
 
             if (direcional != 0 && pontosVida > 0)
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
@@ -63,6 +64,13 @@ namespace btt.Core.Entidade {
             if (pontosVida <= 0) ui.GameOver();
 
             hpVerde.fillAmount = (float)pontosVida/maxHP;
+        }
+
+        private void OnTriggerStay2D(Collider2D col){
+            if (col.CompareTag(tagAlvo)) {
+                podeAtacar = true;
+                alvo = col.GetComponent<Personagem>();
+            }
         }
     }
 }
