@@ -7,18 +7,19 @@ namespace btt.Aplicacao.Servico {
 
     public class EnergiaServico:IEnergiaServico {
 
-        public void ReduzirEnergia(int energiaPulo){
-            energiaPulo --;
-            if(energiaPulo < 0) energiaPulo = 0;
+        public int ReduzirEnergia(int pontosEnergia){
+            pontosEnergia --;
+            if(pontosEnergia < 0) pontosEnergia = 0;
+            return pontosEnergia;
         }
 
-        public void RecuperarEnergia(int energiaPulo, int energiaMaximaPulo){
-            energiaPulo ++;
-            if (energiaPulo > energiaMaximaPulo) energiaPulo = energiaMaximaPulo;
+        public void RecuperarEnergia(int pontosEnergia, int energiaMaximaPulo){
+            pontosEnergia ++;
+            if (pontosEnergia > energiaMaximaPulo) pontosEnergia = energiaMaximaPulo;
         }
 
-        public async Task RecuperarEnergiaAutomaticamente(int energiaPulo){
-            energiaPulo ++;
+        public async Task RecuperarEnergiaAutomaticamente(int pontosEnergia){
+            pontosEnergia ++;
             await Task.Delay(2000);
         }
     }

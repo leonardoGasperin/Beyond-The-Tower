@@ -6,8 +6,8 @@ namespace btt.Aplicacao.Contrato {
 
     public interface IEnergiaServico {
 
-        public void ReduzirEnergia(int energiaPulo);
-        public void RecuperarEnergia(int energiaPulo, int energiaMaximaPulo);
-        public Task RecuperarEnergiaAutomaticamente(int energiaPulo);
+        public int ReduzirEnergia(int pontosEnergia);
+        public void RecuperarEnergia(int pontosEnergia, int energiaMaximaPulo);
+        public Task RecuperarEnergiaAutomaticamente(int pontosEnergia);
     }
 }

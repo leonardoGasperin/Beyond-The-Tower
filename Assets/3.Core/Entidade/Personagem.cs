@@ -16,6 +16,8 @@ namespace btt.Core.Entidade
         public PersonagemConfiguracaoDI.ServiceLocator fachada;
         public Rigidbody2D rb;
         public string nome;
+        public string tagAlvo;
+        public Personagem alvo;
         public int pontosVida;
         public int pontosEnergia;
         public int ataque;
@@ -28,9 +30,12 @@ namespace btt.Core.Entidade
         public float velocidade;
         public bool estaVivo;
         public bool estaAtacando;
+        public bool podeAtacar;
+        public bool podeAndar;
         public bool estaDefendendo;
         public bool estaChao;
         public bool ativo = true;
+        public int maxHP;
         #endregion
 
         #region Unity Methods
@@ -57,23 +62,25 @@ namespace btt.Core.Entidade
         }
 
     //Checar se o jogador está tocando o chão
-        void OnCollisionEnter2D(Collision2D col){
-            if(col.gameObject.CompareTag("Plataforma")) {
-                estaChao = true;
+        protected virtual void OnCollisionEnter2D(Collision2D col){
+            if(col.gameObject.CompareTag(tagAlvo)){
+                podeAtacar = true;
+                alvo = col.gameObject.GetComponent<Personagem>();
             }
-    }
+        }
 
     //Checar se o jogador não está tocando o chão
-        void OnCollisionExit2D(Collision2D col){
-            if(col.gameObject.CompareTag("Plataforma")){
-                estaChao = false;
+        protected virtual void OnCollisionExit2D(Collision2D col){
+            if(col.gameObject.CompareTag(tagAlvo)){
+                podeAtacar = false;
+                alvo = null;
             }
-    }
+        }
 
         #endregion
 
         #region Methods
-        protected virtual void Dano(int danoRecebido)
+        public virtual void Dano(int danoRecebido)
         {
             int danoFinal = danoRecebido - defesa;
             if (danoFinal < 0)
@@ -90,23 +97,22 @@ namespace btt.Core.Entidade
 
         private void Morreu()
         {
-            estaVivo = false;
             ativo = false;
+            podeAtacar = false;
             //animacao.SetTrigger("Morreu");
             // Desativar o personagem ou iniciar a l�gica de rein�cio
         }
-
+        /*
         public void Atacar(Personagem alvo)
         {
-            if (estaVivo && !estaAtacando)
+            if (alvo.estaVivo && estaAtacando)
             {
-                estaAtacando = true;
                 //animacao.SetTrigger("Ataca");
                 alvo.Dano(ataque);
                 estaAtacando = false;
             }
         }
-
+        */
         #endregion
     }
 }

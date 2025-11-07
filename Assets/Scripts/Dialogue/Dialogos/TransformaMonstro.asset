@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8846201511417448093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fd8354f731745fab4bbd5662158169, type: 3}
+  m_Name: 334e19c8-6d98-4e94-ace2-7a53b90281aa
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  isChoiceNode: 0
+  text: "Escolha uma op\xE7\xE3o"
+  children:
+  - 7cab72b2-f478-498c-bcf6-9719d66b976e
+  - 48e29748-3fe1-4b02-b3b7-b8f9afe94549
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+--- !u!114 &-2790729870518502032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fd8354f731745fab4bbd5662158169, type: 3}
+  m_Name: 48e29748-3fe1-4b02-b3b7-b8f9afe94549
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  isChoiceNode: 1
+  text: Lutar
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 250
+    y: 132
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: Lutar
+--- !u!114 &-1099862529115156977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fd8354f731745fab4bbd5662158169, type: 3}
+  m_Name: 7cab72b2-f478-498c-bcf6-9719d66b976e
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  isChoiceNode: 1
+  text: Expurgar
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 250
+    y: 0
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: Expurgar
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3980cf7788ca04129986775e795817ae, type: 3}
+  m_Name: TransformaMonstro
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -8846201511417448093}
+  - {fileID: -1099862529115156977}
+  - {fileID: -2790729870518502032}
+  newNodeOffset: {x: 250, y: 0}

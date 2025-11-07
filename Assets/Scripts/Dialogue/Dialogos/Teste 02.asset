@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2857825335882276299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fd8354f731745fab4bbd5662158169, type: 3}
+  m_Name: 8dcc879c-4ef5-4117-93b9-312d4fcebd1d
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  isChoiceNode: 1
+  text: "Escolha altru\xEDsta"
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 514
+    y: 37
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: cameraSobe
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3980cf7788ca04129986775e795817ae, type: 3}
+  m_Name: Teste 02
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 3786050502888091729}
+  - {fileID: 5525058614565298732}
+  - {fileID: -2857825335882276299}
+  - {fileID: 201581609346719608}
+  newNodeOffset: {x: 250, y: 0}
+--- !u!114 &201581609346719608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fd8354f731745fab4bbd5662158169, type: 3}
+  m_Name: 4711e8d0-7ffd-4243-a24d-5a1c83bb4646
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  isChoiceNode: 1
+  text: "Escolha ego\xEDsta"
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 509
+    y: 183
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: cameraSobe
+--- !u!114 &3786050502888091729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fd8354f731745fab4bbd5662158169, type: 3}
+  m_Name: cb3d9f88-9670-4bff-9d3a-0c4d687a14b0
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  isChoiceNode: 0
+  text: Primeira fala
+  children:
+  - a99e6f0a-ee5a-4563-bccc-6d8d0bed4766
+  rect:
+    serializedVersion: 2
+    x: 20
+    y: 42
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+--- !u!114 &5525058614565298732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fd8354f731745fab4bbd5662158169, type: 3}
+  m_Name: a99e6f0a-ee5a-4563-bccc-6d8d0bed4766
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  isChoiceNode: 0
+  text: 'Segunda fala Segunda fala Segunda fala Segunda fala Segunda fala Segunda
+    fala Segunda fala Segunda fala Segunda fala Segunda fala Segunda fala Segunda
+    fala Segunda fala Segunda fala Segunda fala Segunda fala Segunda fala Segunda
+    fala Segunda fala Segunda fala Segunda fala Segunda fala Segunda fala Segunda
+    fala Segunda fala Segunda fala '
+  children:
+  - 8dcc879c-4ef5-4117-93b9-312d4fcebd1d
+  - 4711e8d0-7ffd-4243-a24d-5a1c83bb4646
+  rect:
+    serializedVersion: 2
+    x: 262
+    y: 49
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
