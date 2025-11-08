@@ -6,8 +6,8 @@ namespace btt.Aplicacao.Servico {
 
     public class SpawnInimigoServico : ISpawnInimigoServico {
 
-        public void SpawnInimigo(GameObject inimigoPrefab, Transform posicao) {
-            Object.Instantiate(inimigoPrefab, posicao);
+        public void Spawn(GameObject prefab, Transform posicao) {
+            Object.Instantiate(prefab, posicao);
         }
 
     }

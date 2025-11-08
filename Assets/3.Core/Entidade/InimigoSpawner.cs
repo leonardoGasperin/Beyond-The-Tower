@@ -29,7 +29,7 @@ namespace btt.Core.Entidade {
             timerCooldown -= Time.deltaTime;
                 if (timerCooldown <= 0) {
                     timerCooldown = spawnCooldown;
-                    fachada.spawnInimigoServico.SpawnInimigo(prefab, posicao);
+                    fachada.spawnInimigoServico.Spawn(prefab, posicao);
                 }
         }
     }
