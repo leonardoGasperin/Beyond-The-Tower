@@ -3,13 +3,15 @@ using btt.Aplicacao.DI.Personagem;
 
 namespace btt.Core.Entidade {
 
-    public class InimigoSpawner : MonoBehaviour
+    public class Spawner : MonoBehaviour
     {
         public GameObject prefab;
         public Transform posicao;
+        public bool spawnDireita;
+        public float desvio;
         private PersonagemConfiguracaoDI.ServiceLocator fachada;
         private float timerCooldown = 0f;
-        private float spawnCooldown = 2f;
+        public float spawnCooldown = 2f;
         private Jogador jogador;
 
         void Start()
@@ -19,8 +21,10 @@ namespace btt.Core.Entidade {
         }
 
         void Update()
-        {
-            if (transform.childCount == 0 && jogador.transform.position.x - 2 < transform.position.x) {
+        {   
+            if(transform.childCount == 0 && spawnDireita && jogador.transform.position.x + desvio > transform.position.x) {
+                IntervaloSpawn();
+            } else if (transform.childCount == 0 && !spawnDireita && jogador.transform.position.x - desvio < transform.position.x) {
                 IntervaloSpawn();
             }
         }
@@ -29,7 +33,7 @@ namespace btt.Core.Entidade {
             timerCooldown -= Time.deltaTime;
                 if (timerCooldown <= 0) {
                     timerCooldown = spawnCooldown;
-                    fachada.spawnInimigoServico.Spawn(prefab, posicao);
+                    fachada.spawnServico.Spawn(prefab, posicao);
                 }
         }
     }

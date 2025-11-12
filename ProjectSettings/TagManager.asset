@@ -8,6 +8,7 @@ TagManager:
   - Jogador
   - Plataforma
   - npc
+  - Projetil
   layers:
   - Default
   - TransparentFX

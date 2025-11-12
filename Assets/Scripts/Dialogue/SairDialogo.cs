@@ -11,12 +11,14 @@ public class SairDialogo : MonoBehaviour
     private AIConversant interlocutor;
     [SerializeField] private GameObject prefabInimigo;
     private CanvasGroup energiasCanvasGroup;
+    private MiniBoss miniBoss;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mainCamera = FindFirstObjectByType<GerenciadorCamera>();   
         jogador = FindFirstObjectByType<Jogador>();
+        miniBoss = FindFirstObjectByType<MiniBoss>();
         interlocutor = FindFirstObjectByType<PlayerConversant>().GetCurrentConversant();
         energiasCanvasGroup = GameObject.Find("Energias").GetComponent<CanvasGroup>();
     }
@@ -35,10 +37,18 @@ public class SairDialogo : MonoBehaviour
         }
     }
 
+    private void Retomar(){
+        mainCamera.cameraVelocidade = 1f;
+        jogador.anda = true;
+        jogador.podePular = true;
+    }
+
     public void FimTutorial(){
         CameraSobe();
         energiasCanvasGroup.alpha = 1f;
         jogador.pontosEnergia = 3;
+        jogador.podePular = true;
+        jogador.anda = true;
     }
 
     public async void Expurgar(){
@@ -49,6 +59,8 @@ public class SairDialogo : MonoBehaviour
         await Task.Yield();
         inimigoScript.pontosVida = 0;
         DestruirNPC(npcAtual);
+        jogador.podePular = true;
+        jogador.anda = true;
     }
 
     public void Lutar(){
@@ -56,6 +68,8 @@ public class SairDialogo : MonoBehaviour
         AIConversant npcAtual = FindFirstObjectByType<PlayerConversant>().GetCurrentConversant();
         Instantiate(prefabInimigo, npcAtual.transform.position, npcAtual.transform.rotation);
         DestruirNPC(npcAtual);
+        jogador.podePular = true;
+        jogador.anda = true;
     }
 
     private async void DestruirNPC(AIConversant npc)
@@ -64,8 +78,9 @@ public class SairDialogo : MonoBehaviour
         if (npc != null) Destroy(npc.gameObject);
     }
 
-    private void Retomar(){
-        mainCamera.cameraVelocidade = 1f;
-        jogador.velocidade = 5f;
+    public void LutaMiniBoss(){
+        miniBoss.podeAtirar = true;
+        jogador.anda = true;
+        jogador.podePular = true;
     }
 }

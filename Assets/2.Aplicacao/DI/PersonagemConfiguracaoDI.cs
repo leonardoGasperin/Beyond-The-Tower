@@ -24,7 +24,7 @@ namespace btt.Aplicacao.DI.Personagem {
             builder.AddScoped(typeof(CombateServico), typeof(ICombateServico));
             builder.AddScoped(typeof(CameraServico), typeof(ICameraServico));
             builder.AddScoped(typeof(LancaServico), typeof(ILancaServico));
-            builder.AddScoped(typeof(SpawnInimigoServico), typeof(ISpawnInimigoServico));
+            builder.AddScoped(typeof(SpawnServico), typeof(ISpawnServico));
             var container = builder.Build();
 
             Services = new ServiceLocator(container);
@@ -43,7 +43,7 @@ namespace btt.Aplicacao.DI.Personagem {
             public ICombateServico combateServico;
             public ICameraServico cameraServico;
             public ILancaServico lancaServico;
-            public ISpawnInimigoServico spawnInimigoServico;
+            public ISpawnServico spawnServico;
             // Adicione todos os outros servi�os como campos
 
             /// <summary>
@@ -57,7 +57,7 @@ namespace btt.Aplicacao.DI.Personagem {
                 combateServico = (ICombateServico)container.Resolve(typeof(ICombateServico));
                 cameraServico = (ICameraServico)container.Resolve(typeof(ICameraServico));
                 lancaServico = (ILancaServico)container.Resolve(typeof(ILancaServico));
-                spawnInimigoServico = (ISpawnInimigoServico)container.Resolve(typeof(ISpawnInimigoServico));
+                spawnServico = (ISpawnServico)container.Resolve(typeof(ISpawnServico));
 
                 // Resolva todos os outros servi�os aqui...
             }

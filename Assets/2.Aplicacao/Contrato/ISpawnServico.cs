@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace btt.Aplicacao.Contrato {
 
-    public interface ISpawnInimigoServico {
+    public interface ISpawnServico {
 
         public void Spawn(GameObject prefab, Transform posicao);
 

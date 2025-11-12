@@ -11,6 +11,22 @@ namespace btt.Aplicacao.Servico {
             transform.rotation = Quaternion.AngleAxis(anguloRotacao, Vector3.forward);
         }
 
+        public bool PodeAtirar(Jogador jogador, Transform transform) {
+            Vector2 origemLanca = transform.position;
+            Vector2 alvoLanca = jogador.transform.position;
+            Vector2 diferenca = alvoLanca - origemLanca;
+
+            float dx = Mathf.Abs(diferenca.x);
+            float dy = diferenca.y;
+
+            float velocidadeInicialLanca = 12f;
+            float gravidade = 9.8f;
+
+            float dentroRaizQuadrada = velocidadeInicialLanca * velocidadeInicialLanca * velocidadeInicialLanca * velocidadeInicialLanca - gravidade * (gravidade * dx * dx + 2 * dy * velocidadeInicialLanca * velocidadeInicialLanca);
+
+            return dentroRaizQuadrada >= 0;
+        }
+
         public Projetil AtiraLanca(Jogador jogador, GameObject projetil, Transform transform){
             Vector2 origemLanca = transform.position;
             Vector2 alvoLanca = jogador.transform.position;
@@ -20,7 +36,7 @@ namespace btt.Aplicacao.Servico {
             float dx = Mathf.Abs(diferenca.x);
             float dy = diferenca.y;
 
-            float velocidadeInicialLanca = 10f;
+            float velocidadeInicialLanca = 12f;
             float gravidade = 9.8f;
 
             // Matemática para calcular o ângulo que a lança será atirada

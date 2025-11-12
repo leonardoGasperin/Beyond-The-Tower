@@ -21,7 +21,7 @@ namespace btt.Core.Entidade {
             if (cameraPodeSubir) {
                 fachada.cameraServico.CameraSobe(transform, cameraVelocidade);
             }
-            if(transform.position.y >= 41) {
+            if(transform.position.y >= 14) {
                 cameraPodeSubir = false;
             }
         }
