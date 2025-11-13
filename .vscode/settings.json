@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Beyond-The-Tower.sln"
+    "dotnet.defaultSolution": "Beyond-The-Tower.slnx"
 }

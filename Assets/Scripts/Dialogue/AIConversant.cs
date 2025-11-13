@@ -41,10 +41,11 @@ namespace DialogueSystem {
                 //return false;
                 return;
             }
-            if(col.gameObject.CompareTag("Jogador")) {
+            if(gameObject.tag == "npc" && col.gameObject.CompareTag("Jogador")) {
                 col.gameObject.GetComponent<PlayerConversant>().StartDialogue(this, dialogue);
                 mainCamera.cameraVelocidade = 0;
-                jogador.velocidade = 0;
+                jogador.anda = false;
+                jogador.podePular = false;
                 dialogoComecou = true;
             }
             //return true;
@@ -58,9 +59,10 @@ namespace DialogueSystem {
             Vector2 direcao = Vector2.left;
             RaycastHit2D hit = Physics2D.Raycast(origem, direcao, 100f);
             
-            if (hit.collider != null && gameObject.tag == "Inimigo" && hit.collider.tag == "Jogador"){
+            if (hit.collider != null && gameObject.GetComponent<MiniBoss>() != null && hit.collider.tag == "Jogador"){
                 hit.collider.gameObject.GetComponent<PlayerConversant>().StartDialogue(this, dialogue);
-                jogador.velocidade = 0;
+                jogador.anda = false;
+                jogador.podePular = false;
                 dialogoComecou = true;
             }   
         }

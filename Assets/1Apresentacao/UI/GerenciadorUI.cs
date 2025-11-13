@@ -29,6 +29,7 @@ namespace btt.Core.Entidade {
             numeroEnergias.text = jogador.pontosEnergia.ToString();
 
             if (!gameOver && jogador.transform.position.y < mainCamera.transform.position.y - 10) {
+                jogador.pontosVida = 0;
                 gameOver = true;
                 GameOver();
             }

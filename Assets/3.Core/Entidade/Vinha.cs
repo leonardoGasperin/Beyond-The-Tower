@@ -6,7 +6,7 @@ public class Vinha : Personagem
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pontosVida = 10;
+        pontosVida = 6;
         tagAlvo = "Jogador";
     }
 

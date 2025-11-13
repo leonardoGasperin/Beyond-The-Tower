@@ -13,7 +13,6 @@ namespace btt.Core.Entidade {
         public Image hpVerde;
         public Jogador jogador;
         public float distanciaDoJogador;
-        public float velocidadeSaidaColisao = 2f;
         private float direcao;
         private float tempo = 0f;
         private float tempoTroca = 1.5f;
@@ -41,7 +40,6 @@ namespace btt.Core.Entidade {
 
             if(estaVivo && pontosVida <= 0) {
                 GetComponent<BoxCollider2D>().enabled = false;
-                jogador.pontosVida ++;
                 jogador.pontosEnergia += 2;
                 estaVivo = false;
                 Destroy(gameObject, 1.5f);
@@ -130,7 +128,7 @@ namespace btt.Core.Entidade {
 
         protected override void OnCollisionExit2D(Collision2D col){
             base.OnCollisionExit2D(col);
-            velocidade = velocidadeSaidaColisao;
+            velocidade = 2f;
         }
         
     }
