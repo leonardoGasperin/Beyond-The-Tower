@@ -18,6 +18,7 @@ namespace btt.Core.Entidade {
 
         protected override void Start(){
             base.Start();
+
             tagAlvo = "Inimigo";
             jogadorController = new JogadorController();
             pontosEnergia = 10000;
@@ -29,7 +30,7 @@ namespace btt.Core.Entidade {
             podeAtacar = false;
             anda = true;
             podePular = true;
-            ui = GameObject.Find("GerenciadorUI").GetComponent<GerenciadorUI>();
+            ui = GameObject.Find("Gerenciador").GetComponent<GerenciadorUI>();
             hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
         }
 
@@ -68,7 +69,11 @@ namespace btt.Core.Entidade {
                 pontosEnergia = fachada.energiaServico.ReduzirEnergia(pontosEnergia);
             }
 
-            if(pontosEnergia <= 0) podePular = false;
+            if(pontosEnergia <= 0) {
+                podePular = false;
+            } else {
+                podePular = true;
+            }
 
             if (pontosVida <= 0) ui.GameOver();
 

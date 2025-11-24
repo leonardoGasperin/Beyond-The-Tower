@@ -43,7 +43,7 @@ namespace DialogueSystem {
             }
             if(gameObject.tag == "npc" && col.gameObject.CompareTag("Jogador")) {
                 col.gameObject.GetComponent<PlayerConversant>().StartDialogue(this, dialogue);
-                mainCamera.cameraVelocidade = 0;
+                mainCamera.cameraPodeSubir = false;
                 jogador.anda = false;
                 jogador.podePular = false;
                 dialogoComecou = true;

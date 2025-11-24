@@ -38,7 +38,7 @@ public class SairDialogo : MonoBehaviour
     }
 
     private void Retomar(){
-        mainCamera.cameraVelocidade = 1f;
+        mainCamera.cameraPodeSubir = true;
         jogador.anda = true;
         jogador.podePular = true;
     }
