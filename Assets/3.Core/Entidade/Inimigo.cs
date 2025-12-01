@@ -18,6 +18,8 @@ namespace btt.Core.Entidade {
         private float tempoTroca = 1.5f;
         private Vector2 direcaoOlha = Vector2.left;
         private bool viuJogador;
+        private float duracaoAtaque = 0.3f;
+        private float tempoAtacando = 0f;
  
         protected override void Start(){
             base.Start();
@@ -117,7 +119,15 @@ namespace btt.Core.Entidade {
             timerCooldown -= Time.deltaTime;
             if (timerCooldown <= 0) {
                 timerCooldown = ataqueCooldown;
+                estaAtacando = true;
+                tempoAtacando = duracaoAtaque;
                 fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+            }
+
+            if (estaAtacando) {
+                tempoAtacando -= Time.deltaTime;
+                if (tempoAtacando <= 0)
+                    estaAtacando = false;
             }
         }
 
