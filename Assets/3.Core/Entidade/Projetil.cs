@@ -37,6 +37,8 @@ namespace btt.Core.Entidade {
                 velocidadeTiro = Vector2.zero;
                 ataque = 0;
                 chao = true;
+            } else if(col.gameObject.CompareTag("Parede")) {
+                velocidadeTiro.x = 0;
             }
         }
     }

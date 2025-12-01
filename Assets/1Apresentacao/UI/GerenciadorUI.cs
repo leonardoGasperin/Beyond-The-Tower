@@ -11,7 +11,7 @@ namespace btt.Core.Entidade {
         private Jogador jogador;
         private bool gameOver = false;
         private GerenciadorCamera mainCamera;
-        private CanvasGroup energiasCanvasGroup;
+        public CanvasGroup energiasCanvasGroup;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()

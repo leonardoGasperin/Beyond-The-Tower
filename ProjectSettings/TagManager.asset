@@ -9,6 +9,7 @@ TagManager:
   - Plataforma
   - npc
   - Projetil
+  - Parede
   layers:
   - Default
   - TransparentFX
