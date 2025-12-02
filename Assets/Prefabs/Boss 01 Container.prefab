@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3943295939663913344}
   - component: {fileID: 3336122694860688392}
   m_Layer: 0
-  m_Name: Boss Container
+  m_Name: Boss 01 Container
   m_TagString: Inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,6 +35,7 @@ Transform:
   - {fileID: 1633799122355813425}
   - {fileID: 7007891036168942363}
   - {fileID: 2763162319852939507}
+  - {fileID: 1770931970016640831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6739118692995192522
@@ -84,6 +85,10 @@ MonoBehaviour:
   maxHP: 0
   hpVerde: {fileID: 0}
   jogador: {fileID: 0}
+  tiroMucoPrefab: {fileID: 7499726127753908214, guid: 7474b1a684e884fcab72bf1aaf9cdb04, type: 3}
+  pontoDeTiro: {fileID: 1770931970016640831}
+  contadorTiro: 5
+  chuvaMucoPrefab: {fileID: 6731434099414254140, guid: d8e7d7fab49e74243ad1bcaadea340a4, type: 3}
 --- !u!60 &3336122694860688392
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -318,6 +323,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8139303421743310974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1770931970016640831}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1770931970016640831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8139303421743310974}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.81, y: 0.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3827498929252904814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &755349831043184807
 PrefabInstance:
   m_ObjectHideFlags: 0
