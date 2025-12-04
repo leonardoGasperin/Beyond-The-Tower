@@ -5067,6 +5067,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3943295939663913344, guid: 72f888d5596fb4603a383ce09fd3e70e, type: 3}
+      propertyPath: estaVivo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943295939663913344, guid: 72f888d5596fb4603a383ce09fd3e70e, type: 3}
+      propertyPath: pontoDeTiro
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943295939663913344, guid: 72f888d5596fb4603a383ce09fd3e70e, type: 3}
+      propertyPath: tiroMucoPrefab
+      value: 
+      objectReference: {fileID: 7499726127753908214, guid: 7474b1a684e884fcab72bf1aaf9cdb04, type: 3}
+    - target: {fileID: 3943295939663913344, guid: 72f888d5596fb4603a383ce09fd3e70e, type: 3}
+      propertyPath: chuvaMucoPrefab
+      value: 
+      objectReference: {fileID: 7499726127753908214, guid: 7474b1a684e884fcab72bf1aaf9cdb04, type: 3}
     - target: {fileID: 4342150300591026870, guid: 72f888d5596fb4603a383ce09fd3e70e, type: 3}
       propertyPath: m_Name
       value: Boss Container
