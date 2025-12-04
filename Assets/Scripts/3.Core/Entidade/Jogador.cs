@@ -1,20 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using btt.Aplicacao.DI.Personagem;
-using UnityEngine.UI;
 
 namespace btt.Core.Entidade {
 
-    public class Jogador : Personagem {
+    public sealed class Jogador : Personagem {
 
         private JogadorController jogadorController;
         private GerenciadorUI ui;
-        [SerializeField] private GameObject barraHP;
-        public Image hpVerde;
         private GerenciadorCamera mainCamera;
+        public int pontosEnergia;
         public int direcional;
         public bool podePular;
         public bool anda;
+        public int nivel;
+        public int experiencia;
 
         protected override void Start(){
             base.Start();
@@ -23,17 +22,17 @@ namespace btt.Core.Entidade {
             jogadorController = new JogadorController();
             pontosEnergia = 10000;
             velocidade = 5f;
-            pontosVida = 10;
-            maxHP = 10;
+            pontosVida = 500;
+            maxHP = 1000;
             ataque = 2;
             forcaDoPulo = 10;
             podeAtacar = false;
             anda = true;
             podePular = true;
             ui = GameObject.Find("Gerenciador").GetComponent<GerenciadorUI>();
-            hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
         }
 
+        // TODO: refatorar para metodos especificos
         protected override void Update(){
             base.Update();
 
@@ -69,6 +68,7 @@ namespace btt.Core.Entidade {
                 pontosEnergia = fachada.energiaServico.ReduzirEnergia(pontosEnergia);
             }
 
+            /// TODO: remover nao precisa
             if(pontosEnergia <= 0) {
                 podePular = false;
             } else {

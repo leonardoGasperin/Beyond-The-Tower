@@ -1,43 +1,32 @@
 using UnityEngine;
-using btt.Aplicacao.DI.Personagem;
-using DialogueSystem;
-using UnityEngine.UI;
 
-namespace btt.Core.Entidade {
-    public class MiniBoss : Personagem
+namespace btt.Core.Entidade
+{
+    // TODO: Adequar para que a Entidade MiniBoss seja genérica e reutilizável para todos os tipos de inimigos MiniBoss
+    public class MiniBoss : Inimigo
     {
-        private float ataqueCooldown = 2f;
-        private float timerCooldown = 0f;
-        private Transform barraHP;
-        public Image hpVerde;
-        public GameObject projetil;
-        private Jogador jogador;
-        private Vector3 offset;
-        private float distancia;
         private bool atirouLanca;
         private float diferencaLanca;
         private float direcaoLanca;
         private Projetil lancaAtual;
-        public bool podeAtirar = false;
         public float velocidadeSaidaColisao = 3f;
         private bool colidindo = false;
         bool podeAlcancarJogador;
-        
-        protected override void Start(){
+
+        protected override void Start()
+        {
             base.Start();
-            jogador = GameObject.FindGameObjectWithTag("Jogador").GetComponent<Jogador>();
-            tagAlvo = "Jogador";
             velocidade = 5f;
             maxHP = 100;
             ataque = 2;
             pontosVida = 100;
             atirouLanca = false;
-            barraHP = transform.Find("Barra de HP");
-            hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
             podeAndar = false;
         }
 
-        protected override void Update(){
+        // TODO: Refatorar em metodos especificos
+        protected override void Update()
+        {
             base.Update();
 
             hpVerde.fillAmount = (float)pontosVida/maxHP;
@@ -117,11 +106,12 @@ namespace btt.Core.Entidade {
             }
         }
 
+        ///Inimigos
         private void IntervaloAtaqueInimigo(){
             timerCooldown -= Time.deltaTime;
             if (timerCooldown <= 0) {
                 timerCooldown = ataqueCooldown;
-                fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+                fachada.combateServico.Atacando(ataque, alvo, 3);
             }
         }
 

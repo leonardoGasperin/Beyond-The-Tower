@@ -1,18 +1,16 @@
+using btt.Core.Fabrica;
 using UnityEngine;
-using btt.Aplicacao.DI.Personagem;
 
-namespace btt.Core.Entidade {
+namespace btt.Core.Entidade
+{
 
-    public class Ratinho : Personagem
+    public class Ratinho : Inimigo
     {
-
-        private int direcao;
-        private Jogador jogador;
         private float ray;
 
-        protected override void Start(){
+        protected override void Start()
+        {
             base.Start();
-            jogador = GameObject.FindGameObjectWithTag("Jogador").GetComponent<Jogador>();
             pontosVida = 2;
             velocidade = 5;
             ataque = 1;
@@ -20,24 +18,31 @@ namespace btt.Core.Entidade {
             ray = 0.5f;
         }
 
-        protected override void Update(){
+        protected override void Update()
+        {
             base.Update();
-
             fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
-            RaycastHit2D teto = Physics2D.Raycast(transform.position + new Vector3(ray * direcao, 0, 0), Vector2.up, 1f);
 
-            if(teto.collider == null) {
-                direcao *= -1;
-                Vector3 inverteDirecao = transform.localScale;
-                inverteDirecao.x = Mathf.Abs(inverteDirecao.x) * direcao;
-                transform.localScale = inverteDirecao;
-            }
-
-            if(pontosVida <= 0) Destroy(gameObject);
+            var origem = transform.position + new Vector3(ray * direcao, 0, 0);
+            var distanciaChao = 1f;
+            var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(origem, Vector2.up, distanciaChao, Color.orchid);
+            DetectarChao(detectorChao);
+            TrocaDirecao(detectorChao.collider);
         }
 
-        private void OnTriggerEnter2D(Collider2D col){
-            if (col.gameObject.tag == "Jogador") fachada.combateServico.Atacando(ataque, jogador, pontosEnergia);
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.gameObject.tag == "Jogador")
+                fachada.combateServico.Atacando(ataque, jogador, 3);
+        }
+
+        public virtual void TrocaDirecao(Collider2D col)
+        {
+            if (col != null) return;
+            direcao *= -1;
+            Vector3 inverteDirecao = transform.localScale;
+            inverteDirecao.x = Mathf.Abs(inverteDirecao.x) * direcao;
+            transform.localScale = inverteDirecao;
         }
     }
 }

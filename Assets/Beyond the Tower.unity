@@ -1353,6 +1353,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 601129225}
     m_Modifications:
+    - target: {fileID: 85992457906624277, guid: bdd6a3864379d4e14a64b4833a1ff140, type: 3}
+      propertyPath: invencivel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5588168060756515453, guid: bdd6a3864379d4e14a64b4833a1ff140, type: 3}
       propertyPath: m_Name
       value: Ratinho (1)
@@ -2557,11 +2561,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2128127090582661806, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.08
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2128127090582661806, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.06
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2128127090582661806, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2603,6 +2607,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3489561343915490835, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
+      propertyPath: barraHP
+      value: 
+      objectReference: {fileID: 1943183868}
+    - target: {fileID: 3489561343915490835, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
+      propertyPath: hpVerde
+      value: 
+      objectReference: {fileID: 2037317631}
     - target: {fileID: 4465109342885141091, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
       propertyPath: m_Name
       value: Jogador Container
@@ -3637,6 +3649,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 601129225}
     m_Modifications:
+    - target: {fileID: 85992457906624277, guid: bdd6a3864379d4e14a64b4833a1ff140, type: 3}
+      propertyPath: invencivel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5588168060756515453, guid: bdd6a3864379d4e14a64b4833a1ff140, type: 3}
       propertyPath: m_Name
       value: Ratinho (2)
@@ -4718,6 +4734,11 @@ MonoBehaviour:
   cooldownConcentracao: 2
   ativaEspelho: 0
   cooldownEspelho: 2
+--- !u!224 &1943183868 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2643928598134783852, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
+  m_PrefabInstance: {fileID: 1365379426}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1996032437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4726,6 +4747,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 601129225}
     m_Modifications:
+    - target: {fileID: 85992457906624277, guid: bdd6a3864379d4e14a64b4833a1ff140, type: 3}
+      propertyPath: invencivel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712143097215526800, guid: bdd6a3864379d4e14a64b4833a1ff140, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5588168060756515453, guid: bdd6a3864379d4e14a64b4833a1ff140, type: 3}
       propertyPath: m_Name
       value: Ratinho
@@ -4785,6 +4814,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8174931065157013387, guid: bdd6a3864379d4e14a64b4833a1ff140, type: 3}
   m_PrefabInstance: {fileID: 1996032437}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2037317631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3849064849120316995, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
+  m_PrefabInstance: {fileID: 1365379426}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2082997075 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7223039964381288557, guid: bfb44ba7ec6324ad78dcd53b9a66f3bd, type: 3}

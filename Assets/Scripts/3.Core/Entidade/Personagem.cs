@@ -1,5 +1,6 @@
-using UnityEngine;
 using btt.Aplicacao.DI.Personagem;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace btt.Core.Entidade
 {
@@ -14,34 +15,31 @@ namespace btt.Core.Entidade
     {
         #region Atributos
         public PersonagemConfiguracaoDI.ServiceLocator fachada;
-        public Rigidbody2D rb;
-        public string nome;
-        public string tagAlvo;
-        public Personagem alvo;
-        public int pontosVida;
-        public int pontosEnergia;
-        public int ataque;
-        public int defesa;
-        public int nivel;
-        public int experiencia;
-        public float forcaDoPulo;
-        public Transform posicao;
         //Animator animacao;
-        public float velocidade;
+        public Transform posicao;
+        public Rigidbody2D rb;
+        public Transform barraHP;
+        public Image hpVerde;
+        public Personagem alvo;
+        public string tagAlvo;
+        public string nome;
+        public bool ativo = true;
         public bool estaVivo;
-        public bool estaAtacando;
         public bool podeAtacar;
-        public bool podeAndar;
+        public bool estaAtacando;
         public bool estaDefendendo;
         public bool estaChao;
-        public bool ativo = true;
+        public bool invencivel;
+        public float velocidade;
+        public float forcaDoPulo;
+        public int ataque;
+        public int defesa;
         public int maxHP;
+        public int pontosVida;
         #endregion
 
         #region Unity Methods
-
-        protected virtual void Awake(){
-        }
+        protected virtual void Awake() { }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Start()
@@ -53,25 +51,36 @@ namespace btt.Core.Entidade
             estaVivo = true;
             estaAtacando = false;
             estaDefendendo = false;
+
+            if (!invencivel)
+            {
+                barraHP = transform.Find("Barra de HP");
+                hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
+            }
         }
 
         // Update is called once per frame
         protected virtual void Update()
         {
-
+            if (!invencivel)
+                hpVerde.fillAmount = (float)pontosVida / maxHP;
         }
 
-    //Checar se o jogador está tocando o chão
-        protected virtual void OnCollisionEnter2D(Collision2D col){
-            if(col.gameObject.CompareTag(tagAlvo)){
+        //Checar se o personagem está tocando o chão
+        protected virtual void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag(tagAlvo))
+            {
                 podeAtacar = true;
                 alvo = col.gameObject.GetComponent<Personagem>();
             }
         }
 
-    //Checar se o jogador não está tocando o chão
-        protected virtual void OnCollisionExit2D(Collision2D col){
-            if(col.gameObject.CompareTag(tagAlvo)){
+        //Checar se o personagem não está tocando o chão
+        protected virtual void OnCollisionExit2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag(tagAlvo))
+            {
                 podeAtacar = false;
                 alvo = null;
             }
@@ -83,22 +92,25 @@ namespace btt.Core.Entidade
         public virtual void Dano(int danoRecebido)
         {
             int danoFinal = danoRecebido - defesa;
-            if (danoFinal < 0)
-            {
-                danoFinal = 0;
-            }
+            if (danoFinal <= 0) return;
+
             pontosVida -= danoFinal;
-            if (pontosVida <= 0)
-            {
-                pontosVida = 0;
-                Morreu();
-            }
+            if (pontosVida > 0) return;
+
+            pontosVida = 0;
+            Morreu();
         }
 
         private void Morreu()
         {
             ativo = false;
             podeAtacar = false;
+            estaAtacando = false;
+            estaDefendendo = false;
+            estaChao = true;
+            estaVivo = false;
+            Destroy(gameObject, 1.5f);
+
             //animacao.SetTrigger("Morreu");
             // Desativar o personagem ou iniciar a l�gica de rein�cio
         }

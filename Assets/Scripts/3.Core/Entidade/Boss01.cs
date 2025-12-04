@@ -1,40 +1,28 @@
 using UnityEngine;
-using btt.Aplicacao.DI.Personagem;
-using UnityEngine.UI;
 using System.Threading.Tasks;
 
 namespace btt.Core.Entidade
 {
-
-    public class Boss01 : Personagem
+    // TODO: Adequar para que a Entidade Boss seja genérica e reutilizável para todos os tipos de inimigos Boss
+    public class Boss01 : Inimigo
     {
-
-        private Transform barraHP;
-        public Image hpVerde;
-        public Jogador jogador;
-        private float distancia;
-        private bool cancelarBoss = false;
-
         public GameObject tiroMucoPrefab;
+        public GameObject chuvaMucoPrefab;
         public Transform pontoDeTiro;
         public int contadorTiro = 4;
-        private bool podeAtirarMuco;
 
-        public GameObject chuvaMucoPrefab;
         private float posicaoYChuva = 12f;
         private float posicaoXMinChuva = -9f;
         private float posicaoXMaxChuva = 12f;
+        private bool cancelarBoss = false;
+        private bool podeAtirarMuco;
         private bool podeChuva;
 
-        protected override async void Start()
+        protected override void Start()
         {
             base.Start();
-            tagAlvo = "Jogador";
             maxHP = 100;
             pontosVida = 100;
-            barraHP = transform.Find("Barra de HP");
-            hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
-            jogador = GameObject.FindGameObjectWithTag("Jogador").GetComponent<Jogador>();
             podeAndar = false;
             estaVivo = true;
 
