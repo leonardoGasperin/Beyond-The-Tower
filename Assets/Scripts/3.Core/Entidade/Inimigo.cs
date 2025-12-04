@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace btt.Core.Entidade
 {
@@ -44,33 +45,18 @@ namespace btt.Core.Entidade
                 jogador.pontosEnergia += 2;
             }
 
-            /// TODO: mudar para ser organico
             tempo += Time.deltaTime;
 
             if (podeAtacar && alvo != null && alvo.estaVivo) IntervaloAtaqueInimigo();
 
         }
 
-        /// TODO: remover metodo para trocar direcao ser mais organico
         public virtual void TrocaDirecao()
         {
             if (tempo < tempoTroca) return;
-
-            if(direcaoOlha == Vector2.left)
-                direcaoOlha = Vector2.right;
-            else
-                direcaoOlha = Vector2.left;
-
+            direcaoOlha.x *= -1;
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y == 0 ? 180 : 0, 0);
             tempo = 0;
-        }
-
-        // TODO: Refatorar
-        protected int OrigemRay(){
-            if(direcaoOlha == Vector2.left) {
-                return -1;
-            } else {
-                return 1;
-            }
         }
 
         /// TODO: Refatorar

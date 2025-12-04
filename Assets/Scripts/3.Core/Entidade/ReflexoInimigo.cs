@@ -21,7 +21,7 @@ namespace btt.Core.Entidade
             base.Update();
             var chaoOrientacaoRelacao = transform.position + new Vector3(0, -1f, 0);
             var chaoVetorDistancia = 0.5f;
-            var visaoOrientacao = transform.position + new Vector3(OrigemRay(), 0, 0);
+            var visaoOrientacao = transform.position + new Vector3(direcaoOlha.x, 0, 0);
             var visaoDistancia = 10f;
             
             DetectarChao(VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(chaoOrientacaoRelacao, Vector2.down, chaoVetorDistancia, Color.yellow));

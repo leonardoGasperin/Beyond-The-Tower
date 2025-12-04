@@ -1,4 +1,3 @@
-using UnityEngine;
 using btt.Aplicacao.Contrato;
 using btt.Core.Entidade;
 
