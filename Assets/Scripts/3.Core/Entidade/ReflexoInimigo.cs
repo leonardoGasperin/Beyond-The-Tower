@@ -19,13 +19,13 @@ namespace btt.Core.Entidade
         protected override void Update()
         {
             base.Update();
-            var chaoOrientacaoRelacao = transform.position + new Vector3(0, -1f, 0);
-            var chaoVetorDistancia = 0.5f;
             var visaoOrientacao = transform.position + new Vector3(direcaoOlha.x, 0, 0);
-            var visaoDistancia = 10f;
-            
-            DetectarChao(VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(chaoOrientacaoRelacao, Vector2.down, chaoVetorDistancia, Color.yellow));
-            DetectarJogador(VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(visaoOrientacao, direcaoOlha * 10f, visaoDistancia, Color.red));
+            var detectarJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(visaoOrientacao, direcaoOlha, 4f, Color.red);
+            var chaoOrientacaoRelacao = transform.position + new Vector3(0.5f * direcaoOlha.x, -1f, 0);
+            var detectarChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(chaoOrientacaoRelacao, Vector2.down, 0.5f, Color.yellow);
+
+            DetectarJogador(detectarJogador);
+            DetectarChao(detectarChao);
             TrocaDirecao();
         }
     }

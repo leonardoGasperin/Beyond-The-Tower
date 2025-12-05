@@ -7,6 +7,7 @@ namespace btt.Core.Entidade
     public class Inimigo : Personagem
     {
         public GameObject projetil;
+        public bool podeAtirar;
 
         protected Jogador jogador;
         protected Vector2 direcaoOlha = Vector2.left;
@@ -23,7 +24,6 @@ namespace btt.Core.Entidade
         protected bool podeAndar;
         protected bool podeAtacarDistancia;
         protected bool podeVoar;
-        public bool podeAtirar;
 
         protected override void Start()
         {
@@ -35,9 +35,7 @@ namespace btt.Core.Entidade
         protected override void Update()
         {
             base.Update();
-            if (estaVivo == false) return;
-            if (invencivel)
-                return;
+            if (invencivel) return;
 
             if (!estaVivo)
             {
@@ -46,6 +44,8 @@ namespace btt.Core.Entidade
             }
 
             tempo += Time.deltaTime;
+            timerCooldown -= Time.deltaTime;
+            tempoAtacando -= Time.deltaTime;
 
             if (podeAtacar && alvo != null && alvo.estaVivo) IntervaloAtaqueInimigo();
 
@@ -53,27 +53,23 @@ namespace btt.Core.Entidade
 
         public virtual void TrocaDirecao()
         {
-            if (tempo < tempoTroca) return;
+            if (viuJogador) return;
+            if (tempo <= tempoTroca) return;
             direcaoOlha.x *= -1;
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y == 0 ? 180 : 0, 0);
             tempo = 0;
         }
 
-        /// TODO: Refatorar
         private void IntervaloAtaqueInimigo(){
-            timerCooldown -= Time.deltaTime;
             if (timerCooldown <= 0) {
                 timerCooldown = ataqueCooldown;
                 estaAtacando = true;
                 tempoAtacando = duracaoAtaque;
-                fachada.combateServico.Atacando(ataque, alvo, 3 /*pontosEnergia*/);
+                fachada.combateServico.Atacando(ataque, alvo);
             }
 
-            if (estaAtacando) {
-                tempoAtacando -= Time.deltaTime;
-                if (tempoAtacando <= 0)
-                    estaAtacando = false;
-            }
+            if (estaAtacando && tempoAtacando <= 0)
+                estaAtacando = false;
         }
 
         protected override void OnCollisionEnter2D(Collision2D col){
@@ -89,43 +85,31 @@ namespace btt.Core.Entidade
         protected virtual void DetectarJogador(RaycastHit2D detectador)
         {
             distanciaDoJogador = jogador.transform.position.x - transform.position.x;
-            if (detectador.collider != null && detectador.collider.CompareTag("Jogador") && Mathf.Abs(distanciaDoJogador) > 0)
+            if (podeAndar && detectador.collider != null && detectador.collider.CompareTag("Jogador"))
                 viuJogador = true;
+            else
+                viuJogador = false;
+
+            if (!viuJogador) return;
 
             direcao = Mathf.Sign(distanciaDoJogador);
             if (viuJogador)
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
 
-            /// TODO: mudar para ser organico
-            if (distanciaDoJogador > 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-            else
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
+            barraHP.transform.localRotation = Quaternion.Euler(0, direcao <= 0 ? 180 : 0, 0);
         }
 
         protected virtual void DetectarChao(RaycastHit2D detectador)
         {
-            if (detectador.collider == null) viuJogador = false;
-
-            if (detectador.collider == null && direcao < 0)
+            if (detectador.collider == null)
             {
-                Vector2 posicao = transform.position;
-                posicao.x += 0.01f;
-                transform.position = posicao;
+                viuJogador = false;
+                podeAndar = false;
+                direcao *= -1;
+                return;
             }
 
-            if (detectador.collider == null && direcao > 0)
-            {
-                Vector2 posicao = transform.position;
-                posicao.x -= 0.01f;
-                transform.position = posicao;
-            }
+            podeAndar = true;
         }
         
     }

@@ -3,12 +3,10 @@ using btt.Aplicacao.Contratos;
 
 namespace btt.Aplicacao.Servico {
     public class MovimentacaoServico : IMovimentacaoServico {
-        public void Movimentacao(Transform transform, float velocidade, float movimentoX){
-            transform.Translate(Vector3.right * movimentoX * velocidade * Time.deltaTime);
-        }
+        public void Movimentacao(Transform transform, float velocidade, float movimentoX)
+            => transform.Translate(movimentoX * Time.deltaTime * velocidade * Vector3.right, Space.World);
 
-        public void Pulo(Rigidbody2D rb, Transform transform, float forcaDoPulo){
-            rb.AddForce(transform.up * forcaDoPulo, ForceMode2D.Impulse);
-        }
+        public void Pulo(Rigidbody2D rb, Transform transform, float forcaDoPulo)
+            => rb.AddForce(transform.up * forcaDoPulo, ForceMode2D.Impulse);
     }
 }

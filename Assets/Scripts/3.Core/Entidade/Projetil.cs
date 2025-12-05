@@ -32,7 +32,7 @@ namespace btt.Core.Entidade {
 
         private void OnTriggerEnter2D(Collider2D col){
             if(col.gameObject.CompareTag("Jogador")) {
-                fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+                fachada.combateServico.Atacando(ataque, alvo);
             } else if(col.gameObject.CompareTag("Plataforma")) {
                 velocidadeTiro = Vector2.zero;
                 ataque = 0;

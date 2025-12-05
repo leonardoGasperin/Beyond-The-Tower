@@ -33,7 +33,7 @@ namespace btt.Core.Entidade
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.tag == "Jogador")
-                fachada.combateServico.Atacando(ataque, jogador, 3);
+                fachada.combateServico.Atacando(ataque, jogador);
         }
 
         public virtual void TrocaDirecao(Collider2D col)

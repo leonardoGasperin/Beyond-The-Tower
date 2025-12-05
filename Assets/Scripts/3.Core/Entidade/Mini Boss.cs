@@ -111,7 +111,7 @@ namespace btt.Core.Entidade
             timerCooldown -= Time.deltaTime;
             if (timerCooldown <= 0) {
                 timerCooldown = ataqueCooldown;
-                fachada.combateServico.Atacando(ataque, alvo, 3);
+                fachada.combateServico.Atacando(ataque, alvo);
             }
         }
 

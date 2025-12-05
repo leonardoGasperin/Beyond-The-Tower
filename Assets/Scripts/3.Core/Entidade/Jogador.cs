@@ -55,7 +55,7 @@ namespace btt.Core.Entidade {
             }
             
             if (podeAtacar && alvo.pontosVida > 0 && jogadorController.BotaoAtaque()) {
-                fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+                fachada.combateServico.Atacando(ataque, alvo);
             }
 
             if (alvo != null && alvo.pontosVida <= 0) {

@@ -8,8 +8,8 @@ namespace btt.Core.Fabrica
             => Physics2D.Raycast(origen, direcao, distancia);
 
         public static RaycastHit2D CriarVetorTransmissaoServicoDebug(Vector2 origen, Vector2 direcao, float distancia, Color cor)
-        { 
-            Debug.DrawRay(origen, direcao, cor);
+        {
+            Debug.DrawLine(origen, origen + (direcao.normalized * distancia), cor);
             return Physics2D.Raycast(origen, direcao, distancia);
         }
     }
