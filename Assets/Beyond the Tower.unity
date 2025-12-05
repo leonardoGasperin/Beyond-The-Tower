@@ -972,13 +972,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 601129225}
     m_Modifications:
+    - target: {fileID: 2364677345106514007, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364677345106514007, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.24
+      objectReference: {fileID: 0}
     - target: {fileID: 8188711393811988326, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.092712
+      value: 10.62
       objectReference: {fileID: 0}
     - target: {fileID: 8188711393811988326, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.2
+      value: 8.46
       objectReference: {fileID: 0}
     - target: {fileID: 8188711393811988326, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1015,6 +1023,10 @@ PrefabInstance:
     - target: {fileID: 8991922497342267734, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_Name
       value: Inimigo Container (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991922497342267734, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3741,6 +3753,10 @@ PrefabInstance:
     - target: {fileID: 2522067899704010239, guid: b1ae0cc222dda438ea2630fc3370493a, type: 3}
       propertyPath: m_Name
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522067899704010239, guid: b1ae0cc222dda438ea2630fc3370493a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7867972935343666679, guid: b1ae0cc222dda438ea2630fc3370493a, type: 3}
       propertyPath: m_LocalPosition.x
