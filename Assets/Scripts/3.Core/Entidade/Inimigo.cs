@@ -35,13 +35,8 @@ namespace btt.Core.Entidade
         protected override void Update()
         {
             base.Update();
+            if (jogador == null) return;
             if (invencivel) return;
-
-            if (!estaVivo)
-            {
-                GetComponent<BoxCollider2D>().enabled = false;
-                jogador.pontosEnergia += 2;
-            }
 
             tempo += Time.deltaTime;
             timerCooldown -= Time.deltaTime;
@@ -49,6 +44,14 @@ namespace btt.Core.Entidade
 
             if (podeAtacar && alvo != null && alvo.estaVivo) IntervaloAtaqueInimigo();
 
+            /// TODO: inverter responsabilidade para o serviço de combate OU jogador
+            if (!estaVivo)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+                jogador.pontosEnergia += 2;
+                /// TODO: mover Destroy para um gerenciador de entidades
+                Destroy(gameObject);
+            }
         }
 
         public virtual void TrocaDirecao()
@@ -101,7 +104,7 @@ namespace btt.Core.Entidade
 
         protected virtual void DetectarChao(RaycastHit2D detectador)
         {
-            if (detectador.collider == null)
+            if (detectador.collider == null || (detectador.collider != null && detectador.collider.CompareTag("Parede")))
             {
                 viuJogador = false;
                 podeAndar = false;

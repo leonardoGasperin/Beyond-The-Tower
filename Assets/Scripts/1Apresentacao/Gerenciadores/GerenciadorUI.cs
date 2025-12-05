@@ -26,6 +26,7 @@ namespace btt.Core.Entidade {
         // Update is called once per frame
         void Update()
         {
+            if (jogador == null) return;
             numeroEnergias.text = jogador.pontosEnergia.ToString();
 
             if (!gameOver && jogador.transform.position.y < mainCamera.transform.position.y - 10) {

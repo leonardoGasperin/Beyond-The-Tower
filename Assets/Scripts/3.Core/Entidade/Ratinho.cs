@@ -25,12 +25,11 @@ namespace btt.Core.Entidade
             var distanciaChao = 1f;
             var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(origem, Vector2.up, distanciaChao, Color.yellow);
 
-            if (detectorChao.collider == null)
+            if (detectorChao.collider == null || (detectorChao.collider != null && detectorChao.collider.CompareTag("Parede")))
                 TrocaDirecao(detectorChao.collider);
             DetectarChao(detectorChao);
 
             fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
-
         }
 
         private void OnTriggerEnter2D(Collider2D col)

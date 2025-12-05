@@ -20,12 +20,12 @@ namespace btt.Core.Entidade
         {
             base.Update();
             var visaoOrientacao = transform.position + new Vector3(direcaoOlha.x, 0, 0);
-            var detectarJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(visaoOrientacao, direcaoOlha, 4f, Color.red);
+            var detectorJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(visaoOrientacao, direcaoOlha, 4f, Color.red);
             var chaoOrientacaoRelacao = transform.position + new Vector3(0.5f * direcaoOlha.x, -1f, 0);
-            var detectarChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(chaoOrientacaoRelacao, Vector2.down, 0.5f, Color.yellow);
+            var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(chaoOrientacaoRelacao, Vector2.down, 0.5f, Color.yellow);
 
-            DetectarJogador(detectarJogador);
-            DetectarChao(detectarChao);
+            DetectarJogador(detectorJogador);
+            DetectarChao(detectorChao);
             TrocaDirecao();
         }
     }

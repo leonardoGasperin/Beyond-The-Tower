@@ -109,7 +109,6 @@ namespace btt.Core.Entidade
             estaDefendendo = false;
             estaChao = true;
             estaVivo = false;
-            Destroy(gameObject, 1f);
 
             //animacao.SetTrigger("Morreu");
             // Desativar o personagem ou iniciar a l�gica de rein�cio
