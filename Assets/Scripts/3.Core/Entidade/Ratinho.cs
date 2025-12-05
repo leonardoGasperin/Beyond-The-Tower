@@ -21,13 +21,16 @@ namespace btt.Core.Entidade
         protected override void Update()
         {
             base.Update();
-            fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
-
             var origem = transform.position + new Vector3(ray * direcao, 0, 0);
             var distanciaChao = 1f;
-            var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(origem, Vector2.up, distanciaChao, Color.orchid);
+            var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(origem, Vector2.up, distanciaChao, Color.yellow);
+
+            if (detectorChao.collider == null)
+                TrocaDirecao(detectorChao.collider);
             DetectarChao(detectorChao);
-            TrocaDirecao(detectorChao.collider);
+
+            fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
+
         }
 
         private void OnTriggerEnter2D(Collider2D col)
@@ -37,12 +40,6 @@ namespace btt.Core.Entidade
         }
 
         public virtual void TrocaDirecao(Collider2D col)
-        {
-            if (col != null) return;
-            direcao *= -1;
-            Vector3 inverteDirecao = transform.localScale;
-            inverteDirecao.x = Mathf.Abs(inverteDirecao.x) * direcao;
-            transform.localScale = inverteDirecao;
-        }
+            => transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y == 0 ? 180 : 0, 0);
     }
 }
