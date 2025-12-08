@@ -27,7 +27,6 @@ namespace btt.Core.Entidade
         protected float direcao;
         protected float tempo = 0f;
         protected float tempoTroca = 1.5f;
-        //protected float duracaoAtaque = 0.3f;
         protected float tempoAtacando = 0f;
 
         public int EnergiaRecompensa => energiaRecompensa;
@@ -72,6 +71,20 @@ namespace btt.Core.Entidade
         #endregion
 
         #region Methods
+        public void Orientacao()
+        {
+            if (distancia > 0)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+                barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
+
         public virtual void TrocaDirecao()
         {
             if (viuJogador || tempo <= tempoTroca) return;
@@ -123,7 +136,6 @@ namespace btt.Core.Entidade
             estaAtacando = true;
             fachada.combateServico.Atacando(ataque, alvo);
             estaAtacando = false;
-            //Invoke(nameof(FinalizarAtaque), duracaoAtaque);
         }
 
         #endregion

@@ -1,13 +1,11 @@
+using btt.Aplicacao.DI.Projetil;
 using UnityEngine;
-using btt.Aplicacao.DI.Personagem;
-using btt.Aplicacao.DI.Inimigo;
 
 namespace btt.Core.Entidade {
 
     public class Projetil : MonoBehaviour
     {
-        private PersonagemConfiguracaoDI.ServiceLocator fachada;
-        private InimigoConfiguracaoDI.ServiceLocator fachadaInimigo;
+        private ProjetilConfiguracaoDI.ServiceLocator fachada;
         public Vector2 velocidadeTiro;
         private Jogador alvo;
         public int ataque;
@@ -17,8 +15,7 @@ namespace btt.Core.Entidade {
 
         void Start()
         {
-            fachada = GetComponent<PersonagemConfiguracaoDI>().Services;
-            fachadaInimigo = GetComponent<InimigoConfiguracaoDI>().Services;
+            fachada = GetComponent<ProjetilConfiguracaoDI>().Services;
             alvo = GameObject.Find("Jogador").GetComponent<Jogador>();
             ataque = 2;
             gravidade = -9.8f;
@@ -29,7 +26,7 @@ namespace btt.Core.Entidade {
         {
             if(!chao){
                 velocidadeTiro.y += gravidade * Time.deltaTime;
-                fachadaInimigo.lancaServico.MovimentoLanca(velocidadeTiro, transform);
+                fachada.lancaServico.MovimentoLanca(velocidadeTiro, transform);
             }
         }
 

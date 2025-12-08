@@ -1,9 +1,9 @@
-using UnityEngine;
+using btt.Apresentacao.Gerenciadores.InimigoGerenciador;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace btt.Core.Entidade
 {
-    // TODO: Adequar para que a Entidade Boss seja genérica e reutilizável para todos os tipos de inimigos Boss
     public class Boss01 : Inimigo
     {
         public GameObject tiroMucoPrefab;
@@ -31,29 +31,17 @@ namespace btt.Core.Entidade
 
         protected override void Update()
         {
-            base.Update();
-            hpVerde.fillAmount = (float)pontosVida / maxHP;
-
             if (jogador.pontosVida <= 0) return;
-            if (pontosVida <= 0) return;
+            base.Update();
 
             distancia = transform.position.x - jogador.transform.position.x;
-            if (distancia > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-            else
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
+            Orientacao();
         }
 
-        private void OnDestroy()
+        public override void Morreu()
         {
+            base.Morreu();
             cancelarBoss = true;
-            estaVivo = false;
         }
 
         private async Task ComportamentoBoss()
@@ -81,17 +69,7 @@ namespace btt.Core.Entidade
             await RepetirChuva();
         }
 
-        private async Task RepetirTiroMuco()
-        {
-            await Task.Delay(3000);
-            for (int i = 0; i < contadorTiro; i++)
-            {
-                if (cancelarBoss || !estaVivo) return;
-                IntervaloTiroMuco();
-                await Task.Delay(3000);
-            }
-        }
-
+        /// TODO: refatorar para remover overengineering
         private void IntervaloTiroMuco()
         {
             if (cancelarBoss || !estaVivo) return;
@@ -111,17 +89,25 @@ namespace btt.Core.Entidade
             }
         }
 
+        /// TODO: abstrair para Serviço de Ataque de Boss
+        /// TODO: refatorar para remover overengineering
+        private async Task RepetirTiroMuco()
+        {
+            await Task.Delay(3000);
+            for (int i = 0; i < contadorTiro; i++)
+            {
+                if (cancelarBoss || !estaVivo) return;
+                IntervaloTiroMuco();
+                await Task.Delay(3000);
+            }
+        }
+
+        /// TODO: abstrair para Serviço de Ataque de Boss
         private void ChuvaDeMuco()
         {
             if (cancelarBoss || !estaVivo) return;
             Instantiate(chuvaMucoPrefab, new Vector2(Random.Range(posicaoXMinChuva, posicaoXMaxChuva), transform.position.y + posicaoYChuva), Quaternion.identity);
         }
     }
-}
 
-// Boss vê o jogador e se vira para sua direção
-// Boss anda na direção do jogador
-// Enquanto está andando, o boss instancia o muco pelo chão com ponto de origem sua boca a intervalos aleatórios
-// Se o boss toca no jogador, ele para de andar e para de instanciar o muco e usa a terceira habilidade
-// Se o boss não toca no jogador, ele continua andando até chegar na parede
-// Ao chegar na parede, ele para de instanciar o muco se vira para o jogador
+}

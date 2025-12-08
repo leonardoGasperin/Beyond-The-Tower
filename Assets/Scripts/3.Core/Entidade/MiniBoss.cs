@@ -81,21 +81,6 @@ namespace btt.Core.Entidade
             fachada.combateServico.Atacando(ataque, alvo);
         }
 
-        private void Orientacao()
-        {
-
-            if (distancia > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-            else
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-        }
-
         private void AtualizaAlvo()
         {
             if (colidindo)
