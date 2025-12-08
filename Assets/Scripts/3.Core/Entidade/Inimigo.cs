@@ -1,20 +1,24 @@
 using btt.Aplicacao.DI.Inimigo;
-using btt.Aplicacao.DI.Personagem;
+using btt.Apresentacao.Gerenciadores.InimigoGerenciador;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace btt.Core.Entidade
 {
-    // TODO: Adequar para que a Entidade Inimigo seja genérica e reutilizável para todos os tipos de inimigos
     public class Inimigo : Personagem
     {
         protected InimigoConfiguracaoDI.ServiceLocator InimigoFachada;
-        /// TODO: rever props, há sinais de overengineering
         public GameObject projetil;
         public bool podeAtirar;
+        public bool estaAtacando;
 
         protected Jogador jogador;
         protected Vector2 direcaoOlha = Vector2.left;
+        protected bool podeAndar;
+        protected bool podeAtacarDistancia;
+        protected bool podeVoar;
+        protected bool viuJogador;
+        [SerializeField]
+        protected int energiaRecompensa;
         protected float ataqueCooldown = 2f;
         protected float timerCooldown = 0f;
         protected float distancia;
@@ -24,16 +28,15 @@ namespace btt.Core.Entidade
         protected float tempoTroca = 1.5f;
         protected float duracaoAtaque = 0.3f;
         protected float tempoAtacando = 0f;
-        protected bool viuJogador;
-        protected bool podeAndar;
-        protected bool podeAtacarDistancia;
-        protected bool podeVoar;
+
+        public int EnergiaRecompensa => energiaRecompensa;
 
         protected override void Start()
         {
             base.Start();
+            estaAtacando = false;
             tagAlvo = "Jogador";
-            jogador = GameObject.FindGameObjectWithTag("Jogador").GetComponent<Jogador>();
+            jogador = GameObject.FindGameObjectWithTag(tagAlvo).GetComponent<Jogador>();
         }
 
         protected override void Update()
@@ -44,42 +47,29 @@ namespace btt.Core.Entidade
 
             tempo += Time.deltaTime;
             timerCooldown -= Time.deltaTime;
-            tempoAtacando -= Time.deltaTime;
 
             if (podeAtacar && alvo != null && alvo.estaVivo) IntervaloAtaqueInimigo();
 
-            /// TODO: inverter responsabilidade para o serviço de combate OU jogador
             if (!estaVivo)
-            {
-                GetComponent<BoxCollider2D>().enabled = false;
-                jogador.pontosEnergia += 2;
-                /// TODO: mover Destroy para um gerenciador de entidades
-                Destroy(gameObject);
-            }
+                Morreu();
         }
 
         public virtual void TrocaDirecao()
         {
-            if (viuJogador) return;
-            if (tempo <= tempoTroca) return;
+            if (viuJogador || tempo <= tempoTroca) return;
             direcaoOlha.x *= -1;
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y == 0 ? 180 : 0, 0);
             tempo = 0;
         }
 
-        /// TODO: Ainda apresenta sinais de overengineering, rever
         private void IntervaloAtaqueInimigo()
         {
-            if (timerCooldown <= 0)
-            {
-                timerCooldown = ataqueCooldown;
-                estaAtacando = true;
-                tempoAtacando = duracaoAtaque;
-                fachada.combateServico.Atacando(ataque, alvo);
-            }
+            if (timerCooldown > 0) return;
 
-            if (estaAtacando && tempoAtacando <= 0)
-                estaAtacando = false;
+            timerCooldown = ataqueCooldown;
+            estaAtacando = true;
+            fachada.combateServico.Atacando(ataque, alvo);
+            Invoke(nameof(FinalizarAtaque), duracaoAtaque);
         }
 
         protected override void OnCollisionEnter2D(Collision2D col)
@@ -96,33 +86,41 @@ namespace btt.Core.Entidade
 
         protected virtual void DetectarJogador(RaycastHit2D detectador)
         {
-            distanciaDoJogador = jogador.transform.position.x - transform.position.x;
-            if (podeAndar && detectador.collider != null && detectador.collider.CompareTag("Jogador"))
-                viuJogador = true;
-            else
-                viuJogador = false;
-
+            viuJogador = podeAndar && detectador.collider != null && detectador.collider.CompareTag("Jogador");
             if (!viuJogador) return;
 
+            float distanciaDoJogador = jogador.transform.position.x - transform.position.x;
             direcao = Mathf.Sign(distanciaDoJogador);
-            if (viuJogador)
-                fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
-
+            fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
             barraHP.transform.localRotation = Quaternion.Euler(0, direcao <= 0 ? 180 : 0, 0);
         }
 
         protected virtual void DetectarChao(RaycastHit2D detectador)
         {
-            if (detectador.collider == null || (detectador.collider != null && detectador.collider.CompareTag("Parede")))
+            if (detectador.collider != null && !detectador.collider.CompareTag("Parede"))
             {
-                viuJogador = false;
-                podeAndar = false;
-                direcao *= -1;
+                podeAndar = true;
                 return;
             }
 
-            podeAndar = true;
+            viuJogador = false;
+            podeAndar = false;
+            direcao *= -1;
+            return;
         }
+
+        public override void Morreu()
+        {
+            base.Morreu();
+
+            estaAtacando = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+            jogador.pontosEnergia += EnergiaRecompensa;
+            GerenciadorInimigo.Instance.DestruirInimigo(this);
+        }
+
+        private void FinalizarAtaque()
+            => estaAtacando = false;
 
     }
 }

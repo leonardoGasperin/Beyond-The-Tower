@@ -13,7 +13,6 @@ namespace btt.Core.Entidade
             ataque = 2;
             podeAtacar = false;
             velocidade = 2f;
-            viuJogador = false;
         }
 
         protected override void Update()

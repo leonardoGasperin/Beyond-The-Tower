@@ -119,6 +119,7 @@ MonoBehaviour:
   pontosVida: 0
   projetil: {fileID: 911344391274804977, guid: d3528febb2c3c4eb4a039e37afdaf4e3, type: 3}
   podeAtirar: 0
+  energiaRecompensa: 5
   velocidadeSaidaColisao: 0
 --- !u!114 &7023613216171018661
 MonoBehaviour:

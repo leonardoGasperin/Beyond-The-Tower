@@ -27,7 +27,6 @@ namespace btt.Core.Entidade
         public bool ativo = true;
         public bool estaVivo;
         public bool podeAtacar;
-        public bool estaAtacando;
         public bool estaDefendendo;
         public bool estaChao;
         public bool invencivel;
@@ -50,7 +49,6 @@ namespace btt.Core.Entidade
             posicao = GetComponent<Transform>();
             //animacao = GetComponent<Animator>();
             estaVivo = true;
-            estaAtacando = false;
             estaDefendendo = false;
 
             if (!invencivel)
@@ -99,17 +97,15 @@ namespace btt.Core.Entidade
             if (pontosVida > 0) return;
 
             pontosVida = 0;
-            Morreu();
+            estaVivo = false;
         }
 
-        private void Morreu()
+        public virtual void Morreu()
         {
             ativo = false;
             podeAtacar = false;
-            estaAtacando = false;
             estaDefendendo = false;
             estaChao = true;
-            estaVivo = false;
 
             //animacao.SetTrigger("Morreu");
             // Desativar o personagem ou iniciar a l�gica de rein�cio

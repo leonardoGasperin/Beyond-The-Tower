@@ -61,29 +61,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf6f263cb3054c1faad0c33c5f244a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::btt.Core.Entidade.Boss01
-  rb: {fileID: 0}
-  nome: 
-  tagAlvo: 
-  alvo: {fileID: 0}
-  pontosVida: 0
-  pontosEnergia: 0
-  ataque: 0
-  defesa: 0
-  nivel: 0
-  experiencia: 0
-  forcaDoPulo: 0
   posicao: {fileID: 0}
-  velocidade: 0
+  rb: {fileID: 0}
+  barraHP: {fileID: 0}
+  hpVerde: {fileID: 0}
+  alvo: {fileID: 0}
+  tagAlvo: 
+  nome: 
+  ativo: 1
   estaVivo: 0
-  estaAtacando: 0
   podeAtacar: 0
-  podeAndar: 0
+  estaAtacando: 0
   estaDefendendo: 0
   estaChao: 0
-  ativo: 1
+  invencivel: 0
+  velocidade: 0
+  forcaDoPulo: 0
+  ataque: 0
+  defesa: 0
   maxHP: 0
-  hpVerde: {fileID: 0}
-  jogador: {fileID: 0}
+  pontosVida: 0
+  projetil: {fileID: 0}
+  podeAtirar: 0
+  energiaRecompensa: 10
+  tiroMucoPrefab: {fileID: 0}
+  chuvaMucoPrefab: {fileID: 0}
+  pontoDeTiro: {fileID: 0}
+  contadorTiro: 4
 --- !u!60 &3336122694860688392
 PolygonCollider2D:
   m_ObjectHideFlags: 0

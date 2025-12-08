@@ -56,6 +56,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -77,6 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -103,27 +106,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f21d4a26db4b4996992fde91c572c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  nome: 
-  tagAlvo: 
-  alvo: {fileID: 0}
-  pontosVida: 0
-  pontosEnergia: 0
-  ataque: 0
-  defesa: 0
-  nivel: 0
-  experiencia: 0
-  forcaDoPulo: 0
   posicao: {fileID: 0}
-  velocidade: 0
+  rb: {fileID: 0}
+  barraHP: {fileID: 0}
+  hpVerde: {fileID: 0}
+  alvo: {fileID: 0}
+  tagAlvo: 
+  nome: 
+  ativo: 1
   estaVivo: 0
-  estaAtacando: 0
   podeAtacar: 0
-  podeAndar: 0
+  estaAtacando: 0
   estaDefendendo: 0
   estaChao: 0
-  ativo: 1
+  invencivel: 0
+  velocidade: 0
+  forcaDoPulo: 0
+  ataque: 0
+  defesa: 0
   maxHP: 0
+  pontosVida: 0
+  projetil: {fileID: 0}
+  podeAtirar: 0
+  energiaRecompensa: 1
 --- !u!61 &2712143097215526800
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -234,6 +239,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -255,6 +262,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0

@@ -156,6 +156,7 @@ MonoBehaviour:
   pontosVida: 0
   projetil: {fileID: 0}
   podeAtirar: 0
+  energiaRecompensa: 2
 --- !u!1001 &7261765711610622229
 PrefabInstance:
   m_ObjectHideFlags: 0

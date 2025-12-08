@@ -6,8 +6,6 @@ namespace btt.Core.Entidade
 
     public class Ratinho : Inimigo
     {
-        private float ray;
-
         protected override void Start()
         {
             base.Start();
@@ -15,13 +13,12 @@ namespace btt.Core.Entidade
             velocidade = 5;
             ataque = 1;
             direcao = 1;
-            ray = 0.5f;
         }
 
         protected override void Update()
         {
             base.Update();
-            var origem = transform.position + new Vector3(ray * direcao, 0, 0);
+            var origem = transform.position + new Vector3(0.5f * direcao, 0, 0);
             var distanciaChao = 1f;
             var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(origem, Vector2.up, distanciaChao, Color.yellow);
 

@@ -27,7 +27,7 @@ namespace btt.Core.Entidade
             velocidade = 5f;
             pontosVida = 500;
             maxHP = 1000;
-            ataque = 2;
+            ataque = 20;
             forcaDoPulo = 10;
             podeAtacar = false;
             anda = true;
@@ -90,15 +90,6 @@ namespace btt.Core.Entidade
             if (pontosVida <= 0) ui.GameOver();
 
             hpVerde.fillAmount = (float)pontosVida / maxHP;
-        }
-
-        private void OnTriggerStay2D(Collider2D col)
-        {
-            if (col.CompareTag(tagAlvo))
-            {
-                podeAtacar = true;
-                alvo = col.GetComponent<Personagem>();
-            }
         }
     }
 }

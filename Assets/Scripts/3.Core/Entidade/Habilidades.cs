@@ -5,7 +5,6 @@ namespace btt.Core.Entidade {
 
     public class Habilidades : MonoBehaviour
     {
-
         private Jogador jogador;
 
         public bool ativaDrenar;
