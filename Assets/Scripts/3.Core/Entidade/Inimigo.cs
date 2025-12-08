@@ -6,6 +6,7 @@ namespace btt.Core.Entidade
 {
     public class Inimigo : Personagem
     {
+        #region Atributos
         protected InimigoConfiguracaoDI.ServiceLocator InimigoFachada;
         public GameObject projetil;
         public bool podeAtirar;
@@ -26,11 +27,14 @@ namespace btt.Core.Entidade
         protected float direcao;
         protected float tempo = 0f;
         protected float tempoTroca = 1.5f;
-        protected float duracaoAtaque = 0.3f;
+        //protected float duracaoAtaque = 0.3f;
         protected float tempoAtacando = 0f;
 
         public int EnergiaRecompensa => energiaRecompensa;
 
+        #endregion
+
+        #region Unity Methods
         protected override void Start()
         {
             base.Start();
@@ -53,25 +57,6 @@ namespace btt.Core.Entidade
             if (!estaVivo)
                 Morreu();
         }
-
-        public virtual void TrocaDirecao()
-        {
-            if (viuJogador || tempo <= tempoTroca) return;
-            direcaoOlha.x *= -1;
-            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y == 0 ? 180 : 0, 0);
-            tempo = 0;
-        }
-
-        private void IntervaloAtaqueInimigo()
-        {
-            if (timerCooldown > 0) return;
-
-            timerCooldown = ataqueCooldown;
-            estaAtacando = true;
-            fachada.combateServico.Atacando(ataque, alvo);
-            Invoke(nameof(FinalizarAtaque), duracaoAtaque);
-        }
-
         protected override void OnCollisionEnter2D(Collision2D col)
         {
             base.OnCollisionEnter2D(col);
@@ -82,6 +67,27 @@ namespace btt.Core.Entidade
         {
             base.OnCollisionExit2D(col);
             velocidade = 2f;
+        }
+
+        #endregion
+
+        #region Methods
+        public virtual void TrocaDirecao()
+        {
+            if (viuJogador || tempo <= tempoTroca) return;
+            direcaoOlha.x *= -1;
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y == 0 ? 180 : 0, 0);
+            tempo = 0;
+        }
+
+        public override void Morreu()
+        {
+            base.Morreu();
+
+            estaAtacando = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+            jogador.pontosEnergia += EnergiaRecompensa;
+            GerenciadorInimigo.Instance.DestruirInimigo(this);
         }
 
         protected virtual void DetectarJogador(RaycastHit2D detectador)
@@ -109,18 +115,18 @@ namespace btt.Core.Entidade
             return;
         }
 
-        public override void Morreu()
+        protected virtual void IntervaloAtaqueInimigo()
         {
-            base.Morreu();
+            if (timerCooldown > 0) return;
 
+            timerCooldown = ataqueCooldown;
+            estaAtacando = true;
+            fachada.combateServico.Atacando(ataque, alvo);
             estaAtacando = false;
-            GetComponent<BoxCollider2D>().enabled = false;
-            jogador.pontosEnergia += EnergiaRecompensa;
-            GerenciadorInimigo.Instance.DestruirInimigo(this);
+            //Invoke(nameof(FinalizarAtaque), duracaoAtaque);
         }
 
-        private void FinalizarAtaque()
-            => estaAtacando = false;
+        #endregion
 
     }
 }

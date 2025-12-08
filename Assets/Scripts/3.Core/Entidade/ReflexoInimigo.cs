@@ -27,5 +27,6 @@ namespace btt.Core.Entidade
             DetectarChao(detectorChao);
             TrocaDirecao();
         }
+
     }
 }

@@ -14,7 +14,6 @@ namespace btt.Core.Entidade
     public class Personagem : MonoBehaviour
     {
         #region Atributos
-        /// TODO: rever props, há sinais de overengineering
         protected PersonagemConfiguracaoDI.ServiceLocator fachada;
         //Animator animacao;
         public Transform posicao;
@@ -36,11 +35,11 @@ namespace btt.Core.Entidade
         public int defesa;
         public int maxHP;
         public int pontosVida;
+
         #endregion
 
         #region Unity Methods
         protected virtual void Awake() { }
-
 
         protected virtual void Start()
         {
@@ -58,13 +57,11 @@ namespace btt.Core.Entidade
             }
         }
 
-
         protected virtual void Update()
         {
             if (!invencivel)
                 hpVerde.fillAmount = (float)pontosVida / maxHP;
         }
-
 
         protected virtual void OnCollisionEnter2D(Collision2D col)
         {
@@ -74,7 +71,6 @@ namespace btt.Core.Entidade
                 alvo = col.gameObject.GetComponent<Personagem>();
             }
         }
-
 
         protected virtual void OnCollisionExit2D(Collision2D col)
         {
@@ -110,6 +106,8 @@ namespace btt.Core.Entidade
             //animacao.SetTrigger("Morreu");
             // Desativar o personagem ou iniciar a l�gica de rein�cio
         }
+
         #endregion
+
     }
 }

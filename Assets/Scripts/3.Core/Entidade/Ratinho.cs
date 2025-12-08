@@ -37,5 +37,6 @@ namespace btt.Core.Entidade
 
         public virtual void TrocaDirecao(Collider2D col)
             => transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y == 0 ? 180 : 0, 0);
+
     }
 }

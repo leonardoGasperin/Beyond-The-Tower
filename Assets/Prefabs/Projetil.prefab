@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6863347183044979150}
   - component: {fileID: 7581387649485151893}
   - component: {fileID: 8754660963028614156}
+  - component: {fileID: 6734152698154322673}
   - component: {fileID: 4095711679421075493}
   - component: {fileID: 8584804109651683841}
   m_Layer: 0
@@ -56,6 +57,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -77,6 +80,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -106,6 +110,7 @@ MonoBehaviour:
   velocidadeTiro: {x: 0, y: 0}
   ataque: 0
   gravidade: 0
+  chao: 0
 --- !u!114 &8754660963028614156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +123,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bbd906cb836d4951a52d4b64e0d7463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6734152698154322673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911344391274804977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d9cc64a2f503e47a73cdfbadf0717c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::btt.Aplicacao.DI.Inimigo.InimigoConfiguracaoDI
 --- !u!61 &4095711679421075493
 BoxCollider2D:
   m_ObjectHideFlags: 0
