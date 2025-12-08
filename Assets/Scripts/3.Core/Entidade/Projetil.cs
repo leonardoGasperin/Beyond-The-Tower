@@ -26,7 +26,7 @@ namespace btt.Core.Entidade {
         {
             if(!chao){
                 velocidadeTiro.y += gravidade * Time.deltaTime;
-                fachada.lancaServico.MovimentoLanca(velocidadeTiro, transform);
+                //fachada.lancaServico.MovimentoLanca(velocidadeTiro, transform);
             }
         }
 

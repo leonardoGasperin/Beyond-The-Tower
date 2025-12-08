@@ -917,9 +917,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 231036964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bbd906cb836d4951a52d4b64e0d7463, type: 3}
+  m_Script: {fileID: 11500000, guid: 952621d782759b545a7cb985f67a295d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::btt.Aplicacao.DI.Camera.CameraConfiguracaoDI
 --- !u!4 &248381727 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3827498929252904814, guid: 72f888d5596fb4603a383ce09fd3e70e, type: 3}
@@ -974,19 +974,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2364677345106514007, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.23
+      value: -0.007
       objectReference: {fileID: 0}
     - target: {fileID: 2364677345106514007, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.24
+      value: 0.006
       objectReference: {fileID: 0}
     - target: {fileID: 8188711393811988326, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.62
+      value: 21.43
       objectReference: {fileID: 0}
     - target: {fileID: 8188711393811988326, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.46
+      value: 7.16
       objectReference: {fileID: 0}
     - target: {fileID: 8188711393811988326, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1877,6 +1877,10 @@ PrefabInstance:
       propertyPath: velocidadeSaidaColisao
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1248714644697498625, guid: 040d2959ca8c247369010604208eb46b, type: 3}
+      propertyPath: onTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 464042694}
     - target: {fileID: 3962784336980831482, guid: 040d2959ca8c247369010604208eb46b, type: 3}
       propertyPath: m_Name
       value: Mini Boss Container
@@ -1928,13 +1932,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3962784336980831482, guid: 040d2959ca8c247369010604208eb46b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1000052631}
-    - targetCorrespondingSourceObject: {fileID: 3962784336980831482, guid: 040d2959ca8c247369010604208eb46b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1000052630}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 040d2959ca8c247369010604208eb46b, type: 3}
 --- !u!1 &964028480
 GameObject:
@@ -1946,7 +1944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 964028483}
   - component: {fileID: 964028482}
-  - component: {fileID: 964028481}
+  - component: {fileID: 964028484}
   m_Layer: 0
   m_Name: "Po\xE7\xE3o Spawner"
   m_TagString: Untagged
@@ -1954,18 +1952,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &964028481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964028480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bbd906cb836d4951a52d4b64e0d7463, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::btt.Aplicacao.DI.Personagem.PersonagemConfiguracaoDI
 --- !u!114 &964028482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1998,6 +1984,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 256614097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &964028484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964028480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afa69bc9ef8c9e48b1df51bf8b5c4c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::btt.Aplicacao.DI.Spawner.SpawnerConfiguracaoDI
 --- !u!1001 &965683102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2055,54 +2053,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 926937cfc7052410499a3a70a20c0258, type: 3}
---- !u!1 &1000052625 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3962784336980831482, guid: 040d2959ca8c247369010604208eb46b, type: 3}
-  m_PrefabInstance: {fileID: 858071133}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1000052630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000052625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297f2772bdae04de38311de3c1828e6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.DialogueTrigger
-  action: IniciaLuta
-  onTrigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 464042694}
-        m_TargetAssemblyTypeName: SairDialogo, Assembly-CSharp
-        m_MethodName: LutaMiniBoss
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1000052631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000052625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf379e67c6f1d475185240c09b5e2bbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.AIConversant
-  conversantName: Mini Boss
-  dialogue: {fileID: 11400000, guid: 691be9c1f6af64685876ad38a3285d96, type: 2}
-  dialogoCompleto: 0
 --- !u!4 &1000052635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3964272940851683249, guid: 040d2959ca8c247369010604208eb46b, type: 3}
@@ -2513,6 +2463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plataforma (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 522696622439734866, guid: bfb44ba7ec6324ad78dcd53b9a66f3bd, type: 3}
+      propertyPath: m_TagString
+      value: Parede
+      objectReference: {fileID: 0}
     - target: {fileID: 7223039964381288557, guid: bfb44ba7ec6324ad78dcd53b9a66f3bd, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.6676776
@@ -2523,11 +2477,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7223039964381288557, guid: bfb44ba7ec6324ad78dcd53b9a66f3bd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.752713
+      value: 12.713
       objectReference: {fileID: 0}
     - target: {fileID: 7223039964381288557, guid: bfb44ba7ec6324ad78dcd53b9a66f3bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.46
+      value: 6.527
       objectReference: {fileID: 0}
     - target: {fileID: 7223039964381288557, guid: bfb44ba7ec6324ad78dcd53b9a66f3bd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2650,16 +2604,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5749516652366999686, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1938968184}
-    - targetCorrespondingSourceObject: {fileID: 5749516652366999686, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1938968178}
-    - targetCorrespondingSourceObject: {fileID: 5749516652366999686, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1938968191}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
 --- !u!1001 &1373476127
 PrefabInstance:
@@ -3534,9 +3479,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1698229719}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bbd906cb836d4951a52d4b64e0d7463, type: 3}
+  m_Script: {fileID: 11500000, guid: 5afa69bc9ef8c9e48b1df51bf8b5c4c7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::btt.Aplicacao.DI.Personagem.PersonagemConfiguracaoDI
+  m_EditorClassIdentifier: Assembly-CSharp::btt.Aplicacao.DI.Spawner.SpawnerConfiguracaoDI
 --- !u!1001 &1722131633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3622,7 +3567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8188711393811988326, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.41
+      value: 8.366
       objectReference: {fileID: 0}
     - target: {fileID: 8188711393811988326, guid: bac155ca16444427db0e7328cb96cab5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3756,7 +3701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2522067899704010239, guid: b1ae0cc222dda438ea2630fc3370493a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7867972935343666679, guid: b1ae0cc222dda438ea2630fc3370493a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3926,7 +3871,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1792413543}
   - component: {fileID: 1792413542}
-  - component: {fileID: 1792413541}
+  - component: {fileID: 1792413544}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -3934,18 +3879,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1792413541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792413540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650b82e91b8e04c89b4ba4bd9fcf3481, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
 --- !u!61 &1792413542
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4007,6 +3940,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 256614097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1792413544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792413540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afa69bc9ef8c9e48b1df51bf8b5c4c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::btt.Aplicacao.DI.Spawner.SpawnerConfiguracaoDI
 --- !u!1001 &1798879335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4733,55 +4678,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7223039964381288557, guid: bfb44ba7ec6324ad78dcd53b9a66f3bd, type: 3}
   m_PrefabInstance: {fileID: 1722131633}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1938968176 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5749516652366999686, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
-  m_PrefabInstance: {fileID: 1365379426}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1938968178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938968176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5396925b4f6644ea9087c0227bd45c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerName: Tyrus
-  testDialogue: {fileID: 0}
---- !u!114 &1938968184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938968176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0acc26b03291443ceb5cd5c3dc404cd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1938968191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938968176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84a46616a7c0341069f4b520967e3988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Habilidades
-  ativaDrenar: 0
-  cooldownDrenar: 2
-  ativaConcentracao: 0
-  cooldownConcentracao: 2
-  ativaEspelho: 0
-  cooldownEspelho: 2
 --- !u!224 &1943183868 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2643928598134783852, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
@@ -5181,6 +5077,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4342150300591026870, guid: 72f888d5596fb4603a383ce09fd3e70e, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374854524930666039, guid: 72f888d5596fb4603a383ce09fd3e70e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

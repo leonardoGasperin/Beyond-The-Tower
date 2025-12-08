@@ -1,12 +1,11 @@
+﻿using btt.Aplicacao.Contrato;
 using btt.Aplicacao.Servico;
-using btt.Aplicacao.Contratos;
-using btt.Aplicacao.Contrato;
 using Reflex.Core;
 using UnityEngine;
 
-namespace btt.Aplicacao.DI.Personagem
+namespace btt.Aplicacao.DI.Camera
 {
-    public class PersonagemConfiguracaoDI : MonoBehaviour
+    public class CameraConfiguracaoDI : MonoBehaviour
     {
         /// <summary>
         /// Propriedade que fornece acesso aos servi�os resolvidos para este escopo.
@@ -19,8 +18,7 @@ namespace btt.Aplicacao.DI.Personagem
         void Awake()
         {
             var builder = new ContainerBuilder();
-            builder.AddScoped(typeof(MovimentacaoServico), typeof(IMovimentacaoServico));
-            builder.AddScoped(typeof(CombateServico), typeof(ICombateServico));
+            builder.AddScoped(typeof(CameraServico), typeof(ICameraServico));
             var container = builder.Build();
 
             Services = new ServiceLocator(container);
@@ -34,8 +32,7 @@ namespace btt.Aplicacao.DI.Personagem
             /// <summary>
             /// Servi�o de exemplo com escopo, implementando <see cref="ImovimentacaoServico"/>.
             /// </summary>
-            public IMovimentacaoServico movimentacaoServico;
-            public ICombateServico combateServico;
+            public ICameraServico cameraServico;
             // Adicione todos os outros servi�os como campos
 
             /// <summary>
@@ -44,9 +41,8 @@ namespace btt.Aplicacao.DI.Personagem
             /// <param name="container">Cont�iner de depend�ncias scoped.</param>
             public ServiceLocator(Container container)
             {
-                movimentacaoServico = (IMovimentacaoServico)container.Resolve(typeof(IMovimentacaoServico));
-                combateServico = (ICombateServico)container.Resolve(typeof(ICombateServico));
-            
+                cameraServico = (ICameraServico)container.Resolve(typeof(ICameraServico));
+
                 // Resolva todos os outros servi�os aqui...
             }
         }

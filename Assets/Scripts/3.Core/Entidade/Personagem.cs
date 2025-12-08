@@ -14,7 +14,8 @@ namespace btt.Core.Entidade
     public class Personagem : MonoBehaviour
     {
         #region Atributos
-        public PersonagemConfiguracaoDI.ServiceLocator fachada;
+        /// TODO: rever props, há sinais de overengineering
+        protected PersonagemConfiguracaoDI.ServiceLocator fachada;
         //Animator animacao;
         public Transform posicao;
         public Rigidbody2D rb;
@@ -41,7 +42,7 @@ namespace btt.Core.Entidade
         #region Unity Methods
         protected virtual void Awake() { }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         protected virtual void Start()
         {
             fachada = GetComponent<PersonagemConfiguracaoDI>().Services;
@@ -59,14 +60,14 @@ namespace btt.Core.Entidade
             }
         }
 
-        // Update is called once per frame
+
         protected virtual void Update()
         {
             if (!invencivel)
                 hpVerde.fillAmount = (float)pontosVida / maxHP;
         }
 
-        //Checar se o personagem está tocando o chão
+
         protected virtual void OnCollisionEnter2D(Collision2D col)
         {
             if (col.gameObject.CompareTag(tagAlvo))
@@ -76,7 +77,7 @@ namespace btt.Core.Entidade
             }
         }
 
-        //Checar se o personagem não está tocando o chão
+
         protected virtual void OnCollisionExit2D(Collision2D col)
         {
             if (col.gameObject.CompareTag(tagAlvo))

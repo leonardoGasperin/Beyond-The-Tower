@@ -1,13 +1,15 @@
+using btt.Aplicacao.DI.Jogador;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace btt.Core.Entidade {
+namespace btt.Core.Entidade
+{
 
-    public sealed class Jogador : Personagem {
-
+    public sealed class Jogador : Personagem
+    {
+        private JogadorConfiguracaoDI.ServiceLocator JogadorFachada;
         private JogadorController jogadorController;
         private GerenciadorUI ui;
-        private GerenciadorCamera mainCamera;
         public int pontosEnergia;
         public int direcional;
         public bool podePular;
@@ -15,9 +17,10 @@ namespace btt.Core.Entidade {
         public int nivel;
         public int experiencia;
 
-        protected override void Start(){
+        protected override void Start()
+        {
             base.Start();
-
+            JogadorFachada = GetComponent<JogadorConfiguracaoDI>().Services;
             tagAlvo = "Inimigo";
             jogadorController = new JogadorController();
             pontosEnergia = 10000;
@@ -33,55 +36,66 @@ namespace btt.Core.Entidade {
         }
 
         // TODO: refatorar para metodos especificos
-        protected override void Update(){
+        protected override void Update()
+        {
             base.Update();
 
-            if(Keyboard.current == null) return;
+            if (Keyboard.current == null) return;
 
-            if(pontosVida > maxHP) pontosVida = maxHP;
+            if (pontosVida > maxHP) pontosVida = maxHP;
 
             direcional = jogadorController.BotoesDirecao();
 
             if (direcional != 0 && pontosVida > 0 && anda)
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
-            
-            if(direcional == -1) {
+
+            if (direcional == -1)
+            {
                 transform.localScale = new Vector3(-1, 1, 1);
                 barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
             }
-            else if(direcional == 1) {
+            else if (direcional == 1)
+            {
                 transform.localScale = new Vector3(1, 1, 1);
                 barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
             }
-            
-            if (podeAtacar && alvo.pontosVida > 0 && jogadorController.BotaoAtaque()) {
+
+            if (podeAtacar && alvo.pontosVida > 0 && jogadorController.BotaoAtaque())
+            {
                 fachada.combateServico.Atacando(ataque, alvo);
             }
 
-            if (alvo != null && alvo.pontosVida <= 0) {
+            if (alvo != null && alvo.pontosVida <= 0)
+            {
                 podeAtacar = false;
                 alvo = null;
             }
 
-            if (jogadorController.BotaoPulo() && podePular && pontosVida > 0){
+            if (jogadorController.BotaoPulo() && podePular && pontosVida > 0)
+            {
                 fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
-                pontosEnergia = fachada.energiaServico.ReduzirEnergia(pontosEnergia);
+                pontosEnergia = JogadorFachada.energiaServico.ReduzirEnergia(pontosEnergia);
             }
 
             /// TODO: remover nao precisa
-            if(pontosEnergia <= 0) {
+            if (pontosEnergia <= 0)
+            {
                 podePular = false;
-            } else {
+            }
+            else
+            {
                 podePular = true;
             }
 
             if (pontosVida <= 0) ui.GameOver();
 
-            hpVerde.fillAmount = (float)pontosVida/maxHP;
+            hpVerde.fillAmount = (float)pontosVida / maxHP;
         }
 
-        private void OnTriggerStay2D(Collider2D col){
-            if (col.CompareTag(tagAlvo)) {
+        private void OnTriggerStay2D(Collider2D col)
+        {
+            if (col.CompareTag(tagAlvo))
+            {
                 podeAtacar = true;
                 alvo = col.GetComponent<Personagem>();
             }

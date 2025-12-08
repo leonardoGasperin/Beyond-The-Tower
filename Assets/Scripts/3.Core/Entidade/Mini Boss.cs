@@ -1,3 +1,5 @@
+using btt.Aplicacao.DI.Inimigo;
+using btt.Aplicacao.DI.Personagem;
 using UnityEngine;
 
 namespace btt.Core.Entidade
@@ -16,6 +18,7 @@ namespace btt.Core.Entidade
         protected override void Start()
         {
             base.Start();
+            InimigoFachada = GetComponent<InimigoConfiguracaoDI>().Services;
             velocidade = 5f;
             maxHP = 100;
             ataque = 2;
@@ -31,7 +34,7 @@ namespace btt.Core.Entidade
 
             hpVerde.fillAmount = (float)pontosVida/maxHP;
 
-            podeAlcancarJogador = fachada.lancaServico.PodeAtirar(jogador, transform);
+            podeAlcancarJogador = InimigoFachada.lancaServico.PodeAtirar(jogador, transform);
 
             if(jogador.pontosVida <= 0) return;
             
@@ -67,7 +70,7 @@ namespace btt.Core.Entidade
             if(atirouLanca == false && podeAtirar && podeAlcancarJogador){
                 podeAndar = true;
                 podeAtirar = false;
-                lancaAtual = fachada.lancaServico.AtiraLanca(jogador, projetil, transform);
+                lancaAtual = InimigoFachada.lancaServico.AtiraLanca(jogador, projetil, transform);
                 atirouLanca = true;
             }
 

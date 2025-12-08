@@ -1,3 +1,5 @@
+using btt.Aplicacao.DI.Inimigo;
+using btt.Aplicacao.DI.Personagem;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -6,6 +8,8 @@ namespace btt.Core.Entidade
     // TODO: Adequar para que a Entidade Inimigo seja genérica e reutilizável para todos os tipos de inimigos
     public class Inimigo : Personagem
     {
+        protected InimigoConfiguracaoDI.ServiceLocator InimigoFachada;
+        /// TODO: rever props, há sinais de overengineering
         public GameObject projetil;
         public bool podeAtirar;
 
@@ -63,8 +67,11 @@ namespace btt.Core.Entidade
             tempo = 0;
         }
 
-        private void IntervaloAtaqueInimigo(){
-            if (timerCooldown <= 0) {
+        /// TODO: Ainda apresenta sinais de overengineering, rever
+        private void IntervaloAtaqueInimigo()
+        {
+            if (timerCooldown <= 0)
+            {
                 timerCooldown = ataqueCooldown;
                 estaAtacando = true;
                 tempoAtacando = duracaoAtaque;
@@ -75,12 +82,14 @@ namespace btt.Core.Entidade
                 estaAtacando = false;
         }
 
-        protected override void OnCollisionEnter2D(Collision2D col){
+        protected override void OnCollisionEnter2D(Collision2D col)
+        {
             base.OnCollisionEnter2D(col);
             velocidade = 0;
         }
 
-        protected override void OnCollisionExit2D(Collision2D col){
+        protected override void OnCollisionExit2D(Collision2D col)
+        {
             base.OnCollisionExit2D(col);
             velocidade = 2f;
         }
@@ -114,6 +123,6 @@ namespace btt.Core.Entidade
 
             podeAndar = true;
         }
-        
+
     }
 }
