@@ -1,4 +1,4 @@
-using btt.Aplicacao.DI.Projetil;
+using btt.Configuracao.DI.Projetil;
 using UnityEngine;
 
 namespace btt.Core.Entidade {

@@ -3,9 +3,9 @@ using btt.Aplicacao.Servico;
 using Reflex.Core;
 using UnityEngine;
 
-namespace btt.Aplicacao.DI.Camera
+namespace btt.Configuracao.DI.Jogador
 {
-    public class CameraConfiguracaoDI : MonoBehaviour
+    public class JogadorConfiguracaoDI : MonoBehaviour
     {
         /// <summary>
         /// Propriedade que fornece acesso aos servi�os resolvidos para este escopo.
@@ -18,7 +18,7 @@ namespace btt.Aplicacao.DI.Camera
         void Awake()
         {
             var builder = new ContainerBuilder();
-            builder.AddScoped(typeof(CameraServico), typeof(ICameraServico));
+            builder.AddScoped(typeof(EnergiaServico), typeof(IEnergiaServico));
             var container = builder.Build();
 
             Services = new ServiceLocator(container);
@@ -32,7 +32,7 @@ namespace btt.Aplicacao.DI.Camera
             /// <summary>
             /// Servi�o de exemplo com escopo, implementando <see cref="ImovimentacaoServico"/>.
             /// </summary>
-            public ICameraServico cameraServico;
+            public IEnergiaServico energiaServico;
             // Adicione todos os outros servi�os como campos
 
             /// <summary>
@@ -41,7 +41,7 @@ namespace btt.Aplicacao.DI.Camera
             /// <param name="container">Cont�iner de depend�ncias scoped.</param>
             public ServiceLocator(Container container)
             {
-                cameraServico = (ICameraServico)container.Resolve(typeof(ICameraServico));
+                energiaServico = (IEnergiaServico)container.Resolve(typeof(IEnergiaServico));
 
                 // Resolva todos os outros servi�os aqui...
             }

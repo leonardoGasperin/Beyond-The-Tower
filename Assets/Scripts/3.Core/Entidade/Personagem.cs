@@ -1,4 +1,4 @@
-using btt.Aplicacao.DI.Personagem;
+using btt.Configuracao.DI.Personagem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,7 +49,6 @@ namespace btt.Core.Entidade
             //animacao = GetComponent<Animator>();
             estaVivo = true;
             estaDefendendo = false;
-
             if (!invencivel)
             {
                 barraHP = transform.Find("Barra de HP");

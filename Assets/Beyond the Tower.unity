@@ -1427,6 +1427,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7867972935343666679, guid: b1ae0cc222dda438ea2630fc3370493a, type: 3}
   m_PrefabInstance: {fileID: 25084769}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &724573905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2315146191733387512, guid: 1eda5f47fe11fb94dba38e48834dba48, type: 3}
+  m_PrefabInstance: {fileID: 6006807167336465027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &752415093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1981,7 +1986,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::btt.Core.Entidade.Spawner
   prefab: {fileID: 5980866136638811853, guid: 926937cfc7052410499a3a70a20c0258, type: 3}
   posicao: {fileID: 964028483}
-  spawnDireita: 0
   desvio: 0
   spawnCooldown: 2
 --- !u!4 &964028483
@@ -3680,6 +3684,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5299371954895203679, guid: 1eda5f47fe11fb94dba38e48834dba48, type: 3}
   m_PrefabInstance: {fileID: 6006807167336465027}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1698229724
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724573905}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 23.59, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &1722131633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5190,8 +5240,12 @@ PrefabInstance:
       value: Inimigo Spawner (9)
       objectReference: {fileID: 0}
     - target: {fileID: 5299371954895203679, guid: 1eda5f47fe11fb94dba38e48834dba48, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299371954895203679, guid: 1eda5f47fe11fb94dba38e48834dba48, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.47
+      value: 14.17
       objectReference: {fileID: 0}
     - target: {fileID: 5299371954895203679, guid: 1eda5f47fe11fb94dba38e48834dba48, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5232,7 +5286,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2315146191733387512, guid: 1eda5f47fe11fb94dba38e48834dba48, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1698229724}
   m_SourcePrefab: {fileID: 100100000, guid: 1eda5f47fe11fb94dba38e48834dba48, type: 3}
 --- !u!1001 &7573974482711963024
 PrefabInstance:

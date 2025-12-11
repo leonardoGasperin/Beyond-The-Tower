@@ -1,4 +1,4 @@
-using btt.Aplicacao.DI.Spawner;
+using btt.Configuracao.DI.Spawner;
 using UnityEngine;
 
 namespace btt.Core.Entidade

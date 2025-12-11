@@ -1,5 +1,5 @@
 using UnityEngine;
-using btt.Aplicacao.DI.Personagem;
+using btt.Configuracao.DI.Personagem;
 
 namespace btt.Core.Entidade
 {

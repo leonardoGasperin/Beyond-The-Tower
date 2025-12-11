@@ -2,7 +2,7 @@ using UnityEngine;
 using btt.Core.Entidade;
 using DialogueSystem;
 using System.Threading.Tasks;
-using btt.Aplicacao.DI.Personagem;
+using btt.Configuracao.DI.Personagem;
 
 public class SairDialogo : MonoBehaviour
 {

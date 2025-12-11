@@ -1,12 +1,12 @@
-using btt.Aplicacao.Contrato;
-using btt.Aplicacao.Contratos;
 using btt.Aplicacao.Servico;
+using btt.Aplicacao.Contratos;
+using btt.Aplicacao.Contrato;
 using Reflex.Core;
 using UnityEngine;
 
-namespace btt.Aplicacao.DI.Spawner
+namespace btt.Configuracao.DI.Projetil
 {
-    public class SpawnerConfiguracaoDI : MonoBehaviour
+    public class ProjetilConfiguracaoDI : MonoBehaviour
     {
         /// <summary>
         /// Propriedade que fornece acesso aos servi?os resolvidos para este escopo.
@@ -19,7 +19,8 @@ namespace btt.Aplicacao.DI.Spawner
         void Awake()
         {
             var builder = new ContainerBuilder();
-            builder.AddScoped(typeof(SpawnServico), typeof(ISpawnServico));
+            builder.AddScoped(typeof(CombateServico), typeof(ICombateServico));
+            builder.AddScoped(typeof(LancaServico), typeof(ILancaServico));
             var container = builder.Build();
 
             Services = new ServiceLocator(container);
@@ -33,7 +34,8 @@ namespace btt.Aplicacao.DI.Spawner
             /// <summary>
             /// Servi?o de exemplo com escopo, implementando <see cref="ImovimentacaoServico"/>.
             /// </summary>
-            public ISpawnServico spawnServico;
+            public ICombateServico combateServico;
+            public ILancaServico lancaServico;
             // Adicione todos os outros servi?os como campos
 
             /// <summary>
@@ -42,7 +44,8 @@ namespace btt.Aplicacao.DI.Spawner
             /// <param name="container">Cont?iner de depend?ncias scoped.</param>
             public ServiceLocator(Container container)
             {
-                spawnServico = (ISpawnServico)container.Resolve(typeof(ISpawnServico));
+                combateServico = (ICombateServico)container.Resolve(typeof(ICombateServico));
+                lancaServico = (ILancaServico)container.Resolve(typeof(ILancaServico));
 
                 // Resolva todos os outros servi?os aqui...
             }

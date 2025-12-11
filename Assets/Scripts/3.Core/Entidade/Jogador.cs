@@ -1,10 +1,9 @@
-using btt.Aplicacao.DI.Jogador;
+using btt.Configuracao.DI.Jogador;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace btt.Core.Entidade
 {
-
     public sealed class Jogador : Personagem
     {
         private JogadorConfiguracaoDI.ServiceLocator JogadorFachada;
@@ -46,20 +45,11 @@ namespace btt.Core.Entidade
 
             direcional = jogadorController.BotoesDirecao();
 
-            if (direcional != 0 && pontosVida > 0 && anda)
+            if (direcional != 0 && estaVivo && anda)
                 fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
 
-            if (direcional == -1)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-            else if (direcional == 1)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-
+            Orientacao();
+            
             if (podeAtacar && alvo.pontosVida > 0 && jogadorController.BotaoAtaque())
             {
                 fachada.combateServico.Atacando(ataque, alvo);
@@ -90,6 +80,20 @@ namespace btt.Core.Entidade
             if (pontosVida <= 0) ui.GameOver();
 
             hpVerde.fillAmount = (float)pontosVida / maxHP;
+        }
+
+        private void Orientacao()
+        {
+            if (direcional == -1)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+                barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (direcional == 1)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
         }
     }
 }

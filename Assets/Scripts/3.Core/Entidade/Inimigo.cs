@@ -1,4 +1,4 @@
-using btt.Aplicacao.DI.Inimigo;
+using btt.Configuracao.DI.Inimigo;
 using btt.Apresentacao.Gerenciadores.InimigoGerenciador;
 using UnityEngine;
 

@@ -1,4 +1,4 @@
-using btt.Aplicacao.DI.Camera;
+using btt.Configuracao.DI.Camera;
 using UnityEngine;
 
 namespace btt.Core.Entidade {

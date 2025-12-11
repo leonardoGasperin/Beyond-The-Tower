@@ -1,10 +1,9 @@
-﻿using btt.Aplicacao.Contrato;
-using btt.Aplicacao.Contratos;
+﻿using btt.Aplicacao.Contratos;
 using btt.Aplicacao.Servico;
 using Reflex.Core;
 using UnityEngine;
 
-namespace btt.Aplicacao.DI.Inimigo
+namespace btt.Configuracao.DI.Inimigo
 {
     public class InimigoConfiguracaoDI : MonoBehaviour
     {
