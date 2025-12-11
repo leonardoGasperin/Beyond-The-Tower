@@ -1,26 +1,20 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class JogadorController {
-
-    public bool BotaoPulo(){
-        //Se apertou espaço, pula
-        return Keyboard.current.spaceKey.wasPressedThisFrame;
-    }
-
-    public int BotoesDirecao(){
-        //Seta esquerda pressionada, movimento para a esquerda
-        if (Keyboard.current.leftArrowKey.isPressed){
+public class JogadorController
+{
+    public int BotoesDirecao()
+    {
+        if (Keyboard.current.leftArrowKey.isPressed)
             return -1;
-        }
-        //Seta direita pressionada, movimento para a direita
-        else if (Keyboard.current.rightArrowKey.isPressed){
+        else if (Keyboard.current.rightArrowKey.isPressed)
             return 1;
-        }
         return 0;
     }
 
-    public bool BotaoAtaque(){
-        return Keyboard.current.zKey.wasPressedThisFrame;
-    }
+    public bool BotaoPulo()
+        => Keyboard.current.spaceKey.wasPressedThisFrame;
+
+    public bool BotaoAtaque()
+        => Keyboard.current.zKey.wasPressedThisFrame;
+
 }

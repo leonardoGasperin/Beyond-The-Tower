@@ -6,16 +6,19 @@ namespace btt.Core.Entidade
 {
     public sealed class Jogador : Personagem
     {
+        #region Atributos
         private JogadorConfiguracaoDI.ServiceLocator JogadorFachada;
         private JogadorController jogadorController;
         private GerenciadorUI ui;
         public int pontosEnergia;
         public int direcional;
-        public bool podePular;
-        public bool anda;
         public int nivel;
         public int experiencia;
+        public bool emDialogo;
 
+        #endregion
+
+        #region Herdados Metodos
         protected override void Start()
         {
             base.Start();
@@ -28,72 +31,78 @@ namespace btt.Core.Entidade
             maxHP = 1000;
             ataque = 20;
             forcaDoPulo = 10;
-            podeAtacar = false;
-            anda = true;
-            podePular = true;
             ui = GameObject.Find("Gerenciador").GetComponent<GerenciadorUI>();
         }
 
-        // TODO: refatorar para metodos especificos
         protected override void Update()
         {
+            Morreu();
             base.Update();
-
-            if (Keyboard.current == null) return;
-
-            if (pontosVida > maxHP) pontosVida = maxHP;
+            if (Keyboard.current == null || emDialogo)
+                return;
 
             direcional = jogadorController.BotoesDirecao();
+            Movimento();
+            Ataque();
+            Pulo();
+        }
 
-            if (direcional != 0 && estaVivo && anda)
-                fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
+        protected override void Morreu()
+        {
+            if (estaVivo) return;
+
+            base.Morreu();
+            ui.GameOver();
+        }
+
+        #endregion
+
+        #region Entidade Metodos
+        private void Orientacao()
+        {
+            if (direcional == 0) return;
+
+            transform.localScale = new Vector3(direcional, 1, 1);
+            barraHP.transform.localRotation = Quaternion.Euler(0, direcional == -1 ? 180 : 0, 0);
+        }
+
+        private void Movimento()
+        {
+            if (direcional == 0) return;
 
             Orientacao();
-            
-            if (podeAtacar && alvo.pontosVida > 0 && jogadorController.BotaoAtaque())
-            {
-                fachada.combateServico.Atacando(ataque, alvo);
-            }
+            fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
+        }
 
-            if (alvo != null && alvo.pontosVida <= 0)
+        private void Pulo()
+        {
+            if (!EnergiaPuloControle() || !jogadorController.BotaoPulo()) return;
+
+            fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
+            pontosEnergia = JogadorFachada.energiaServico.ReduzirEnergia(pontosEnergia);
+        }
+
+        private bool EnergiaPuloControle()
+        {
+            if (pontosEnergia <= 0)
+                return false;
+            else
+                return true;
+        }
+
+        private void Ataque()
+        {
+            if (alvo != null && !alvo.estaVivo)
             {
                 podeAtacar = false;
                 alvo = null;
+                return;
             }
 
-            if (jogadorController.BotaoPulo() && podePular && pontosVida > 0)
-            {
-                fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
-                pontosEnergia = JogadorFachada.energiaServico.ReduzirEnergia(pontosEnergia);
-            }
-
-            /// TODO: remover nao precisa
-            if (pontosEnergia <= 0)
-            {
-                podePular = false;
-            }
-            else
-            {
-                podePular = true;
-            }
-
-            if (pontosVida <= 0) ui.GameOver();
-
-            hpVerde.fillAmount = (float)pontosVida / maxHP;
+            if (podeAtacar && alvo != null && jogadorController.BotaoAtaque())
+                fachada.combateServico.Atacando(ataque, alvo);
         }
 
-        private void Orientacao()
-        {
-            if (direcional == -1)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-            else if (direcional == 1)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-        }
+        #endregion
     }
 }

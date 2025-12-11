@@ -23,12 +23,6 @@ public class SairDialogo : MonoBehaviour
         energiasCanvasGroup = GameObject.Find("Energias").GetComponent<CanvasGroup>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void CameraSobe(){
         Retomar();
         if (interlocutor != null)
@@ -39,16 +33,13 @@ public class SairDialogo : MonoBehaviour
 
     private void Retomar(){
         mainCamera.cameraPodeSubir = true;
-        jogador.anda = true;
-        jogador.podePular = true;
+        jogador.emDialogo = false;
     }
 
     public void FimTutorial(){
         CameraSobe();
         energiasCanvasGroup.alpha = 1f;
         jogador.pontosEnergia = 3;
-        jogador.podePular = true;
-        jogador.anda = true;
     }
 
     public async void Expurgar(){
@@ -58,29 +49,15 @@ public class SairDialogo : MonoBehaviour
         Inimigo inimigoScript = inimigoInstanciado.GetComponent<Inimigo>();
         await Task.Yield();
         inimigoScript.pontosVida = 0;
-        DestruirNPC(npcAtual);
-        jogador.podePular = true;
-        jogador.anda = true;
+        Destroy(npcAtual.gameObject);
     }
 
     public void Lutar(){
         Retomar();
         AIConversant npcAtual = FindFirstObjectByType<PlayerConversant>().GetCurrentConversant();
         Instantiate(prefabInimigo, npcAtual.transform.position, npcAtual.transform.rotation);
-        DestruirNPC(npcAtual);
-        jogador.podePular = true;
-        jogador.anda = true;
     }
 
-    private async void DestruirNPC(AIConversant npc)
-    {
-        await Task.Delay(1);
-        if (npc != null) Destroy(npc.gameObject);
-    }
-
-    public void LutaMiniBoss(){
-        miniBoss.podeAtirar = true;
-        jogador.anda = true;
-        jogador.podePular = true;
-    }
+    public void LutaMiniBoss()
+        => miniBoss.podeAtirar = true;
 }

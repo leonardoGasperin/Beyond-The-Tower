@@ -88,12 +88,8 @@ namespace btt.Core.Entidade
         {
             int danoFinal = danoRecebido - defesa;
             if (danoFinal <= 0) return;
-
             pontosVida -= danoFinal;
-            if (pontosVida > 0) return;
-
-            pontosVida = 0;
-            estaVivo = false;
+            PontoVidaControle();
         }
 
         protected virtual void Morreu()
@@ -105,6 +101,14 @@ namespace btt.Core.Entidade
 
             //animacao.SetTrigger("Morreu");
             // Desativar o personagem ou iniciar a l�gica de rein�cio
+        }
+
+        protected virtual void PontoVidaControle()
+        {
+            pontosVida = Mathf.Clamp(pontosVida, 0, maxHP);
+
+            if (pontosVida <= 0)
+                estaVivo = false;
         }
 
         #endregion

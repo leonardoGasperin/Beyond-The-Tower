@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 1233679317108193640}
   - component: {fileID: 8768636874914752029}
   - component: {fileID: 7751169833005300294}
-  - component: {fileID: 3489561343915490835}
   - component: {fileID: 2345266762647126764}
   - component: {fileID: 1171172595794735991}
+  - component: {fileID: 3489561343915490835}
   - component: {fileID: 3550689958431898323}
   - component: {fileID: 5060840238472556824}
   - component: {fileID: 4826328630726076447}
@@ -295,44 +295,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3489561343915490835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5749516652366999686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8ac00986d614f2c9d11b02bdee9ac3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  posicao: {fileID: 0}
-  rb: {fileID: 0}
-  barraHP: {fileID: 2643928598134783852}
-  hpVerde: {fileID: 0}
-  alvo: {fileID: 0}
-  tagAlvo: 
-  nome: 
-  ativo: 1
-  estaVivo: 0
-  podeAtacar: 0
-  estaAtacando: 0
-  estaDefendendo: 0
-  estaChao: 0
-  invencivel: 0
-  velocidade: 5
-  forcaDoPulo: 5
-  ataque: 0
-  defesa: 0
-  maxHP: 0
-  pontosVida: 0
-  pontosEnergia: 0
-  direcional: 0
-  podePular: 0
-  anda: 0
-  nivel: 0
-  experiencia: 0
 --- !u!114 &2345266762647126764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +319,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac354f67972990f4ea64780d4a071be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::btt.Aplicacao.DI.Jogador.JogadorConfiguracaoDI
+--- !u!114 &3489561343915490835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749516652366999686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8ac00986d614f2c9d11b02bdee9ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicao: {fileID: 0}
+  rb: {fileID: 0}
+  barraHP: {fileID: 2643928598134783852}
+  hpVerde: {fileID: 0}
+  alvo: {fileID: 0}
+  tagAlvo: 
+  nome: 
+  ativo: 1
+  estaVivo: 0
+  podeAtacar: 0
+  estaDefendendo: 0
+  estaChao: 0
+  invencivel: 0
+  velocidade: 5
+  forcaDoPulo: 5
+  ataque: 0
+  defesa: 0
+  maxHP: 0
+  pontosVida: 0
+  pontosEnergia: 0
+  direcional: 0
+  nivel: 0
+  experiencia: 0
 --- !u!114 &3550689958431898323
 MonoBehaviour:
   m_ObjectHideFlags: 0
