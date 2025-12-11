@@ -15,8 +15,8 @@ namespace btt.Core.Entidade
         private EEstadoMiniBoss maquinaEstado;
 
         public float velocidadeSaidaColisao = 3f;
-        
-        #region Unity Methods
+
+        #region Unity Metodos
         protected override void Start()
         {
             base.Start();
@@ -30,7 +30,6 @@ namespace btt.Core.Entidade
             podeAndar = false;
         }
 
-        // TODO: Refatorar em metodos especificos
         protected override void Update()
         {
             if(jogador.pontosVida == 0) return;
@@ -39,7 +38,7 @@ namespace btt.Core.Entidade
             AtualizarEstado();
             ExecutarEstado();
             AtualizaAlvo();
-            Orientacao();
+            ObjetoOrientacao();
 
         }
 
@@ -55,7 +54,9 @@ namespace btt.Core.Entidade
                 podeAtirar = true;
             }
         }
+        #endregion
 
+        #region Herdados Metodos
         protected override void OnCollisionEnter2D(Collision2D col)
         {
             base.OnCollisionEnter2D(col);
@@ -70,9 +71,6 @@ namespace btt.Core.Entidade
             podeAndar = true;
         }
 
-        #endregion
-
-        #region Methods
         protected override void IntervaloAtaqueInimigo()
         {
             if (timerCooldown > 0) return;
@@ -80,7 +78,9 @@ namespace btt.Core.Entidade
             timerCooldown = ataqueCooldown;
             fachada.combateServico.Atacando(ataque, alvo);
         }
+        #endregion
 
+        #region Methods
         private void AtualizaAlvo()
         {
             if (colidindo)

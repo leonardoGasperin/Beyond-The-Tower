@@ -38,7 +38,7 @@ namespace btt.Core.Entidade
 
         #endregion
 
-        #region Unity Methods
+        #region Unity Metodos
         protected virtual void Awake() { }
 
         protected virtual void Start()
@@ -59,6 +59,7 @@ namespace btt.Core.Entidade
 
         protected virtual void Update()
         {
+            if (invencivel) return;
             if (!invencivel)
                 hpVerde.fillAmount = (float)pontosVida / maxHP;
         }
@@ -83,7 +84,7 @@ namespace btt.Core.Entidade
 
         #endregion
 
-        #region Methods
+        #region Metodos
         public virtual void Dano(int danoRecebido)
         {
             int danoFinal = danoRecebido - defesa;
@@ -96,7 +97,7 @@ namespace btt.Core.Entidade
             estaVivo = false;
         }
 
-        public virtual void Morreu()
+        protected virtual void Morreu()
         {
             ativo = false;
             podeAtacar = false;

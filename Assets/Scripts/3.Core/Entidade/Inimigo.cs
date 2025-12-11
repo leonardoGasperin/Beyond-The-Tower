@@ -33,7 +33,7 @@ namespace btt.Core.Entidade
 
         #endregion
 
-        #region Unity Methods
+        #region Herdados Metodos
         protected override void Start()
         {
             base.Start();
@@ -46,15 +46,12 @@ namespace btt.Core.Entidade
         {
             base.Update();
             if (jogador == null) return;
-            if (invencivel) return;
 
             tempo += Time.deltaTime;
             timerCooldown -= Time.deltaTime;
 
             if (podeAtacar && alvo != null && alvo.estaVivo) IntervaloAtaqueInimigo();
-
-            if (!estaVivo)
-                Morreu();
+            if (!estaVivo) Morreu();
         }
         protected override void OnCollisionEnter2D(Collision2D col)
         {
@@ -68,10 +65,20 @@ namespace btt.Core.Entidade
             velocidade = 2f;
         }
 
+        protected override void Morreu()
+        {
+            base.Morreu();
+
+            estaAtacando = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+            jogador.pontosEnergia += EnergiaRecompensa;
+            GerenciadorInimigo.Instance.DestruirInimigo(this);
+        }
+
         #endregion
 
-        #region Methods
-        public void Orientacao()
+        #region Entidade Metodos
+        protected virtual void ObjetoOrientacao()
         {
             if (distancia > 0)
             {
@@ -85,22 +92,12 @@ namespace btt.Core.Entidade
             }
         }
 
-        public virtual void TrocaDirecao()
+        protected virtual void TrocaDirecao()
         {
             if (viuJogador || tempo <= tempoTroca) return;
             direcaoOlha.x *= -1;
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y == 0 ? 180 : 0, 0);
             tempo = 0;
-        }
-
-        public override void Morreu()
-        {
-            base.Morreu();
-
-            estaAtacando = false;
-            GetComponent<BoxCollider2D>().enabled = false;
-            jogador.pontosEnergia += EnergiaRecompensa;
-            GerenciadorInimigo.Instance.DestruirInimigo(this);
         }
 
         protected virtual void DetectarJogador(RaycastHit2D detectador)

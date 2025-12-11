@@ -18,6 +18,11 @@ namespace btt.Core.Entidade
         protected override void Update()
         {
             base.Update();
+            Comportamento();
+        }
+
+        private void Comportamento()
+        {
             var visaoOrientacao = transform.position + new Vector3(direcaoOlha.x, 0, 0);
             var detectorJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(visaoOrientacao, direcaoOlha, 4f, Color.red);
             var chaoOrientacaoRelacao = transform.position + new Vector3(0.5f * direcaoOlha.x, -1f, 0);

@@ -6,6 +6,7 @@ namespace btt.Core.Entidade
 {
     public class Boss01 : Inimigo
     {
+        #region Atributos
         public GameObject tiroMucoPrefab;
         public GameObject chuvaMucoPrefab;
         public Transform pontoDeTiro;
@@ -18,6 +19,9 @@ namespace btt.Core.Entidade
         private bool podeAtirarMuco;
         private bool podeChuva;
 
+        #endregion
+
+        #region Herdados Metodos
         protected override void Start()
         {
             base.Start();
@@ -35,30 +39,38 @@ namespace btt.Core.Entidade
             base.Update();
 
             distancia = transform.position.x - jogador.transform.position.x;
-            Orientacao();
+            ObjetoOrientacao();
         }
 
-        public override void Morreu()
+        protected override void Morreu()
         {
-            base.Morreu();
-            cancelarBoss = true;
+            ativo = false;
+            podeAtacar = false;
+            estaDefendendo = false;
+            estaChao = true;
+            estaAtacando = false;
+            GetComponent<PolygonCollider2D>().enabled = false;
+            jogador.pontosEnergia += EnergiaRecompensa;
+            GerenciadorInimigo.Instance.DestruirInimigo(this);
         }
+        #endregion
 
+        #region Entidade Metodos
         private async Task ComportamentoBoss()
         {
             while (!cancelarBoss && estaVivo)
             {
-                if (pontosVida <= 0)
+                switch(pontosVida > maxHP / 2)
                 {
-                    estaVivo = false;
-                    break;
+                    case true:
+                        await PrimeiraForma();
+                        break;
+                    case false:
+                        // await SegundaForma();
+                        break;
+                    default:
                 }
-                if (pontosVida > maxHP / 2)
-                {
-                    await PrimeiraForma();
-                } /*else {
-                    await SegundaForma();
-                }*/
+                
             }
         }
 
@@ -69,14 +81,12 @@ namespace btt.Core.Entidade
             await RepetirChuva();
         }
 
-        /// TODO: refatorar para remover overengineering
         private void IntervaloTiroMuco()
         {
             if (cancelarBoss || !estaVivo) return;
-            float distanciaAtual = transform.position.x - jogador.transform.position.x;
             GameObject tiro = Instantiate(tiroMucoPrefab, pontoDeTiro.position, Quaternion.identity);
             TiroMuco tiroMuco = tiro.GetComponent<TiroMuco>();
-            tiroMuco.direcao = distanciaAtual > 0 ? -1f : 1f;
+            tiroMuco.direcao = distancia > 0 ? -1f : 1f;
         }
 
         private async Task RepetirChuva()
@@ -89,8 +99,6 @@ namespace btt.Core.Entidade
             }
         }
 
-        /// TODO: abstrair para Serviço de Ataque de Boss
-        /// TODO: refatorar para remover overengineering
         private async Task RepetirTiroMuco()
         {
             await Task.Delay(3000);
@@ -102,12 +110,12 @@ namespace btt.Core.Entidade
             }
         }
 
-        /// TODO: abstrair para Serviço de Ataque de Boss
         private void ChuvaDeMuco()
         {
             if (cancelarBoss || !estaVivo) return;
             Instantiate(chuvaMucoPrefab, new Vector2(Random.Range(posicaoXMinChuva, posicaoXMaxChuva), transform.position.y + posicaoYChuva), Quaternion.identity);
         }
+        #endregion
     }
 
 }

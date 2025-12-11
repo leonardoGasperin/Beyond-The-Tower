@@ -5,12 +5,11 @@ namespace btt.Core.Entidade
 {
     public class TiroMuco : MonoBehaviour
     {
-
+        /// TODO: Analisar codigo de Projetil e TiroMuco e ChuvaMuco para ver o que pode ser reaproveitado e criar uma classe base
         private PersonagemConfiguracaoDI.ServiceLocator fachada;
         public float velocidadeTiro;
         private Jogador alvo;
         public int ataque;
-        private int pontosEnergia;
         public float direcao;
 
         void Start()
@@ -34,9 +33,7 @@ namespace btt.Core.Entidade
                 Destroy(gameObject);
             }
             else if (col.gameObject.CompareTag("Parede") || col.gameObject.CompareTag("Plataforma"))
-            {
                 Destroy(gameObject);
-            }
         }
     }
 }

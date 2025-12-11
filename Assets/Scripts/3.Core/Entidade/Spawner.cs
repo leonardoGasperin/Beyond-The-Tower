@@ -10,38 +10,37 @@ namespace btt.Core.Entidade
 
         public GameObject prefab;
         public Transform posicao;
-        public bool spawnDireita;
         public float desvio;
-        public float spawnCooldown = 2f;
+        public float spawnCooldown;
+
         private Jogador jogador;
-        private float timerCooldown = 0f;
+        private float timerCooldown;
 
         void Start()
         {
+            spawnCooldown = 10f;
+            timerCooldown = 10f;
             fachada = GetComponent<SpawnerConfiguracaoDI>().Services;
             jogador = GameObject.FindGameObjectWithTag("Jogador").GetComponent<Jogador>();
         }
 
-        void Update()
+        void FixedUpdate()
         {
-            if (transform.childCount == 0 && spawnDireita && jogador.transform.position.x + desvio > transform.position.x)
-            {
+            timerCooldown -= 1*Time.deltaTime;
+        }
+
+        private void OnTriggerStay2D(Collider2D col)
+        {
+            if (timerCooldown > 0) return;
+
+            if (col.CompareTag("Jogador"))
                 IntervaloSpawn();
-            }
-            else if (transform.childCount == 0 && !spawnDireita && jogador.transform.position.x - desvio < transform.position.x)
-            {
-                IntervaloSpawn();
-            }
         }
 
         public void IntervaloSpawn()
         {
-            timerCooldown -= Time.deltaTime;
-            if (timerCooldown <= 0)
-            {
-                timerCooldown = spawnCooldown;
-                fachada.spawnServico.Spawn(prefab, posicao);
-            }
+            timerCooldown = spawnCooldown;
+            fachada.spawnServico.Spawn(prefab, posicao);
         }
     }
 }

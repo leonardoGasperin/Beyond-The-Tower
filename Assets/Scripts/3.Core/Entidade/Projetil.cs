@@ -9,7 +9,6 @@ namespace btt.Core.Entidade {
         public Vector2 velocidadeTiro;
         private Jogador alvo;
         public int ataque;
-        private int pontosEnergia;
         public float gravidade;
         public bool chao;
 
