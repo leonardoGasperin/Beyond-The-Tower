@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace btt.Core.Entidade
 {
-
     public class Ratinho : Inimigo
     {
         #region Unit Metodos
@@ -29,7 +28,6 @@ namespace btt.Core.Entidade
         {
             base.Update();
             Comportamento();
-            fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
         }
 
         public virtual void TrocaDirecao(Collider2D col)
@@ -46,6 +44,7 @@ namespace btt.Core.Entidade
             if (detectorChao.collider == null || (detectorChao.collider != null && detectorChao.collider.CompareTag("Parede")))
                 TrocaDirecao(detectorChao.collider);
             DetectarChao(detectorChao);
+            fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcao);
         }
         #endregion
 
