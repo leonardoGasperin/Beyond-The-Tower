@@ -8,13 +8,30 @@ namespace btt.Core.Entidade
     {
         #region Atributos
         private JogadorConfiguracaoDI.ServiceLocator JogadorFachada;
-        private JogadorController jogadorController;
+        public InputActionReference movimentoInput;
+        public InputActionReference puloInput;
+        public InputActionReference ataqueInput;
         private GerenciadorUI ui;
         public int pontosEnergia;
-        public int direcional;
+        public float direcional;
         public int nivel;
         public int experiencia;
         public bool emDialogo;
+
+        #endregion
+
+        #region Unity Metodos
+        private void OnEnable()
+        {
+            puloInput.action.started += Pulo;
+            ataqueInput.action.started += Ataque;
+        }
+
+        private void OnDisable()
+        {
+            puloInput.action.started -= Pulo;
+            ataqueInput.action.started -= Ataque;
+        }
 
         #endregion
 
@@ -24,7 +41,6 @@ namespace btt.Core.Entidade
             base.Start();
             JogadorFachada = GetComponent<JogadorConfiguracaoDI>().Services;
             tagAlvo = "Inimigo";
-            jogadorController = new JogadorController();
             pontosEnergia = 10000;
             velocidade = 5f;
             pontosVida = 500;
@@ -41,10 +57,7 @@ namespace btt.Core.Entidade
             if (Keyboard.current == null || emDialogo)
                 return;
 
-            direcional = jogadorController.BotoesDirecao();
             Movimento();
-            Ataque();
-            Pulo();
         }
 
         protected override void Morreu()
@@ -68,15 +81,16 @@ namespace btt.Core.Entidade
 
         private void Movimento()
         {
+            direcional = movimentoInput.action.ReadValue<float>();
             if (direcional == 0) return;
 
             Orientacao();
             fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
         }
 
-        private void Pulo()
+        private void Pulo(InputAction.CallbackContext obj)
         {
-            if (!EnergiaPuloControle() || !jogadorController.BotaoPulo()) return;
+            if (!EnergiaPuloControle()) return;
 
             fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
             pontosEnergia = JogadorFachada.energiaServico.ReduzirEnergia(pontosEnergia);
@@ -86,20 +100,13 @@ namespace btt.Core.Entidade
         {
             if (pontosEnergia <= 0)
                 return false;
-            else
-                return true;
+            
+            return true;
         }
 
-        private void Ataque()
+        private void Ataque(InputAction.CallbackContext obj)
         {
-            if (alvo != null && !alvo.estaVivo)
-            {
-                podeAtacar = false;
-                alvo = null;
-                return;
-            }
-
-            if (podeAtacar && alvo != null && jogadorController.BotaoAtaque())
+            if (podeAtacar && alvo != null)
                 fachada.combateServico.Atacando(ataque, alvo);
         }
 

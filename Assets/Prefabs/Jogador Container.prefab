@@ -136,10 +136,11 @@ GameObject:
   - component: {fileID: 7751169833005300294}
   - component: {fileID: 2345266762647126764}
   - component: {fileID: 1171172595794735991}
-  - component: {fileID: 3489561343915490835}
   - component: {fileID: 3550689958431898323}
   - component: {fileID: 5060840238472556824}
   - component: {fileID: 4826328630726076447}
+  - component: {fileID: 3489561343915490835}
+  - component: {fileID: 2759005811901529511}
   m_Layer: 0
   m_Name: Jogador
   m_TagString: Jogador
@@ -319,41 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac354f67972990f4ea64780d4a071be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::btt.Aplicacao.DI.Jogador.JogadorConfiguracaoDI
---- !u!114 &3489561343915490835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5749516652366999686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8ac00986d614f2c9d11b02bdee9ac3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  posicao: {fileID: 0}
-  rb: {fileID: 0}
-  barraHP: {fileID: 2643928598134783852}
-  hpVerde: {fileID: 0}
-  alvo: {fileID: 0}
-  tagAlvo: 
-  nome: 
-  ativo: 1
-  estaVivo: 0
-  podeAtacar: 0
-  estaDefendendo: 0
-  estaChao: 0
-  invencivel: 0
-  velocidade: 5
-  forcaDoPulo: 5
-  ataque: 0
-  defesa: 0
-  maxHP: 0
-  pontosVida: 0
-  pontosEnergia: 0
-  direcional: 0
-  nivel: 0
-  experiencia: 0
 --- !u!114 &3550689958431898323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +364,75 @@ MonoBehaviour:
   cooldownConcentracao: 2
   ativaEspelho: 0
   cooldownEspelho: 2
+--- !u!114 &3489561343915490835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749516652366999686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8ac00986d614f2c9d11b02bdee9ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicao: {fileID: 0}
+  rb: {fileID: 0}
+  barraHP: {fileID: 2643928598134783852}
+  hpVerde: {fileID: 0}
+  alvo: {fileID: 0}
+  tagAlvo: 
+  nome: 
+  ativo: 1
+  estaVivo: 0
+  podeAtacar: 0
+  estaDefendendo: 0
+  estaChao: 0
+  invencivel: 0
+  velocidade: 5
+  forcaDoPulo: 5
+  ataque: 0
+  defesa: 0
+  maxHP: 0
+  pontosVida: 0
+  movimentoInput: {fileID: 1342908267751674177, guid: 0fed62fc5a29ad54c8e8b4d312bc2fbe, type: 3}
+  puloInput: {fileID: 4522287421153180093, guid: 0fed62fc5a29ad54c8e8b4d312bc2fbe, type: 3}
+  ataqueInput: {fileID: -8893470170501997639, guid: 0fed62fc5a29ad54c8e8b4d312bc2fbe, type: 3}
+  pontosEnergia: 0
+  direcional: 0
+  nivel: 0
+  experiencia: 0
+  emDialogo: 0
+--- !u!114 &2759005811901529511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749516652366999686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 0fed62fc5a29ad54c8e8b4d312bc2fbe, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Teclado
+  m_DefaultActionMap: jogador
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &4064215004154952698
 PrefabInstance:
   m_ObjectHideFlags: 0

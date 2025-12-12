@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace DialogueSystem
 {
-
     public class AIConversant : MonoBehaviour
     {
 
