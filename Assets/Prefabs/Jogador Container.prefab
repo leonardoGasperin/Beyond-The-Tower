@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2598034273927466789}
   - component: {fileID: 5105921227714247886}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2128127090582661806}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Jogador Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 4826328630726076447}
   - component: {fileID: 3489561343915490835}
   - component: {fileID: 2759005811901529511}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Jogador
   m_TagString: Jogador
   m_Icon: {fileID: 0}
@@ -377,7 +377,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posicao: {fileID: 0}
-  rb: {fileID: 0}
   barraHP: {fileID: 2643928598134783852}
   hpVerde: {fileID: 0}
   alvo: {fileID: 0}
@@ -395,6 +394,7 @@ MonoBehaviour:
   defesa: 0
   maxHP: 0
   pontosVida: 0
+  rb: {fileID: 0}
   movimentoInput: {fileID: 1342908267751674177, guid: 0fed62fc5a29ad54c8e8b4d312bc2fbe, type: 3}
   puloInput: {fileID: 4522287421153180093, guid: 0fed62fc5a29ad54c8e8b4d312bc2fbe, type: 3}
   ataqueInput: {fileID: -8893470170501997639, guid: 0fed62fc5a29ad54c8e8b4d312bc2fbe, type: 3}
@@ -529,13 +529,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2518805819285079188, guid: 0c8aa876fc12049948a79c3aada9631d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2785642036141546458, guid: 0c8aa876fc12049948a79c3aada9631d, type: 3}
       propertyPath: m_Name
       value: Barra de HP
       objectReference: {fileID: 0}
+    - target: {fileID: 2785642036141546458, guid: 0c8aa876fc12049948a79c3aada9631d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3972063379619774243, guid: 0c8aa876fc12049948a79c3aada9631d, type: 3}
       propertyPath: m_FillAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424588022007536778, guid: 0c8aa876fc12049948a79c3aada9631d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9098115100256654992, guid: 0c8aa876fc12049948a79c3aada9631d, type: 3}
       propertyPath: m_PresetInfoIsWorld

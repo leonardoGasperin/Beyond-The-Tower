@@ -1,4 +1,4 @@
-using btt.Apresentacao.Gerenciadores.InimigoGerenciador;
+using btt.Apresentacao.Gerenciadores.GerenciadorSpawn;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -51,7 +51,7 @@ namespace btt.Core.Entidade
             estaAtacando = false;
             GetComponent<PolygonCollider2D>().enabled = false;
             jogador.pontosEnergia += EnergiaRecompensa;
-            GerenciadorInimigo.Instance.DestruirInimigo(this);
+            GerenciadorSpawn.Instance.DestruirInimigo(this);
         }
         #endregion
 

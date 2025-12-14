@@ -14,11 +14,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Plataforma
+  - Estrutura
   - Water
   - UI
-  - 
-  - 
+  - Jogador
+  - Inimigo
   - 
   - 
   - 

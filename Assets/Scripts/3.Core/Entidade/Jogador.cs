@@ -8,10 +8,12 @@ namespace btt.Core.Entidade
     {
         #region Atributos
         private JogadorConfiguracaoDI.ServiceLocator JogadorFachada;
+        private GerenciadorUI ui;
+
+        public Rigidbody2D rb;
         public InputActionReference movimentoInput;
         public InputActionReference puloInput;
         public InputActionReference ataqueInput;
-        private GerenciadorUI ui;
         public int pontosEnergia;
         public float direcional;
         public int nivel;
@@ -39,6 +41,7 @@ namespace btt.Core.Entidade
         protected override void Start()
         {
             base.Start();
+            rb = GetComponent<Rigidbody2D>();
             JogadorFachada = GetComponent<JogadorConfiguracaoDI>().Services;
             tagAlvo = "Inimigo";
             pontosEnergia = 10000;

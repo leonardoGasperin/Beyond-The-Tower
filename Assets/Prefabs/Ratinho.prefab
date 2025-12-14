@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 85992457906624277}
   - component: {fileID: 2712143097215526800}
   - component: {fileID: 882392130820970458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ratinho
   m_TagString: Inimigo
   m_Icon: {fileID: 0}
@@ -107,7 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posicao: {fileID: 0}
-  rb: {fileID: 0}
   barraHP: {fileID: 0}
   hpVerde: {fileID: 0}
   alvo: {fileID: 0}
@@ -116,7 +115,6 @@ MonoBehaviour:
   ativo: 1
   estaVivo: 0
   podeAtacar: 0
-  estaAtacando: 0
   estaDefendendo: 0
   estaChao: 0
   invencivel: 0
@@ -126,9 +124,10 @@ MonoBehaviour:
   defesa: 0
   maxHP: 0
   pontosVida: 0
+  energiaRecompensa: 1
   projetil: {fileID: 0}
   podeAtirar: 0
-  energiaRecompensa: 1
+  estaAtacando: 0
 --- !u!61 &2712143097215526800
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -197,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8869053404500618347}
   - component: {fileID: 6863751634301244969}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

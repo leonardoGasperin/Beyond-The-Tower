@@ -1,14 +1,15 @@
 using btt.Aplicacao.Handler.SpawnerHandler;
 using btt.Core.Entidade;
+using btt.Core.Enumeradores;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace btt.Apresentacao.Gerenciadores.InimigoGerenciador
+namespace btt.Apresentacao.Gerenciadores.GerenciadorSpawn
 {
-    public class GerenciadorInimigo : MonoBehaviour
+    public class GerenciadorSpawn : MonoBehaviour
     {
-        public static GerenciadorInimigo Instance { get; private set; }
+        public static GerenciadorSpawn Instance { get; private set; }
 
         [Header("Configuração de Spawn")]
         [SerializeField] private Spawner[] spawners;
@@ -65,7 +66,8 @@ namespace btt.Apresentacao.Gerenciadores.InimigoGerenciador
                 .ForEach(
                     spawn =>
                     {
-                        Instantiate(spawn.prefab.GetComponent<Inimigo>(), spawn.posicao.position, Quaternion.identity);
+
+                        Instantiate(spawn.prefab, spawn.posicao.position, Quaternion.identity);
                         spawn.podeSpawnar = false;
                     }
                 );

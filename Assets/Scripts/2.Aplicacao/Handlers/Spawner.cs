@@ -1,3 +1,4 @@
+using btt.Core.Enumeradores;
 using UnityEngine;
 
 namespace btt.Aplicacao.Handler.SpawnerHandler
@@ -9,6 +10,7 @@ namespace btt.Aplicacao.Handler.SpawnerHandler
         public GameObject prefab;
         public Transform posicao;
         public int spawnCooldown;
+        public ETipoSpawn tipo;
         public bool infinito;
         public bool podeSpawnar;
 

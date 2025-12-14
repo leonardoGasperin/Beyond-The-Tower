@@ -1,5 +1,5 @@
 using btt.Configuracao.DI.Inimigo;
-using btt.Apresentacao.Gerenciadores.InimigoGerenciador;
+using btt.Apresentacao.Gerenciadores.GerenciadorSpawn;
 using UnityEngine;
 
 namespace btt.Core.Entidade
@@ -8,18 +8,13 @@ namespace btt.Core.Entidade
     {
         #region Atributos
         protected InimigoConfiguracaoDI.ServiceLocator InimigoFachada;
-        public GameObject projetil;
-        public bool podeAtirar;
-        public bool estaAtacando;
-
         protected Jogador jogador;
         protected Vector2 direcaoOlha = Vector2.left;
         protected bool podeAndar;
         protected bool podeAtacarDistancia;
         protected bool podeVoar;
         protected bool viuJogador;
-        [SerializeField]
-        protected int energiaRecompensa;
+        protected int mascaraCamada;
         protected float ataqueCooldown = 2f;
         protected float timerCooldown = 0f;
         protected float distancia;
@@ -29,6 +24,12 @@ namespace btt.Core.Entidade
         protected float tempoTroca = 1.5f;
         protected float tempoAtacando = 0f;
 
+        [SerializeField]
+        protected int energiaRecompensa;
+
+        public GameObject projetil;
+        public bool podeAtirar;
+        public bool estaAtacando;
         public int EnergiaRecompensa => energiaRecompensa;
 
         #endregion
@@ -37,6 +38,7 @@ namespace btt.Core.Entidade
         protected override void Start()
         {
             base.Start();
+            mascaraCamada = LayerMask.GetMask("Estrutura", "Jogador");
             estaAtacando = false;
             tagAlvo = "Jogador";
             jogador = GameObject.FindGameObjectWithTag(tagAlvo).GetComponent<Jogador>();
@@ -72,7 +74,7 @@ namespace btt.Core.Entidade
             estaAtacando = false;
             GetComponent<BoxCollider2D>().enabled = false;
             jogador.pontosEnergia += EnergiaRecompensa;
-            GerenciadorInimigo.Instance.DestruirInimigo(this);
+            GerenciadorSpawn.Instance.DestruirInimigo(this);
         }
 
         #endregion
@@ -100,9 +102,9 @@ namespace btt.Core.Entidade
             tempo = 0;
         }
 
-        protected virtual void DetectarJogador(RaycastHit2D detectador)
+        protected virtual void DetectarJogador(RaycastHit2D detector)
         {
-            viuJogador = podeAndar && detectador.collider != null && detectador.collider.CompareTag("Jogador");
+            viuJogador = podeAndar && detector.collider != null && detector.collider.CompareTag("Jogador");
             if (!viuJogador) return;
 
             float distanciaDoJogador = jogador.transform.position.x - transform.position.x;
@@ -111,9 +113,9 @@ namespace btt.Core.Entidade
             barraHP.transform.localRotation = Quaternion.Euler(0, direcao <= 0 ? 180 : 0, 0);
         }
 
-        protected virtual void DetectarChao(RaycastHit2D detectador)
+        protected virtual void DetectarChao(RaycastHit2D detector)
         {
-            if (detectador.collider != null && !detectador.collider.CompareTag("Parede"))
+            if (detector.collider != null && !detector.collider.CompareTag("Parede"))
             {
                 podeAndar = true;
                 return;

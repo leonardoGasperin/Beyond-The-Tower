@@ -17,7 +17,6 @@ namespace btt.Core.Entidade
         protected PersonagemConfiguracaoDI.ServiceLocator fachada;
         //Animator animacao;
         public Transform posicao;
-        public Rigidbody2D rb;
         public Transform barraHP;
         public Image hpVerde;
         public Personagem alvo;
@@ -44,7 +43,6 @@ namespace btt.Core.Entidade
         protected virtual void Start()
         {
             fachada = GetComponent<PersonagemConfiguracaoDI>().Services;
-            rb = GetComponent<Rigidbody2D>();
             posicao = GetComponent<Transform>();
             //animacao = GetComponent<Animator>();
             estaVivo = true;

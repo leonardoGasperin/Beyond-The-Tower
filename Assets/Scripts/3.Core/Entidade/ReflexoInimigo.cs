@@ -24,9 +24,16 @@ namespace btt.Core.Entidade
         private void Comportamento()
         {
             var visaoOrientacao = transform.position + new Vector3(direcaoOlha.x, 0, 0);
-            var detectorJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(visaoOrientacao, direcaoOlha, 4f, Color.red);
             var chaoOrientacaoRelacao = transform.position + new Vector3(0.5f * direcaoOlha.x, -1f, 0);
-            var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(chaoOrientacaoRelacao, Vector2.down, 0.5f, Color.yellow);
+
+#if DEBUG
+            var detectorJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(visaoOrientacao, direcaoOlha, 4f, mascaraCamada, Color.red);
+            var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(chaoOrientacaoRelacao, Vector2.down, 0.5f, mascaraCamada, Color.yellow);
+#endif
+#if !DEBUG
+            var detectorJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServico(visaoOrientacao, direcaoOlha, 4f, mascaraCamada);
+            var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServico(chaoOrientacaoRelacao, Vector2.down, 0.5f, mascaraCamada);
+#endif
 
             DetectarJogador(detectorJogador);
             DetectarChao(detectorChao);

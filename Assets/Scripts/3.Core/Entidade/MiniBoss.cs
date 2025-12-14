@@ -44,7 +44,6 @@ namespace btt.Core.Entidade
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-
             if (col.gameObject.CompareTag("Projetil") && lancaAtual.chao)
             {
                 Destroy(col.gameObject);
