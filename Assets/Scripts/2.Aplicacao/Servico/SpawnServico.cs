@@ -3,7 +3,6 @@ using btt.Aplicacao.Contrato;
 
 namespace btt.Aplicacao.Servico
 {
-
     public class SpawnServico : ISpawnServico
     {
 

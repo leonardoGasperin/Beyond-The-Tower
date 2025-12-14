@@ -1,5 +1,7 @@
+using btt.Aplicacao.Handler.SpawnerHandler;
 using btt.Core.Entidade;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace btt.Apresentacao.Gerenciadores.InimigoGerenciador
@@ -9,10 +11,11 @@ namespace btt.Apresentacao.Gerenciadores.InimigoGerenciador
         public static GerenciadorInimigo Instance { get; private set; }
 
         [Header("Configuração de Spawn")]
-        [SerializeField] private GameObject prefabInimigo;
-        [SerializeField] private Transform[] pontoSpawns;
-
+        [SerializeField] private Spawner[] spawners;
         private readonly Queue<GameObject> poolInimigos = new();
+
+        private List<Spawner> Spawners => spawners.Where(e => e != null && !e.infinito).ToList();
+        private List<Spawner> SpawnerInfinitos => spawners.Where(e => e != null && e.infinito).ToList();
 
         private void Awake()
         {
@@ -34,18 +37,38 @@ namespace btt.Apresentacao.Gerenciadores.InimigoGerenciador
 
         private void Start()
         {
-            SpawnInimigos();
+            Spawn();
+        }
+
+        private void Update()
+        {
+            SpawnInfinito();
         }
 
         /// <summary>
         /// Spawna lista de inimigos.
         /// </summary>
-        public void SpawnInimigos()
+        private void Spawn()
         {
-            if (pontoSpawns.Length == 0) return;
+            if (Spawners.Count == 0) return;
+            Spawners
+                .ForEach(spawn
+                    => Instantiate(spawn.prefab.GetComponent<Inimigo>(), spawn.posicao.position, Quaternion.identity));
+        }
 
-            foreach (var ponto in pontoSpawns)
-                Instantiate(prefabInimigo.GetComponent<Inimigo>(), ponto.position, Quaternion.identity);
+        private void SpawnInfinito()
+        {
+            if (SpawnerInfinitos.Count == 0) return;
+            SpawnerInfinitos
+                .Where(e => e.podeSpawnar)
+                .ToList()
+                .ForEach(
+                    spawn =>
+                    {
+                        Instantiate(spawn.prefab.GetComponent<Inimigo>(), spawn.posicao.position, Quaternion.identity);
+                        spawn.podeSpawnar = false;
+                    }
+                );
         }
 
         /// <summary>

@@ -1984,10 +1984,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba99c4646ed04bd689322251dbd516d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::btt.Core.Entidade.Spawner
-  prefab: {fileID: 5980866136638811853, guid: 926937cfc7052410499a3a70a20c0258, type: 3}
-  posicao: {fileID: 964028483}
-  desvio: 0
-  spawnCooldown: 2
+  prefab: {fileID: 0}
+  posicao: {fileID: 0}
+  timerCooldown: 0
 --- !u!4 &964028483
 Transform:
   m_ObjectHideFlags: 0
@@ -2847,6 +2846,14 @@ PrefabInstance:
       propertyPath: hpVerde
       value: 
       objectReference: {fileID: 2037317631}
+    - target: {fileID: 3489561343915490835, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
+      propertyPath: puloInput
+      value: 
+      objectReference: {fileID: 4522287421153180093, guid: 0fed62fc5a29ad54c8e8b4d312bc2fbe, type: 3}
+    - target: {fileID: 3489561343915490835, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
+      propertyPath: movimentoInput
+      value: 
+      objectReference: {fileID: 1342908267751674177, guid: 0fed62fc5a29ad54c8e8b4d312bc2fbe, type: 3}
     - target: {fileID: 4465109342885141091, guid: 7d6ef287992ab48278fab774d80d8969, type: 3}
       propertyPath: m_Name
       value: Jogador Container
