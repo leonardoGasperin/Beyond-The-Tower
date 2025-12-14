@@ -38,8 +38,7 @@ namespace btt.Core.Entidade
         private void Comportamento()
         {
             var origem = transform.position + new Vector3(0.5f * direcao, 0, 0);
-            var distanciaChao = 1f;
-            var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(origem, Vector2.up, distanciaChao, mascaraCamada, Color.yellow);
+            var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(origem, Vector2.up, raycastDistancia, mascaraCamada, Color.yellow);
 
             if (detectorChao.collider == null || (detectorChao.collider != null && detectorChao.collider.CompareTag("Parede")))
                 TrocaDirecao(detectorChao.collider);

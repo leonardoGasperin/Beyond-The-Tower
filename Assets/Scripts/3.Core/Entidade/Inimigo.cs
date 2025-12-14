@@ -26,6 +26,9 @@ namespace btt.Core.Entidade
 
         [SerializeField]
         protected int energiaRecompensa;
+        [Range(0, 100)]
+        [SerializeField]
+        protected float raycastDistancia;
 
         public GameObject projetil;
         public bool podeAtirar;

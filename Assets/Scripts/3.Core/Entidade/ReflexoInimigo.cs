@@ -27,11 +27,11 @@ namespace btt.Core.Entidade
             var chaoOrientacaoRelacao = transform.position + new Vector3(0.5f * direcaoOlha.x, -1f, 0);
 
 #if DEBUG
-            var detectorJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(visaoOrientacao, direcaoOlha, 4f, mascaraCamada, Color.red);
+            var detectorJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(visaoOrientacao, direcaoOlha, raycastDistancia, mascaraCamada, Color.red);
             var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServicoDebug(chaoOrientacaoRelacao, Vector2.down, 0.5f, mascaraCamada, Color.yellow);
 #endif
 #if !DEBUG
-            var detectorJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServico(visaoOrientacao, direcaoOlha, 4f, mascaraCamada);
+            var detectorJogador = VetorTransmissaoFabrica.CriarVetorTransmissaoServico(visaoOrientacao, direcaoOlha, raycastDistancia, mascaraCamada);
             var detectorChao = VetorTransmissaoFabrica.CriarVetorTransmissaoServico(chaoOrientacaoRelacao, Vector2.down, 0.5f, mascaraCamada);
 #endif
 
