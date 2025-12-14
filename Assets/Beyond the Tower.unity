@@ -2022,7 +2022,7 @@ MonoBehaviour:
   timerCooldown: 0
   prefab: {fileID: 5980866136638811853, guid: 926937cfc7052410499a3a70a20c0258, type: 3}
   posicao: {fileID: 2023210025}
-  spawnCooldown: 10
+  spawnCooldown: 15
   tipo: 1
   infinito: 1
   podeSpawnar: 0

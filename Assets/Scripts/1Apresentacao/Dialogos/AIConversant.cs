@@ -11,7 +11,7 @@ namespace DialogueSystem
         private GerenciadorCamera mainCamera;
         private Jogador jogador;
         public bool dialogoCompleto = false;
-        private bool dialogoComecou = false;
+        private bool dialogoComecou = false; 
 
         void Start()
         {
@@ -21,18 +21,22 @@ namespace DialogueSystem
 
         public void OnCollisionEnter2D(Collision2D col)
         {
-            if (gameObject.tag != "npc" && !col.gameObject.CompareTag("Jogador")) return;
+            if (gameObject.tag != "npc" && !col.gameObject.CompareTag("Jogador") || dialogoCompleto) return;
  
             col.gameObject.GetComponent<PlayerConversant>().StartDialogue(this, dialogue);
             mainCamera.cameraPodeSubir = false;
             dialogoComecou = true;
-            jogador.emDialogo = true;
+            jogador.emDialogo = dialogoComecou;
         }
 
         public string GetName()
             => conversantName;
 
         public void DialogoCompleto()
-            => dialogoCompleto = true;
+        {
+            dialogoCompleto = true;
+            dialogoComecou = false;
+            jogador.emDialogo = dialogoComecou;
+        }
     }
 }
