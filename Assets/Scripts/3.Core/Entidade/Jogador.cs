@@ -1,4 +1,5 @@
 using btt.Configuracao.DI.Jogador;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,7 @@ namespace btt.Core.Entidade
         public int nivel;
         public int experiencia;
         public bool emDialogo;
+        public Habilidades[] habilidades;
 
         #endregion
 

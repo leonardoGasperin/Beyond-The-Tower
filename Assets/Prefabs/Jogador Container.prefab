@@ -138,7 +138,6 @@ GameObject:
   - component: {fileID: 1171172595794735991}
   - component: {fileID: 3550689958431898323}
   - component: {fileID: 5060840238472556824}
-  - component: {fileID: 4826328630726076447}
   - component: {fileID: 3489561343915490835}
   - component: {fileID: 2759005811901529511}
   m_Layer: 7
@@ -346,24 +345,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Tyrus
   testDialogue: {fileID: 0}
---- !u!114 &4826328630726076447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5749516652366999686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84a46616a7c0341069f4b520967e3988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Habilidades
-  ativaDrenar: 0
-  cooldownDrenar: 2
-  ativaConcentracao: 0
-  cooldownConcentracao: 2
-  ativaEspelho: 0
-  cooldownEspelho: 2
 --- !u!114 &3489561343915490835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,6 +384,7 @@ MonoBehaviour:
   nivel: 0
   experiencia: 0
   emDialogo: 0
+  habilidades: []
 --- !u!114 &2759005811901529511
 MonoBehaviour:
   m_ObjectHideFlags: 0
