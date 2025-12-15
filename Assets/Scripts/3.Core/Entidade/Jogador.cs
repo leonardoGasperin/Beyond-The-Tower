@@ -15,6 +15,7 @@ namespace btt.Core.Entidade
         public InputActionReference movimentoInput;
         public InputActionReference puloInput;
         public InputActionReference ataqueInput;
+        public InputActionReference primeiraHabilidade;
         public int pontosEnergia;
         public float direcional;
         public int nivel;
@@ -29,12 +30,14 @@ namespace btt.Core.Entidade
         {
             puloInput.action.started += Pulo;
             ataqueInput.action.started += Ataque;
+            //primeiraHabilidade.action.started += Habilidade;
         }
 
         private void OnDisable()
         {
             puloInput.action.started -= Pulo;
             ataqueInput.action.started -= Ataque;
+            //primeiraHabilidade.action.started -= Habilidade;
         }
 
         #endregion
