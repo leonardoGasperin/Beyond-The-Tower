@@ -1,31 +1,28 @@
 using UnityEngine;
 using btt.Core.Entidade;
 
-public class Checkpoint : MonoBehaviour
+namespace btt.Aplicacao.Handler.CheckpointHandler
 {
-    private GerenciadorCamera mainCamera;
-    private CanvasGroup energiasCanvasGroup;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class Checkpoint : MonoBehaviour
     {
-        mainCamera = FindFirstObjectByType<GerenciadorCamera>();
-        energiasCanvasGroup = GameObject.Find("Energias").GetComponent<CanvasGroup>();
-    }
+        private GerenciadorCamera mainCamera;
+        private CanvasGroup energiasCanvasGroup;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Jogador jogador = other.GetComponent<Jogador>();
-        if (jogador != null)
+        private void Start()
         {
-            Save.SalvarEstadoJogo(jogador.gameObject, mainCamera, energiasCanvasGroup);
-            Debug.Log("Checkpoint alcançado");
+            mainCamera = FindFirstObjectByType<GerenciadorCamera>();
+            energiasCanvasGroup = GameObject.Find("Energias").GetComponent<CanvasGroup>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Jogador jogador = other.GetComponent<Jogador>();
+            if (jogador != null)
+            {
+                Save.SalvarEstadoJogo(jogador.gameObject, mainCamera, energiasCanvasGroup);
+                Debug.Log("Checkpoint alcançado");
+            }
         }
     }
+
 }

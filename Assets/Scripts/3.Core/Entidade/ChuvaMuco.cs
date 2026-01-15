@@ -1,5 +1,5 @@
 using UnityEngine;
-using btt.Aplicacao.DI.Personagem;
+using btt.Configuracao.DI.Personagem;
 
 namespace btt.Core.Entidade
 {
@@ -35,7 +35,7 @@ namespace btt.Core.Entidade
         {
             if (col.gameObject.CompareTag("Jogador"))
             {
-                fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+                fachada.combateServico.Atacando(ataque, alvo);
                 Destroy(gameObject);
                 Destroy(sombraInstanciada);
             }

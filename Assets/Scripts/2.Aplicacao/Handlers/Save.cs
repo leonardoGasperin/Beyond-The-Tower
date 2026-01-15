@@ -1,15 +1,14 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 using System;
 using btt.Core.Entidade;
 using System.IO;
 
-public static class Save {
-
+public static class Save
+{
     public const string SAVE = "/salvarDados.json";
 
-    public static void SalvarEstadoJogo(GameObject jogador, GerenciadorCamera mainCamera, CanvasGroup energiasCanvasGroup){
+    public static void SalvarEstadoJogo(GameObject jogador, GerenciadorCamera mainCamera, CanvasGroup energiasCanvasGroup)
+    {
         string filePathSaveData = Application.persistentDataPath + SAVE;
         DadosJogador dadosJogador = ProcessarDadosJogador(jogador);
         DadosCamera dadosCamera = new DadosCamera(mainCamera);
@@ -19,30 +18,36 @@ public static class Save {
         File.WriteAllText(filePathSaveData, txt);
     }
 
-    private static DadosJogador ProcessarDadosJogador(GameObject jogador){
+    private static DadosJogador ProcessarDadosJogador(GameObject jogador)
+    {
         return new DadosJogador(jogador.GetComponent<Jogador>());
     }
 
-    public static void ResetarSave() {
+    public static void ResetarSave()
+    {
         string filePath = Application.persistentDataPath + SAVE;
 
-        if (File.Exists(filePath)) {
+        if (File.Exists(filePath))
+        {
             File.Delete(filePath);
             Debug.Log("Save resetado com sucesso!");
         }
-        else {
+        else
+        {
             Debug.Log("Nenhum save encontrado para resetar.");
         }
     }
 }
 
 [Serializable]
-public class SalvarDados {
+public class SalvarDados
+{
     public DadosJogador dadosJogador;
     public DadosCamera dadosCamera;
     public DadosUIEnergias dadosUIEnergias;
 
-    public SalvarDados(DadosJogador dadosJogador, DadosCamera dadosCamera, DadosUIEnergias dadosUIEnergias) {
+    public SalvarDados(DadosJogador dadosJogador, DadosCamera dadosCamera, DadosUIEnergias dadosUIEnergias)
+    {
         this.dadosJogador = dadosJogador;
         this.dadosCamera = dadosCamera;
         this.dadosUIEnergias = dadosUIEnergias;
@@ -50,8 +55,9 @@ public class SalvarDados {
 }
 
 [Serializable]
-public class DadosJogador {
-    
+public class DadosJogador
+{
+
     [SerializeField] public Vector2 posicaoCheckpoint;
     public int energia;
     public int hp;
@@ -63,7 +69,8 @@ public class DadosJogador {
     * Add moralidade do jogador
     */
 
-    public DadosJogador(Jogador jogador) {
+    public DadosJogador(Jogador jogador)
+    {
         posicaoCheckpoint = jogador.transform.position;
         energia = jogador.pontosEnergia;
         hp = jogador.pontosVida;
@@ -72,19 +79,23 @@ public class DadosJogador {
 }
 
 [Serializable]
-public class DadosCamera {
+public class DadosCamera
+{
     public bool cameraPodeSubir;
 
-    public DadosCamera(GerenciadorCamera mainCamera) {
+    public DadosCamera(GerenciadorCamera mainCamera)
+    {
         cameraPodeSubir = mainCamera.cameraPodeSubir;
     }
 }
 
 [Serializable]
-public class DadosUIEnergias {
+public class DadosUIEnergias
+{
     public float alpha;
 
-    public DadosUIEnergias(CanvasGroup energiasCanvasGroup) {
+    public DadosUIEnergias(CanvasGroup energiasCanvasGroup)
+    {
         alpha = energiasCanvasGroup.alpha;
     }
 }

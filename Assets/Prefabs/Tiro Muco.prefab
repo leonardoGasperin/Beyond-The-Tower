@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1903043485917788648}
   - component: {fileID: 8184793711855421503}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tiro Muco
   m_TagString: Untagged
   m_Icon: {fileID: 0}

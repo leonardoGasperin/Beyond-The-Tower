@@ -1,18 +1,18 @@
+using btt.Configuracao.DI.Camera;
 using UnityEngine;
-using btt.Aplicacao.DI.Personagem;
 
 namespace btt.Core.Entidade {
     public class GerenciadorCamera : MonoBehaviour
     {
 
-        public PersonagemConfiguracaoDI.ServiceLocator fachada;
+        public CameraConfiguracaoDI.ServiceLocator fachada;
         public bool cameraPodeSubir = true;
         public float cameraVelocidade;
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            fachada = GetComponent<PersonagemConfiguracaoDI>().Services;
+            fachada = GetComponent<CameraConfiguracaoDI>().Services;
         }
 
         // Update is called once per frame

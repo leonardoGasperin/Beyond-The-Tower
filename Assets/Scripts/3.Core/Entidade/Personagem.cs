@@ -1,5 +1,6 @@
+using btt.Configuracao.DI.Personagem;
 using UnityEngine;
-using btt.Aplicacao.DI.Personagem;
+using UnityEngine.UI;
 
 namespace btt.Core.Entidade
 {
@@ -13,65 +14,66 @@ namespace btt.Core.Entidade
     public class Personagem : MonoBehaviour
     {
         #region Atributos
-        public PersonagemConfiguracaoDI.ServiceLocator fachada;
-        public Rigidbody2D rb;
-        public string nome;
-        public string tagAlvo;
-        public Personagem alvo;
-        public int pontosVida;
-        public int pontosEnergia;
-        public int ataque;
-        public int defesa;
-        public int nivel;
-        public int experiencia;
-        public float forcaDoPulo;
-        public Transform posicao;
+        protected PersonagemConfiguracaoDI.ServiceLocator fachada;
         //Animator animacao;
-        public float velocidade;
+        public Transform posicao;
+        public Transform barraHP;
+        public Image hpVerde;
+        public Personagem alvo;
+        public string tagAlvo;
+        public string nome;
+        public bool ativo = true;
         public bool estaVivo;
-        public bool estaAtacando;
         public bool podeAtacar;
-        public bool podeAndar;
         public bool estaDefendendo;
         public bool estaChao;
-        public bool ativo = true;
+        public bool invencivel;
+        public float velocidade;
+        public float forcaDoPulo;
+        public int ataque;
+        public int defesa;
         public int maxHP;
+        public int pontosVida;
+
         #endregion
 
-        #region Unity Methods
+        #region Unity Metodos
+        protected virtual void Awake() { }
 
-        protected virtual void Awake(){
-        }
-
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Start()
         {
             fachada = GetComponent<PersonagemConfiguracaoDI>().Services;
-            rb = GetComponent<Rigidbody2D>();
             posicao = GetComponent<Transform>();
             //animacao = GetComponent<Animator>();
             estaVivo = true;
-            estaAtacando = false;
             estaDefendendo = false;
+            if (!invencivel)
+            {
+                barraHP = transform.Find("Barra de HP");
+                hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
+            }
         }
 
-        // Update is called once per frame
         protected virtual void Update()
         {
-
+            if (invencivel) return;
+            if (!invencivel)
+                hpVerde.fillAmount = (float)pontosVida / maxHP;
         }
 
-    //Checar se o jogador está tocando o chão
-        protected virtual void OnCollisionEnter2D(Collision2D col){
-            if(col.gameObject.CompareTag(tagAlvo)){
+        protected virtual void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag(tagAlvo))
+            {
                 podeAtacar = true;
                 alvo = col.gameObject.GetComponent<Personagem>();
             }
         }
 
-    //Checar se o jogador não está tocando o chão
-        protected virtual void OnCollisionExit2D(Collision2D col){
-            if(col.gameObject.CompareTag(tagAlvo)){
+        protected virtual void OnCollisionExit2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag(tagAlvo))
+            {
                 podeAtacar = false;
                 alvo = null;
             }
@@ -79,40 +81,35 @@ namespace btt.Core.Entidade
 
         #endregion
 
-        #region Methods
+        #region Metodos
         public virtual void Dano(int danoRecebido)
         {
             int danoFinal = danoRecebido - defesa;
-            if (danoFinal < 0)
-            {
-                danoFinal = 0;
-            }
+            if (danoFinal <= 0) return;
             pontosVida -= danoFinal;
-            if (pontosVida <= 0)
-            {
-                pontosVida = 0;
-                Morreu();
-            }
+            PontoVidaControle();
         }
 
-        private void Morreu()
+        protected virtual void Morreu()
         {
             ativo = false;
             podeAtacar = false;
+            estaDefendendo = false;
+            estaChao = true;
+
             //animacao.SetTrigger("Morreu");
             // Desativar o personagem ou iniciar a l�gica de rein�cio
         }
-        /*
-        public void Atacar(Personagem alvo)
+
+        protected virtual void PontoVidaControle()
         {
-            if (alvo.estaVivo && estaAtacando)
-            {
-                //animacao.SetTrigger("Ataca");
-                alvo.Dano(ataque);
-                estaAtacando = false;
-            }
+            pontosVida = Mathf.Clamp(pontosVida, 0, maxHP);
+
+            if (pontosVida <= 0)
+                estaVivo = false;
         }
-        */
+
         #endregion
+
     }
 }

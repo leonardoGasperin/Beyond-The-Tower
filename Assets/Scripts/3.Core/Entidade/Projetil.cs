@@ -1,21 +1,20 @@
+using btt.Configuracao.DI.Projetil;
 using UnityEngine;
-using btt.Aplicacao.DI.Personagem;
 
 namespace btt.Core.Entidade {
 
     public class Projetil : MonoBehaviour
     {
-        private PersonagemConfiguracaoDI.ServiceLocator fachada;
+        private ProjetilConfiguracaoDI.ServiceLocator fachada;
         public Vector2 velocidadeTiro;
         private Jogador alvo;
         public int ataque;
-        private int pontosEnergia;
         public float gravidade;
         public bool chao;
 
         void Start()
         {
-            fachada = GetComponent<PersonagemConfiguracaoDI>().Services;
+            fachada = GetComponent<ProjetilConfiguracaoDI>().Services;
             alvo = GameObject.Find("Jogador").GetComponent<Jogador>();
             ataque = 2;
             gravidade = -9.8f;
@@ -32,7 +31,7 @@ namespace btt.Core.Entidade {
 
         private void OnTriggerEnter2D(Collider2D col){
             if(col.gameObject.CompareTag("Jogador")) {
-                fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
+                fachada.combateServico.Atacando(ataque, alvo);
             } else if(col.gameObject.CompareTag("Plataforma")) {
                 velocidadeTiro = Vector2.zero;
                 ataque = 0;

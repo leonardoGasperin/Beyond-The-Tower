@@ -1,90 +1,123 @@
+using btt.Configuracao.DI.Jogador;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using btt.Aplicacao.DI.Personagem;
-using UnityEngine.UI;
 
-namespace btt.Core.Entidade {
-
-    public class Jogador : Personagem {
-
-        private JogadorController jogadorController;
+namespace btt.Core.Entidade
+{
+    public sealed class Jogador : Personagem
+    {
+        #region Atributos
+        private JogadorConfiguracaoDI.ServiceLocator JogadorFachada;
         private GerenciadorUI ui;
-        [SerializeField] private GameObject barraHP;
-        public Image hpVerde;
-        private GerenciadorCamera mainCamera;
-        public int direcional;
-        public bool podePular;
-        public bool anda;
 
-        protected override void Start(){
+        public Rigidbody2D rb;
+        public InputActionReference movimentoInput;
+        public InputActionReference puloInput;
+        public InputActionReference ataqueInput;
+        public InputActionReference primeiraHabilidade;
+        public int pontosEnergia;
+        public float direcional;
+        public int nivel;
+        public int experiencia;
+        public bool emDialogo;
+        public Habilidades[] habilidades;
+
+        #endregion
+
+        #region Unity Metodos
+        private void OnEnable()
+        {
+            puloInput.action.started += Pulo;
+            ataqueInput.action.started += Ataque;
+            //primeiraHabilidade.action.started += Habilidade;
+        }
+
+        private void OnDisable()
+        {
+            puloInput.action.started -= Pulo;
+            ataqueInput.action.started -= Ataque;
+            //primeiraHabilidade.action.started -= Habilidade;
+        }
+
+        #endregion
+
+        #region Herdados Metodos
+        protected override void Start()
+        {
             base.Start();
-
+            rb = GetComponent<Rigidbody2D>();
+            JogadorFachada = GetComponent<JogadorConfiguracaoDI>().Services;
             tagAlvo = "Inimigo";
-            jogadorController = new JogadorController();
             pontosEnergia = 10000;
             velocidade = 5f;
-            pontosVida = 10;
-            maxHP = 10;
-            ataque = 2;
+            pontosVida = 500;
+            maxHP = 1000;
+            ataque = 20;
             forcaDoPulo = 10;
-            podeAtacar = false;
-            anda = true;
-            podePular = true;
             ui = GameObject.Find("Gerenciador").GetComponent<GerenciadorUI>();
-            hpVerde = barraHP.transform.Find("HP Base/HP").GetComponent<Image>();
         }
 
-        protected override void Update(){
+        protected override void Update()
+        {
+            Morreu();
             base.Update();
+            if (Keyboard.current == null || emDialogo)
+                return;
 
-            if(Keyboard.current == null) return;
-
-            if(pontosVida > maxHP) pontosVida = maxHP;
-
-            direcional = jogadorController.BotoesDirecao();
-
-            if (direcional != 0 && pontosVida > 0 && anda)
-                fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
-            
-            if(direcional == -1) {
-                transform.localScale = new Vector3(-1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-            else if(direcional == 1) {
-                transform.localScale = new Vector3(1, 1, 1);
-                barraHP.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-            
-            if (podeAtacar && alvo.pontosVida > 0 && jogadorController.BotaoAtaque()) {
-                fachada.combateServico.Atacando(ataque, alvo, pontosEnergia);
-            }
-
-            if (alvo != null && alvo.pontosVida <= 0) {
-                podeAtacar = false;
-                alvo = null;
-            }
-
-            if (jogadorController.BotaoPulo() && podePular && pontosVida > 0){
-                fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
-                pontosEnergia = fachada.energiaServico.ReduzirEnergia(pontosEnergia);
-            }
-
-            if(pontosEnergia <= 0) {
-                podePular = false;
-            } else {
-                podePular = true;
-            }
-
-            if (pontosVida <= 0) ui.GameOver();
-
-            hpVerde.fillAmount = (float)pontosVida/maxHP;
+            Movimento();
         }
 
-        private void OnTriggerStay2D(Collider2D col){
-            if (col.CompareTag(tagAlvo)) {
-                podeAtacar = true;
-                alvo = col.GetComponent<Personagem>();
-            }
+        protected override void Morreu()
+        {
+            if (estaVivo) return;
+
+            base.Morreu();
+            ui.GameOver();
         }
+
+        #endregion
+
+        #region Entidade Metodos
+        private void Orientacao()
+        {
+            if (direcional == 0) return;
+
+            transform.localScale = new Vector3(direcional, 1, 1);
+            barraHP.transform.localRotation = Quaternion.Euler(0, direcional == -1 ? 180 : 0, 0);
+        }
+
+        private void Movimento()
+        {
+            direcional = movimentoInput.action.ReadValue<float>();
+            if (direcional == 0) return;
+
+            Orientacao();
+            fachada.movimentacaoServico.Movimentacao(transform, velocidade, direcional);
+        }
+
+        private void Pulo(InputAction.CallbackContext obj)
+        {
+            if (!EnergiaPuloControle()) return;
+
+            fachada.movimentacaoServico.Pulo(rb, transform, forcaDoPulo);
+            pontosEnergia = JogadorFachada.energiaServico.ReduzirEnergia(pontosEnergia);
+        }
+
+        private bool EnergiaPuloControle()
+        {
+            if (pontosEnergia <= 0)
+                return false;
+            
+            return true;
+        }
+
+        private void Ataque(InputAction.CallbackContext obj)
+        {
+            if (podeAtacar && alvo != null)
+                fachada.combateServico.Atacando(ataque, alvo);
+        }
+
+        #endregion
     }
 }
